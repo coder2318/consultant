@@ -1,0 +1,1935 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "AgroConsult API documentation",
+        "description": "AgroConsult API documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/v1",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/application": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Application list",
+                "description": "index",
+                "operationId": "ApplciationIndex",
+                "parameters": [
+                    {
+                        "name": "resume_id",
+                        "in": "query",
+                        "description": "resume_id to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Create new application",
+                "description": "Create by comoany or recruter",
+                "operationId": "e88ae6041b1e6cd172756e9f7a6f7a16",
+                "requestBody": {
+                    "description": "Create new application",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Mushugimda muammo "
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "example": "2022-10-12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/application/{application}": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Show application",
+                "description": "Show by application",
+                "operationId": "aabd18f1e002bfcbee80bfae49f82b1f",
+                "parameters": [
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "description": "application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Update application",
+                "description": "Update by application",
+                "operationId": "780f0444a0b7888d96629630558a4d4f",
+                "parameters": [
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "description": "application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update application",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Mushugimda muammo update"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "example": "2022-10-12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "delete application",
+                "description": "delete by application",
+                "operationId": "c2c8a11656f477d7db0b34ffb105812d",
+                "parameters": [
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "description": "application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Sign in",
+                "description": "Login by login, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "format": "login",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "33333333"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/get-info": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get info user",
+                "description": "Get info user",
+                "operationId": "41a6f6591b665ebde663e52174e2ede7",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout",
+                "description": "Logout",
+                "operationId": "28d48c13fca984400ac8de99f54ee13a",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Category list",
+                "description": "index",
+                "operationId": "CategoryIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create new category",
+                "description": "Create ",
+                "operationId": "eff1cd45aae877fc48e08a32f5715e40",
+                "requestBody": {
+                    "description": "Create new Category",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "AgroConsult"
+                                    },
+                                    "parent_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/category/{category}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "CategoryShow",
+                "description": "Show by Category",
+                "operationId": "CategoryShow",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Update Category",
+                "description": "Update ",
+                "operationId": "824fa4908016a062bae95fdae8adc320",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Product"
+                                    },
+                                    "parent_id": {
+                                        "type": "number",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "delete Category",
+                "description": "delete ",
+                "operationId": "4e9a70d64e2448e6d0ab534a83636e42",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/comment": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "comment list",
+                "description": "index",
+                "operationId": "commentIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Create new comment",
+                "description": "Create comment",
+                "operationId": "1594cc25caed0b3a51f52b24bee25bb2",
+                "requestBody": {
+                    "description": "Create new comment",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "resume_id",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "text": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/comment/{comment}": {
+            "delete": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "delete comment",
+                "description": "delete ",
+                "operationId": "8050fb8beae2268dd839de466d8f68a1",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "comment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/experience": {
+            "get": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "experience list",
+                "description": "index",
+                "operationId": "experienceIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "Create new experience",
+                "description": "Create experience",
+                "operationId": "314685fb52daaf9f88e439cb42113f98",
+                "requestBody": {
+                    "description": "Create new experience",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "resume_id",
+                                    "start_date",
+                                    "company_name",
+                                    "profession"
+                                ],
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "2022-01-01"
+                                    },
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "is_current_job": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "company_name": {
+                                        "type": "text",
+                                        "example": "Agrobank OOO"
+                                    },
+                                    "profession": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/experience/{experience}": {
+            "get": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "experienceShow",
+                "description": "Show by experience",
+                "operationId": "experienceShow",
+                "parameters": [
+                    {
+                        "name": "experience",
+                        "in": "path",
+                        "description": "experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "Update experience",
+                "description": "Update experience",
+                "operationId": "05de8f0800b5b7649f555160c56f929b",
+                "parameters": [
+                    {
+                        "name": "experience",
+                        "in": "path",
+                        "description": "experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "2022-01-01"
+                                    },
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "is_current_job": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "company_name": {
+                                        "type": "text",
+                                        "example": "Agrobank OOO"
+                                    },
+                                    "profession": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "delete experience",
+                "description": "delete ",
+                "operationId": "ab39f443a267f24913948d89484e360e",
+                "parameters": [
+                    {
+                        "name": "experience",
+                        "in": "path",
+                        "description": "experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Profile list",
+                "description": "index",
+                "operationId": "ProfileIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Create new profile",
+                "description": "Create by profile",
+                "operationId": "2d25f72d512e96b4dfc6ff6d41bd3c3b",
+                "requestBody": {
+                    "description": "Create new profile",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "role"
+                                ],
+                                "properties": {
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/profile/{profile}": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "ProfileShow",
+                "description": "Show by Profile",
+                "operationId": "ProfileShow",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "Profile ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Update profile",
+                "description": "Update ",
+                "operationId": "b6e58ba3bd13a67fad121daee585174c",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "Profile ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update profile",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "role": {
+                                        "type": "string",
+                                        "example": "consultant"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "delete profile",
+                "description": "delete by profile",
+                "operationId": "6af4ec4868358c4a718989b0a99f0047",
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "in": "path",
+                        "description": "Profile ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/reaction": {
+            "post": {
+                "tags": [
+                    "Reaction"
+                ],
+                "summary": "Create new reaction",
+                "description": "Create reaction",
+                "operationId": "f352a78b09ea81e738728ec2edefe9c0",
+                "requestBody": {
+                    "description": "Create new reaction",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comment_id",
+                                    "profile_id",
+                                    "reaction"
+                                ],
+                                "properties": {
+                                    "comment_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "reaction": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/reaction/{reaction}": {
+            "delete": {
+                "tags": [
+                    "Reaction"
+                ],
+                "summary": "delete reaction",
+                "description": "delete ",
+                "operationId": "87ca91a2a550c9a83d336a086a57bb65",
+                "parameters": [
+                    {
+                        "name": "reaction",
+                        "in": "path",
+                        "description": "reaction ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/response": {
+            "get": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "response list",
+                "description": "index",
+                "operationId": "responseIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "Create new response",
+                "description": "Create response",
+                "operationId": "ec7153b0f00715e48d2a39172781a95b",
+                "requestBody": {
+                    "description": "Create new response",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "application_id",
+                                    "resume_id",
+                                    "amount",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "application_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "amount": {
+                                        "type": "text",
+                                        "example": "250000"
+                                    },
+                                    "text": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/response/{response}": {
+            "get": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "responseShow",
+                "description": "Show by response",
+                "operationId": "responseShow",
+                "parameters": [
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "Update response",
+                "description": "Update response",
+                "operationId": "b7a8c8d77cf1cf38a9c3708717f2260a",
+                "parameters": [
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "application_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "amount": {
+                                        "type": "text",
+                                        "example": "250000"
+                                    },
+                                    "text": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "delete response",
+                "description": "delete ",
+                "operationId": "771c19b3c08ab2f39cf2f9fb03b697c3",
+                "parameters": [
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/resume": {
+            "get": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "Resume list",
+                "description": "index",
+                "operationId": "ResumeIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "Create new resume",
+                "description": "Create ",
+                "operationId": "48dc484527e77d29399421935ac806c1",
+                "requestBody": {
+                    "description": "Create new Resume",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "sub_category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "language": {
+                                        "type": "text",
+                                        "example": "['english', 'russian']"
+                                    },
+                                    "about": {
+                                        "type": "string",
+                                        "example": "AgroConsult"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/resume/{resume}": {
+            "get": {
+                "tags": [
+                    "Resume"
+                ],
+                "description": "Show by Resume",
+                "operationId": "ResumeShow",
+                "parameters": [
+                    {
+                        "name": "resume",
+                        "in": "path",
+                        "description": "Resume ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "Update Resume",
+                "description": "Update ",
+                "operationId": "22629d84ce845a3ed32b247254338992",
+                "parameters": [
+                    {
+                        "name": "resume",
+                        "in": "path",
+                        "description": "Resume ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update Category",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "sub_category_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "language": {
+                                        "type": "text",
+                                        "example": "['english', 'russian']"
+                                    },
+                                    "about": {
+                                        "type": "string",
+                                        "example": "AgroConsult"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "delete Resume",
+                "description": "delete ",
+                "operationId": "803ac1e08ba3f50437502d0682fbc2aa",
+                "parameters": [
+                    {
+                        "name": "resume",
+                        "in": "path",
+                        "description": "Resume ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/payment": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Payment list",
+                "description": "index",
+                "operationId": "PaymentIndex",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "status to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create new payment",
+                "description": "Create by comoany or recruter",
+                "operationId": "5085569296cc62d45a938b8e363c7b84",
+                "requestBody": {
+                    "description": "Create new payment",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "application_id",
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "application_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "amount": {
+                                        "type": "string",
+                                        "example": "250000"
+                                    },
+                                    "payment_type": {
+                                        "type": "string",
+                                        "example": "payme"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Login with username and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

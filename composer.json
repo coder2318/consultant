@@ -8,13 +8,16 @@
         "php": "^8.0.2",
         "beyondcode/laravel-websockets": "^1.13",
         "cboden/ratchet": "^0.4.4",
+        "darkaonline/l5-swagger": "^8.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
+        "laravel/passport": "^11.2",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "lcobucci/jwt": "^4.2"
+        "lcobucci/jwt": "^4.2",
+        "tymon/jwt-auth": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

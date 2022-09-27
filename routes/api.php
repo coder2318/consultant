@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
+    ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController};
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('auth/get-info', [AuthController::class, 'me']);
+
+    Route::group(
+        [
+            'middleware' =>['auth:api'],
+        ] , function () {
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+        /** admin roli uchun */
+        Route::group(
+            [
+                'middleware' =>['auth:api', 'role:admin'],
+            ] , function () {
+            Route::apiResource('category', CategoryController::class)->except('index');
+        });
+
+        /** consultant roli uchun */
+        Route::group(
+            [
+                'middleware' =>['auth:api', 'role:consultant'],
+            ] , function () {
+            Route::apiResource('resume', ResumeController::class);
+            Route::apiResource('experience', ExperienceController::class);
+            Route::apiResource('response', ResponseController::class);
+        });
+
+        /** user roli uchun */
+        Route::group(
+            [
+                'middleware' =>['auth:api', 'role:user'],
+            ] , function () {
+            Route::apiResource('application', ApplicationController::class);
+            Route::apiResource('comment', Commentcontroller::class);
+            Route::apiResource('payment', PaymentController::class);
+        });
+        Route::apiResource('profile', ProfileController::class);
+    });
+
+    Route::get('category', [CategoryController::class, 'index']);
 });

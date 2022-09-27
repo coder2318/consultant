@@ -27,12 +27,12 @@ class BaseRepository
         return $query->get();
     }
 
-    public function store($params)
+    public function store($params): object
     {
         return $this->entity->create($params);
     }
 
-    public function update(array $params, int $id)
+    public function update(array $params, int $id): mixed
     {
         $query = $this->getById($id);
         if ($query) {

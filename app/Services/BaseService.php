@@ -29,6 +29,8 @@ class BaseService
      */
     protected $sort_fields;
 
+    protected $filter_fields;
+
     /**
      * @param array $params
      * @return mixed
@@ -36,7 +38,6 @@ class BaseService
     public function get(array $params, $pagination = true)
     {
         $perPage = null;
-
         if ($pagination) {
             $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
         }
@@ -171,7 +172,7 @@ class BaseService
      * @param $params
      * @return mixed
      */
-    public function create($params)
+    public function create($params): object
     {
         return $this->repo->store($params);
     }
@@ -190,10 +191,9 @@ class BaseService
      * @param $id
      * @return mixed
      */
-    public function edit($params, $id)
+    public function edit($params, $id): mixed
     {
         return $this->repo->update($params, $id);
-
     }
 
     /**
