@@ -13,4 +13,8 @@ class Category extends BaseModel
         'name',
         'parent_id'
     ];
+
+    protected $casts = [
+        'name' => 'array'
+    ];
 }
