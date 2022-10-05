@@ -30,7 +30,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         /** admin roli uchun */
         Route::group(
             [
-                'middleware' =>['auth:api', 'role:admin'],
+                'middleware' =>['role:admin'],
             ] , function () {
             Route::apiResource('category', CategoryController::class)->except('index');
         });

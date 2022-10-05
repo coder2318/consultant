@@ -13,8 +13,7 @@ class ResponseFactoryMixin
         return function($data){
             return [
                 'success'=> true,
-                'data' => $data,
-                'message' => 'ok'
+                'data' => $data
             ];
         };
     }
@@ -24,9 +23,8 @@ class ResponseFactoryMixin
         return function($message, $status, $errors = null, $data = null){
             $data = [
                 'success' => false,
-                'message' => $message,
-                'errors' => $errors,
-                'data' => $data
+                'data' => $message,
+                'errors' => $errors
             ];
             return new JsonResponse($data, $status);
         };
