@@ -23,8 +23,7 @@ class ResponseFactoryMixin
         return function($message, $status, $errors = null, $data = null){
             $data = [
                 'success' => false,
-                'data' => $message,
-                'errors' => $errors
+                'errors' => $message
             ];
             return new JsonResponse($data, $status);
         };

@@ -66,42 +66,42 @@ class Handler extends ExceptionHandler
     public function handleException($request, Throwable $exception)
     {
         if ($exception instanceof MethodNotAllowedHttpException) {
-            return response()->errorJson('Указанный метод для запроса недействителен|405', 405);
+            return response()->errorJson(['method' => ['Указанный метод для запроса недействителен']], 405);
         }
 
         if ($exception instanceof RouteNotFoundException || $exception instanceof NotFoundHttpException) {
-            return response()->errorJson('Указанная ссылка не найдена|406', 404);
+            return response()->errorJson(['not_found' => ['Указанная ссылка не найдена']], 404);
         }
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-            return response()->errorJson('Указанная модел не найдена|407', 404);
+            return response()->errorJson(['model_not_found' => ['Указанная модел не найдена']], 404);
         }
 
 
         if ($exception instanceof HttpException) {
-            return response()->errorJson($exception->getMessage(), $exception->getStatusCode());
+            return response()->errorJson(['http_error'=>[$exception->getMessage()]], $exception->getStatusCode());
         }
 
         if ($exception instanceof ValidationException) {
 
             $items = $exception->validator->errors()->getMessages();
 
-            return response()->errorJson('Указанные данные недействительны|422', 422, $items);
+            return response()->errorJson($items, 422);
         }
 
         if ($exception instanceof AuthenticationException) {
             info('auth_token', [$request->header('authorization')]);
-            return response()->errorJson($exception->getMessage(), 401);
+            return response()->errorJson(['auth'=>[$exception->getMessage()]], 401);
         }
 
         if ($exception instanceof AuthorizationException) {
-            return response()->errorJson($exception->getMessage(), 403);
+            return response()->errorJson(['permission'=>[$exception->getMessage()]], 403);
         }
 
 //        if (\App::environment(['production'])) {
 //            $this->sendError($exception);
 //        }
 
-        return response()->errorJson($exception->getMessage().' in '.$exception->getFile().":".$exception->getLine(), 500);
+        return response()->errorJson(['server_error' => [$exception->getMessage().' in '.$exception->getFile().":".$exception->getLine()]], 500);
 
     }
 
