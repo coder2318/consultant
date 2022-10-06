@@ -57,7 +57,7 @@ class CategoryController extends Controller
      *    description="Create new Category",
      *    @OA\JsonContent(
      *       required={"name"},
-     *       @OA\Property(property="name", type="string", example="AgroConsult"),
+     *       @OA\Property(property="name", type="string", example={"uz_cyrl": "service nomi", "uz_latn": "service", "ru": "service"}),
      *       @OA\Property(property="parent_id", type="number", example="1")
      *    ),
      * ),

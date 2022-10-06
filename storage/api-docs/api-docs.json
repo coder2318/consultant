@@ -421,7 +421,11 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "AgroConsult"
+                                        "example": {
+                                            "uz_cyrl": "service nomi",
+                                            "uz_latn": "service",
+                                            "ru": "service"
+                                        }
                                     },
                                     "parent_id": {
                                         "type": "number",
