@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Mixins\ResponseFactoryMixin;
 use GuzzleHttp\Client;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -84,8 +85,21 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException) {
 
             $items = $exception->validator->errors()->getMessages();
-
-            return response()->errorJson($items, 422);
+            $errors = [];
+            foreach ($items as $field => $message){
+                $messageStandard = [];
+                foreach ($message as $key => $translate){
+                    $messageStandard[] = [
+                        'key' => $key,
+                        'text' => $translate
+                    ];
+                }
+                $errors[] = [
+                    'field' => $field,
+                    'message' => $messageStandard
+                ];
+            }
+            return response()->errorJson($errors, ResponseFactoryMixin::CODE_VALIDATION_ERROR);
         }
 
         if ($exception instanceof AuthenticationException) {

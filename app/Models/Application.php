@@ -17,7 +17,11 @@ class Application extends BaseModel
         'date',
         'text',
         'status',
-        'files'
+        'files',
+        'views',
+        'type',
+        'is_visible',
+        'expired_date'
     ];
 
     public static function boot()

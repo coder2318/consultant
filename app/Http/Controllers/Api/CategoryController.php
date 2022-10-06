@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\IndexRequest;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
+use App\Mixins\ResponseFactoryMixin;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
@@ -85,7 +86,7 @@ class CategoryController extends Controller
     public function store(StoreRequest $request)
     {
         $candidate = $this->service->create($request->all());
-        return response()->successJson($candidate);
+        return response()->successJson($candidate, ResponseFactoryMixin::CODE_SUCCESS_CREATED);
     }
 
     /**
@@ -121,9 +122,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $model = $this->service->show($category->id);
-        if($model)
-            return response()->successJson($model);
-        return response()->errorJson('Информация не найдена|404', 404);
+        return response()->successJson($model);
     }
 
     /**
@@ -164,10 +163,7 @@ class CategoryController extends Controller
     public function update(UpdateRequest $request, Category $category)
     {
         $model = $this->service->edit($request->all(), $category->id);
-        if ($model)
-            return response()->successJson($model);
-        return response()->errorJson('Не обновлено|305', 422);
-
+        return response()->successJson($model, ResponseFactoryMixin::CODE_SUCCESS_UPDATED);
     }
 
     /**
@@ -206,9 +202,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $model = $this->service->delete((int) $category->id);
-        if($model)
-            return response()->successJson('Successfully deleted');
-        return response()->errorJson('Не удалено|306', 404);
+        $this->service->delete((int) $category->id);
+        return response()->successJson('Successfully deleted', ResponseFactoryMixin::CODE_SUCCESS_DELETED);
     }
 }
