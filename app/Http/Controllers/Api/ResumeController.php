@@ -56,9 +56,7 @@ class ResumeController extends Controller
      *    @OA\JsonContent(
      *       required={"category_id"},
      *       @OA\Property(property="category_id", type="number", example="1"),
-     *       @OA\Property(property="sub_category_id", type="number", example="1"),
-     *       @OA\Property(property="language", type="text", example="['english', 'russian']"),
-     *       @OA\Property(property="about", type="string", example="AgroConsult"),
+     *       @OA\Property(property="sub_category_id", type="number", example="1")
      *    ),
      * ),
      * @OA\Response(
@@ -121,9 +119,7 @@ class ResumeController extends Controller
     public function show(Resume $resume)
     {
         $model = $this->service->show((int) $resume->id);
-        if($model)
-            return response()->successJson($model);
-        return response()->errorJson('Информация не найдена|404', 404);
+        return response()->successJson($model);
     }
 
     /**
@@ -143,11 +139,11 @@ class ResumeController extends Controller
      * @OA\RequestBody(
      *    description="Update Category",
      *    @OA\JsonContent(
-     *       @OA\Property(property="profile_id", type="number", example="1"),
      *       @OA\Property(property="category_id", type="number", example="1"),
      *       @OA\Property(property="sub_category_id", type="number", example="1"),
      *       @OA\Property(property="language", type="text", example="['english', 'russian']"),
      *       @OA\Property(property="about", type="string", example="AgroConsult"),
+     *       @OA\Property(property="status", type="number", example="2"),
      *    ),
      * ),
      *      @OA\Response(
@@ -167,10 +163,7 @@ class ResumeController extends Controller
     public function update(UpdateRequest $request, Resume $resume)
     {
         $model = $this->service->edit($request->all(), (int) $resume->id);
-        if ($model)
-            return response()->successJson($model);
-        return response()->errorJson('Не обновлено|305', 422);
-
+        return response()->successJson($model);
     }
 
     /**
@@ -209,9 +202,7 @@ class ResumeController extends Controller
 
     public function destroy(Resume $resume)
     {
-        $model = $this->service->delete((int) $resume->id);
-        if($model)
-            return response()->successJson('Successfully deleted');
-        return response()->errorJson('Не удалено|306', 404);
+        $this->service->delete((int) $resume->id);
+        return response()->successJson('Successfully deleted');
     }
 }

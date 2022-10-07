@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable
 {
@@ -46,11 +45,6 @@ class User extends Authenticatable
     public function profile(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Profile::class, 'user_id', 'id')->where('role', Profile::USER_ROLE);
-    }
-
-    public function consultant(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(Profile::class, 'user_id', 'id')->where('role', Profile::CONSULTANT_ROLE);
     }
 
     public function admin(): \Illuminate\Database\Eloquent\Relations\HasOne

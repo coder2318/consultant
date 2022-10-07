@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Resume extends BaseModel
 {
     use HasFactory;
+
+    const CREATED = 1;
+    const CHECKED = 2;
+    const VISIBLE = 3;
+    const HIDDEN = 4;
 
     protected $fillable = [
         'profile_id',
@@ -28,8 +32,8 @@ class Resume extends BaseModel
         parent::boot();
 
         self::creating(function ($model) {
-            if(auth()->user() && auth()->user()->consultant)
-                $model->profile_id = auth()->user()->consultant->id;
+            if(auth()->user() && auth()->user()->profile)
+                $model->profile_id = auth()->user()->profile->id;
         });
 
     }

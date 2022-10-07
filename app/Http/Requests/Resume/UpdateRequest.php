@@ -24,12 +24,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'profile_id' => 'nullable|exists:profiles,id',
             'category_id' => 'nullable|exists:categories,id',
             'sub_category_id' => 'nullable',
             'language' => 'nullable|array',
             'about' => 'nullable',
-            'files' => 'nullable|file|max:10240'
+            'files.*' => 'nullable|file|max:10240',
+            'status' => 'nullable|numeric'
         ];
     }
 }

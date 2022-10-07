@@ -10,12 +10,12 @@ class Profile extends BaseModel
     use HasFactory;
 
     const USER_ROLE = 'user';
-    const CONSULTANT_ROLE = 'consultant';
     const ADMIN_ROLE = 'admin';
 
     protected $fillable = [
         'user_id',
         'role',
-        'is_active'
+        'is_active',
+        'is_consultant'
     ];
 }

@@ -18,6 +18,7 @@ class Application extends BaseModel
     const PUBLISHED = 1;
     const CONFIRMED = 2;
     const DRAFTED = 3;
+    const FINISHED = 4;
 
     const PUBLIC = 'public';
     const PRIVATE = 'private';
