@@ -25,10 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'resume_id' => 'nullable|exists:resumes,id',
-            'category_id' => 'required|exists:categories,id',
-            'date' => 'nullable',
-            'text' => 'required',
-            'files.*' => 'nullable|file|max:15240'
+            'name' => 'required'
         ];
     }
 }

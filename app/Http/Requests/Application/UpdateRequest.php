@@ -27,9 +27,14 @@ class UpdateRequest extends FormRequest
             'resume_id' => 'nullable|exists:resumes,id',
             'profile_id' => 'nullable|exists:profiles,id',
             'category_id' => 'nullable|exists:categories,id',
-            'date' => 'nullable',
             'text' => 'nullable',
-            'files.*' => 'nullable|file|max:15240'
+            'files.*' => 'nullable|file|max:15240',
+            'is_visible' => 'nullable|boolean',
+            'expired_date' => 'nullable|date',
+            'price_from' => 'nullable|numeric',
+            'price_to' => 'nullable|numeric',
+            'when' => 'nullable|in:today,tomorrow,in_week,whenever',
+            'when_date' => 'nullable|date'
         ];
     }
 }

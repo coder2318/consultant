@@ -10,18 +10,35 @@ class Application extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
+    const TODAY = 'today';
+    const TOMORROW = 'tomorrow';
+    const IN_WEEK = 'in_week';
+    const WHENEVER = 'whenever';
+
+    const PUBLISHED = 1;
+    const CONFIRMED = 2;
+    const DRAFTED = 3;
+
+    const PUBLIC = 'public';
+    const PRIVATE = 'private';
+
     protected $fillable = [
         'resume_id',
+        'name',
         'profile_id',
         'category_id',
-        'date',
         'text',
         'status',
         'files',
         'views',
         'type',
         'is_visible',
-        'expired_date'
+        'expired_date',
+        'price_from',
+        'price_to',
+        'when',
+        'when_date',
+        'payment_verified'
     ];
 
     public static function boot()
