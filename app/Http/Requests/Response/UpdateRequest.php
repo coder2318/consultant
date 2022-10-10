@@ -27,7 +27,8 @@ class UpdateRequest extends FormRequest
             'application_id' => 'nullable|exists:applications,id',
             'resume_id' => 'nullable|exists:resumes,id',
             'amount' => 'nullable',
-            'text' => 'nullable'
+            'text' => 'nullable',
+            'status' => 'nullable|numeric|in:1,2,3'
         ];
     }
 }

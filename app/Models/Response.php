@@ -9,6 +9,10 @@ class Response extends BaseModel
 {
     use HasFactory;
 
+    const SEND = 1;
+    const ACCEPT = 2;
+    const DENY = 3;
+
     protected $fillable = [
         'application_id',
         'resume_id',

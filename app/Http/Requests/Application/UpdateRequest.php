@@ -34,7 +34,8 @@ class UpdateRequest extends FormRequest
             'price_from' => 'nullable|numeric',
             'price_to' => 'nullable|numeric',
             'when' => 'nullable|in:today,tomorrow,in_week,whenever',
-            'when_date' => 'nullable|date'
+            'when_date' => 'nullable|date',
+            'status' => 'nullable|numeric|in:1,2,3,4'
         ];
     }
 }

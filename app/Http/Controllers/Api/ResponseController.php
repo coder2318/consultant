@@ -119,9 +119,7 @@ class ResponseController extends Controller
     public function show(Response $response)
     {
         $model = $this->service->show($response->id);
-        if($model)
-            return response()->successJson($model);
-        return response()->errorJson('Информация не найдена|404', 404);
+        return response()->successJson($model);
     }
 
     /**
@@ -141,10 +139,9 @@ class ResponseController extends Controller
      * @OA\RequestBody(
      *    description="Update Category",
      *    @OA\JsonContent(
-     *       @OA\Property(property="application_id", type="number", example="1"),
-     *       @OA\Property(property="resume_id", type="number", example="3"),
      *       @OA\Property(property="amount", type="text", example="250000"),
-     *       @OA\Property(property="text", type="text", example="backend dasturchi")
+     *       @OA\Property(property="text", type="text", example="backend dasturchi"),
+     *       @OA\Property(property="status", type="number", example="1")
      *    ),
      * ),
      *      @OA\Response(
@@ -164,10 +161,7 @@ class ResponseController extends Controller
     public function update(UpdateRequest $request, Response $response)
     {
         $model = $this->service->edit($request->all(), $response->id);
-        if ($model)
-            return response()->successJson($model);
-        return response()->errorJson('Не обновлено|305', 422);
-
+        return response()->successJson($model);
     }
 
     /**
@@ -206,9 +200,7 @@ class ResponseController extends Controller
 
     public function destroy(Response $response)
     {
-        $model = $this->service->delete((int) $response->id);
-        if($model)
-            return response()->successJson('Successfully deleted');
-        return response()->errorJson('Не удалено|306', 404);
+        $this->service->delete((int) $response->id);
+        return response()->successJson('Successfully deleted');
     }
 }

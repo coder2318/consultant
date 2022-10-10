@@ -15,11 +15,13 @@ class Application extends BaseModel
     const IN_WEEK = 'in_week';
     const WHENEVER = 'whenever';
 
+    /** @var int application holati yani elon qilingan, consultant bn kelishilgan, chernovik qilib qoyilgan, tugatilgan */
     const PUBLISHED = 1;
     const CONFIRMED = 2;
     const DRAFTED = 3;
     const FINISHED = 4;
 
+    /** @var string application turi yani hammaga yoki aynan bitta consultantga  */
     const PUBLIC = 'public';
     const PRIVATE = 'private';
 
