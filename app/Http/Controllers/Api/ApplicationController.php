@@ -133,9 +133,7 @@ class ApplicationController extends Controller
     public function show(Application $application)
     {
         $model = $this->service->show($application->id);
-        if($model)
-            return response()->successJson($model);
-        return response()->errorJson('Информация не найдена|404', 404);
+        return response()->successJson($model);
     }
 
     /**

@@ -26,4 +26,13 @@ class ApplicationService extends BaseService
         $params = $this->fileUpload($params, 'applications', $application);
         return $this->repo->update($params, $id);
     }
+
+    public function show($id)
+    {
+        $model = $this->repo->getById($id);
+        $model->update([
+            'views' => (int) $model->views + 1
+        ]);
+        return $model;
+    }
 }
