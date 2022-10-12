@@ -63,11 +63,14 @@ class ApplicationController extends Controller
      *    required=true,
      *    description="Create new application",
      *    @OA\JsonContent(
-     *       required={ "category_id", "text"},
+     *       required={ "category_id", "text", "when"},
      *       @OA\Property(property="resume_id", type="number", example="1"),
+     *       @OA\Property(property="name", type="string", example="Mushugimda muammo "),
      *       @OA\Property(property="category_id", type="number", example="1"),
      *       @OA\Property(property="text", type="string", example="Mushugimda muammo "),
-     *       @OA\Property(property="date", type="string", example="2022-10-12")
+     *       @OA\Property(property="when", type="string", example="today"),
+     *       @OA\Property(property="price_from", type="number", example="100000"),
+     *       @OA\Property(property="price_to", type="number", example="150000")
      *    ),
      * ),
      * @OA\Response(
@@ -153,7 +156,6 @@ class ApplicationController extends Controller
      *    description="Update application",
      *    @OA\JsonContent(
      *       @OA\Property(property="resume_id", type="number", example="1"),
-     *       @OA\Property(property="profile_id", type="number", example="1"),
      *       @OA\Property(property="category_id", type="number", example="1"),
      *       @OA\Property(property="text", type="string", example="Mushugimda muammo update"),
      *       @OA\Property(property="date", type="string", example="2022-10-12")

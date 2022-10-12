@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->string('name');
-            $table->boolean('payment_verified')->default(false);
+        Schema::table('resumes', function (Blueprint $table) {
+            $table->boolean('visible')->default(true);
         });
     }
 
@@ -26,9 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('name');
-            $table->dropColumn('payment_verified');
+        Schema::table('resumes', function (Blueprint $table) {
+            $table->dropColumn('visible');
         });
     }
 };

@@ -9,9 +9,8 @@ class Resume extends BaseModel
     use HasFactory;
 
     const CREATED = 1;
-    const CHECKED = 2;
-    const VISIBLE = 3;
-    const HIDDEN = 4;
+    const CONFIRMED = 2;
+    const BLOCKED = 3;
 
     protected $fillable = [
         'profile_id',
@@ -20,7 +19,8 @@ class Resume extends BaseModel
         'language',
         'about',
         'files',
-        'status'
+        'status',
+        'visible'
     ];
 
     protected $casts = [

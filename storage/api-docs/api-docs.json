@@ -64,12 +64,17 @@
                             "schema": {
                                 "required": [
                                     "category_id",
-                                    "text"
+                                    "text",
+                                    "when"
                                 ],
                                 "properties": {
                                     "resume_id": {
                                         "type": "number",
                                         "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mushugimda muammo "
                                     },
                                     "category_id": {
                                         "type": "number",
@@ -79,9 +84,17 @@
                                         "type": "string",
                                         "example": "Mushugimda muammo "
                                     },
-                                    "date": {
+                                    "when": {
                                         "type": "string",
-                                        "example": "2022-10-12"
+                                        "example": "today"
+                                    },
+                                    "price_from": {
+                                        "type": "number",
+                                        "example": "100000"
+                                    },
+                                    "price_to": {
+                                        "type": "number",
+                                        "example": "150000"
                                     }
                                 },
                                 "type": "object"
@@ -184,10 +197,6 @@
                             "schema": {
                                 "properties": {
                                     "resume_id": {
-                                        "type": "number",
-                                        "example": "1"
-                                    },
-                                    "profile_id": {
                                         "type": "number",
                                         "example": "1"
                                     },
@@ -1601,14 +1610,6 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "application_id": {
-                                        "type": "number",
-                                        "example": "1"
-                                    },
-                                    "resume_id": {
-                                        "type": "number",
-                                        "example": "3"
-                                    },
                                     "amount": {
                                         "type": "text",
                                         "example": "250000"
@@ -1616,6 +1617,10 @@
                                     "text": {
                                         "type": "text",
                                         "example": "backend dasturchi"
+                                    },
+                                    "status": {
+                                        "type": "number",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -1733,14 +1738,6 @@
                                     "sub_category_id": {
                                         "type": "number",
                                         "example": "1"
-                                    },
-                                    "language": {
-                                        "type": "text",
-                                        "example": "['english', 'russian']"
-                                    },
-                                    "about": {
-                                        "type": "string",
-                                        "example": "AgroConsult"
                                     }
                                 },
                                 "type": "object"
@@ -1841,10 +1838,6 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "profile_id": {
-                                        "type": "number",
-                                        "example": "1"
-                                    },
                                     "category_id": {
                                         "type": "number",
                                         "example": "1"
@@ -1860,6 +1853,10 @@
                                     "about": {
                                         "type": "string",
                                         "example": "AgroConsult"
+                                    },
+                                    "status": {
+                                        "type": "number",
+                                        "example": "2"
                                     }
                                 },
                                 "type": "object"

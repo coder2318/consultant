@@ -27,7 +27,7 @@ return new class extends Migration
             $table->jsonb('language')->nullable();
             $table->text('about')->nullable();
             $table->text('files')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

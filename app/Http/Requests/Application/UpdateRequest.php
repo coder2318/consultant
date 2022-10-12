@@ -25,8 +25,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'resume_id' => 'nullable|exists:resumes,id',
-            'profile_id' => 'nullable|exists:profiles,id',
             'category_id' => 'nullable|exists:categories,id',
+            'name' => 'nullable',
             'text' => 'nullable',
             'files.*' => 'nullable|file|max:15240',
             'is_visible' => 'nullable|boolean',
