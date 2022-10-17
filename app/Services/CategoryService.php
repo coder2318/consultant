@@ -18,14 +18,20 @@ class CategoryService extends BaseService
     {
         $profile = auth()->user()->profile??null;
         if($profile){
-            $result = DB::table('categories')
+            return DB::table('categories')
                 ->leftJoin('resumes', 'categories.id', '=', 'resumes.category_id')
                 ->select(
                     'categories.id as id', 'categories.name as name',
                     DB::raw("(case when (categories.id = resumes.category_id and resumes.profile_id = $profile->id) then true else false end) as disabled")
                 )->get();
-
         }
-        return $result??[];
+        $result = DB::table('categories')
+            ->select(
+                'categories.id as id', 'categories.name as name'
+            )->get();
+        return $result->map(function ($item){
+            $item->disabled = false;
+            return $item;
+        });
     }
 }
