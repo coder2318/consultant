@@ -205,4 +205,32 @@ class CategoryController extends Controller
         $this->service->delete((int) $category->id);
         return response()->successJson('Successfully deleted', ResponseFactoryMixin::CODE_SUCCESS_DELETED);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/category/check/list",
+     *      operationId="CategoryCheckList",
+     *      tags={"Category"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Category checked list",
+     *      description="Category resume checked list",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function checkList()
+    {
+        return response()->successJson($this->service->checkList());
+    }
 }
