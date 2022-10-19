@@ -11,7 +11,8 @@ class Category extends BaseModel
 
     protected $fillable = [
         'name',
-        'parent_id'
+        'parent_id',
+        'icon'
     ];
 
     protected $casts = [

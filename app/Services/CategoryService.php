@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Models\Resume;
 use App\Repositories\CategoryRepository;
+use App\Traits\FilesUpload;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService extends BaseService
 {
+    use FilesUpload;
     public function __construct(CategoryRepository $repository, protected Resume $resumeModel)
     {
         $this->repo = $repository;
@@ -33,5 +35,19 @@ class CategoryService extends BaseService
             $item->disabled = false;
             return $item;
         });
+    }
+
+    public function create($params): object
+    {
+        $params = $this->fileUpload($params, 'categories');
+        $params['name'] = json_decode($params['name']);
+        return $this->repo->store($params);
+    }
+
+    public function edit($params, $id): mixed
+    {
+        $category = $this->repo->getById($id);
+        $params = $this->fileUpload($params, 'categories', $category);
+        return $this->repo->update($params, $id);
     }
 }

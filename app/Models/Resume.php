@@ -20,11 +20,13 @@ class Resume extends BaseModel
         'about',
         'files',
         'status',
-        'visible'
+        'visible',
+        'skill_ids'
     ];
 
     protected $casts = [
-        'language' => 'array'
+        'language' => 'array',
+        'skill_ids' => 'array'
     ];
 
     public static function boot()

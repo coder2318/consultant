@@ -27,6 +27,18 @@ trait FilesUpload
 
         }
 
+        if (isset($params['icon']) && $params['icon']) {
+            if ($model) {
+                if (isset($model->icon)){
+                    unlink($model->icon);
+                }
+            }
+            $fileName = time() . '.' . $params['icon']->extension();
+            $params['icon']->storeAs('public/'.$pathFile, $fileName);
+            $params['icon'] ='storage/'.$pathFile.'/'.$fileName;
+
+        }
+
 
         if (isset($params['files']) && count($params['files'])) {
             if ($model) {
