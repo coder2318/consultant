@@ -20,7 +20,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('auth/get-info', [AuthController::class, 'me']);
-    Route::apiResource('category', CategoryController::class)->except('index');
+
     Route::group(
         [
             'middleware' =>['auth:api'],
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             [
                 'middleware' =>['role:admin'],
             ] , function () {
-
+            Route::apiResource('category', CategoryController::class)->except('index');
         });
 
         /** consultant roli uchun */

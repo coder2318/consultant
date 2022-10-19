@@ -18,4 +18,9 @@ class Category extends BaseModel
     protected $casts = [
         'name' => 'array'
     ];
+
+    public function getIconAttribute($value)
+    {
+        return url('/').'/'.$value;
+    }
 }
