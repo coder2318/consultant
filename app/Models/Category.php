@@ -21,6 +21,8 @@ class Category extends BaseModel
 
     public function getIconAttribute($value)
     {
-        return url('/').'/'.$value;
+        if($value)
+            return url('/').'/'.$value;
+        return null;
     }
 }
