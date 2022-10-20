@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
-    ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,SkillController};
+    ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,
+    SkillController, ResourceController};
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +61,12 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     });
 
     Route::get('category', [CategoryController::class, 'index']);
+    Route::group(
+        [
+            'prefix' => 'resource',
+        ] , function () {
+        Route::get('translate/{lang}', [ResourceController::class, 'translate']);
+        Route::get('language', [ResourceController::class, 'language']);
+    });
+
 });

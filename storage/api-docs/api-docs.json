@@ -1475,6 +1475,69 @@
                 ]
             }
         },
+        "/resource/translate/{lang}": {
+            "get": {
+                "tags": [
+                    "Resource"
+                ],
+                "summary": "Translate  list",
+                "description": "index",
+                "operationId": "Translate",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "path",
+                        "description": "lang",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/resource/language": {
+            "get": {
+                "tags": [
+                    "Resource"
+                ],
+                "summary": "Language  list",
+                "description": "index",
+                "operationId": "Language",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/response": {
             "get": {
                 "tags": [
