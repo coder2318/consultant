@@ -177,10 +177,7 @@ class ApplicationController extends Controller
     {
         $this->authorize('update', $application);
         $model = $this->service->edit($request->all(), $application->id);
-        if ($model)
-            return response()->successJson($model);
-        return response()->errorJson('Не обновлено|305', 422);
-
+        return response()->successJson($model);
     }
 
     /**

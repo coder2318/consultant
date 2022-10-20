@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\ArrayStringCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Resume extends BaseModel
@@ -26,7 +27,7 @@ class Resume extends BaseModel
 
     protected $casts = [
         'language' => 'array',
-        'skill_ids' => 'array'
+        'skill_ids' => ArrayStringCast::class
     ];
 
     public static function boot()
