@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
-    ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController};
+    ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,SkillController};
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::apiResource('payment', PaymentController::class);
         });
         Route::apiResource('profile', ProfileController::class);
+        Route::apiResource('skill', SkillController::class);
     });
 
     Route::get('category', [CategoryController::class, 'index']);
