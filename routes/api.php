@@ -61,12 +61,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     });
 
     Route::get('category', [CategoryController::class, 'index']);
-    Route::group(
-        [
-            'prefix' => 'resource',
-        ] , function () {
-        Route::get('translate/{lang}', [ResourceController::class, 'translate']);
-        Route::get('language', [ResourceController::class, 'language']);
-    });
+    Route::get('translate/{lang}', [ResourceController::class, 'translate']);
+    Route::get('language', [ResourceController::class, 'language']);
 
 });

@@ -13,7 +13,7 @@ class ResourceController extends Controller
     }
     /**
      * @OA\Get(
-     *      path="/resource/translate/{lang}",
+     *      path="/translate/{lang}",
      *      operationId="Translate",
      *      tags={"Resource"},
      *     security={{ "bearerAuth": {} }},
@@ -47,7 +47,7 @@ class ResourceController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/resource/language",
+     *      path="/language",
      *      operationId="Language",
      *      tags={"Resource"},
      *     security={{ "bearerAuth": {} }},
