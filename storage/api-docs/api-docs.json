@@ -1475,7 +1475,7 @@
                 ]
             }
         },
-        "/resource/translate/{lang}": {
+        "/translate/{lang}": {
             "get": {
                 "tags": [
                     "Resource"
@@ -1512,7 +1512,7 @@
                 ]
             }
         },
-        "/resource/language": {
+        "/language": {
             "get": {
                 "tags": [
                     "Resource"

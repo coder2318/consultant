@@ -16,10 +16,10 @@ class Application extends BaseModel
     const WHENEVER = 'whenever';
 
     /** @var int application holati yani elon qilingan, consultant bn kelishilgan, chernovik qilib qoyilgan, tugatilgan */
-    const PUBLISHED = 1;
-    const CONFIRMED = 2;
-    const DRAFTED = 3;
-    const FINISHED = 4;
+    const PUBLISHED = 1; // e'lon qilingan
+    const CONFIRMED = 2; //consultant bn kelishilgan
+    const DRAFTED = 3; //chernovik qilib qoyilgan
+    const FINISHED = 4; //tugatilgan
 
     /** @var string application turi yani hammaga yoki aynan bitta consultantga  */
     const PUBLIC = 'public';
@@ -27,10 +27,10 @@ class Application extends BaseModel
 
     protected $fillable = [
         'resume_id',
-        'name',
+        'title',
         'profile_id',
         'category_id',
-        'text',
+        'description',
         'status',
         'files',
         'views',

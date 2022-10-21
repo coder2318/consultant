@@ -26,8 +26,8 @@ class StoreRequest extends FormRequest
         return [
             'resume_id' => 'nullable|exists:resumes,id',
             'category_id' => 'required|exists:categories,id',
-            'name' => 'required',
-            'text' => 'nullable',
+            'title' => 'required',
+            'description' => 'nullable',
             'files.*' => 'nullable|file|max:15240',
             'is_visible' => 'nullable|boolean',
             'expired_date' => 'nullable|date',

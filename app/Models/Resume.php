@@ -9,9 +9,9 @@ class Resume extends BaseModel
 {
     use HasFactory;
 
-    const CREATED = 1;
-    const CONFIRMED = 2;
-    const BLOCKED = 3;
+    const CREATED = 1; // yaratilgan
+    const CONFIRMED = 2; // verifikatsiyadan o'tgan
+    const BLOCKED = 3; // block qilingan
 
     protected $fillable = [
         'profile_id',
