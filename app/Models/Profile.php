@@ -18,4 +18,9 @@ class Profile extends BaseModel
         'is_active',
         'is_consultant'
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

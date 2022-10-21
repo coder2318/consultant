@@ -4,6 +4,8 @@
 namespace App\Repositories;
 
 
+use App\Traits\AgroPaginator;
+
 class BaseRepository
 {
 
@@ -21,8 +23,10 @@ class BaseRepository
 
     public function getPaginate($query, int $perPage = null)
     {
-        if ($perPage)
-            return $query->paginate($perPage);
+        if ($perPage){
+            $paginate = $query->paginate($perPage);
+            return AgroPaginator::paginate($paginate);
+        }
 
         return $query->get();
     }

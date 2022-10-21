@@ -44,6 +44,7 @@ class Application extends BaseModel
         'payment_verified'
     ];
 
+    protected $appends = ['user', 'category'];
     public static function boot()
     {
         parent::boot();
@@ -66,5 +67,29 @@ class Application extends BaseModel
             return $files;
         }
         return null;
+    }
+
+    public function profile(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Profile::class, 'profile_id', 'id');
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function getUserAttribute(): string
+    {
+        $user_id = Profile::find($this->profile_id)->user_id;
+        $user = User::find($user_id);
+        return $user->l_name . ' '.$user->f_name;
+    }
+
+    public function getCategoryAttribute(): string
+    {
+        $category = Category::find($this->category_id);
+        $lang = request()->header('Language');
+        return $category->name[$lang]??'';
     }
 }

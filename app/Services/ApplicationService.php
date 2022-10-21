@@ -12,6 +12,9 @@ class ApplicationService extends BaseService
     {
         $this->repo = $repo;
         $this->filter_fields = ['resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number']];
+        $this->attributes = [
+            'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 'category_id'
+        ];
     }
 
     public function create($params): object
