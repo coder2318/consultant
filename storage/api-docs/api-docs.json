@@ -279,6 +279,43 @@
                 ]
             }
         },
+        "/admin/application/{application}": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Show application by admin",
+                "description": "Show by application admin",
+                "operationId": "7063039129b11643df868b0096b28c6c",
+                "parameters": [
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "description": "application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/login": {
             "post": {
                 "tags": [

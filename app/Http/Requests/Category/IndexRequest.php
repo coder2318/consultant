@@ -24,7 +24,9 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'nullable'
+            'name' => 'nullable',
+            'sort_key' => 'nullable',
+            'sort_type' => 'required_with:sort_key'
         ];
     }
 }

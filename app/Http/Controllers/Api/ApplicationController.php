@@ -137,6 +137,41 @@ class ApplicationController extends Controller
     }
 
     /**
+     * @OA\Get (
+     * path="/admin/application/{application}",
+     * summary="Show application by admin",
+     * security={{ "bearerAuth": {} }},
+     * description="Show by application admin",
+     * tags={"Application"},
+     *     @OA\Parameter(
+     *         description="application ID",
+     *         in="path",
+     *         name="application",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
+    public function showAdmin(Application $application)
+    {
+        $model = $this->service->showAdmin($application->id);
+        return response()->successJson($model);
+    }
+
+    /**
      * @OA\Put (
      * path="/application/{application}",
      * summary="Update application",

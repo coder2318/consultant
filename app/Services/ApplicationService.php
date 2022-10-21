@@ -38,4 +38,13 @@ class ApplicationService extends BaseService
         ]);
         return $model;
     }
+
+    public function showAdmin($id)
+    {
+        $model = $this->repo->getById($id);
+        $model->update([
+            'showed' => true
+        ]);
+        return $model;
+    }
 }

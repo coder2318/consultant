@@ -20,6 +20,7 @@ class Application extends BaseModel
     const CONFIRMED = 2; //consultant bn kelishilgan
     const DRAFTED = 3; //chernovik qilib qoyilgan
     const FINISHED = 4; //tugatilgan
+    const INACTIVE = 5; //deactivatsiya qilingan
 
     /** @var string application turi yani hammaga yoki aynan bitta consultantga  */
     const PUBLIC = 'public';
@@ -41,7 +42,9 @@ class Application extends BaseModel
         'price_to',
         'when',
         'when_date',
-        'payment_verified'
+        'payment_verified',
+        'showed',
+        'reason_inactive'
     ];
 
     protected $appends = ['user', 'category'];

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             [
                 'middleware' =>['role:admin'],
             ] , function () {
+            Route::get('admin/application/{application}', [ApplicationController::class, 'showAdmin']);
             Route::apiResource('category', CategoryController::class)->except('index');
         });
 
