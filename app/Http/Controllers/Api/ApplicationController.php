@@ -210,7 +210,6 @@ class ApplicationController extends Controller
      */
     public function update(UpdateRequest $request, Application $application)
     {
-        $this->authorize('update', $application);
         $model = $this->service->edit($request->all(), $application->id);
         return response()->successJson($model);
     }
@@ -252,7 +251,6 @@ class ApplicationController extends Controller
 
     public function destroy(Application $application)
     {
-        $this->authorize('delete', $application);
         $model = $this->service->delete((int) $application->id);
         if($model)
             return response()->successJson('Successfully deleted');
