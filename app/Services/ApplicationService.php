@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
 use App\Traits\FilesUpload;
 
@@ -11,10 +12,34 @@ class ApplicationService extends BaseService
     public function __construct(ApplicationRepository $repo)
     {
         $this->repo = $repo;
-        $this->filter_fields = ['resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number']];
+        $this->filter_fields = ['resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
+                'category_id' => ['type' => 'number'], 'price_from' => ['type' => 'from'], 'price_to' => ['type' => 'to'],
+                'when_date' => ['type' => 'notNull']
+            ];
         $this->attributes = [
-            'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 'category_id', 'showed', 'reason_inactive'
+            'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 'category_id', 'showed', 'reason_inactive',
+            'when_date'
         ];
+    }
+
+    public function selfIndex(array $params, $pagination = true)
+    {
+        $perPage = null;
+        if ($pagination) {
+            $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
+        }
+
+        $query = $this->repo->getQuery();
+        $self_category_id = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('category_id');
+
+        if(!isset($params['category_id']))
+            $query = $query->whereIn('category_id', $self_category_id);
+
+        $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $this->sort($query, $this->sort_fields, $params);
+        $query = $this->select($query, $this->attributes);
+        $query = $this->repo->getPaginate($query, $perPage);
+        return $query;
     }
 
     public function create($params): object

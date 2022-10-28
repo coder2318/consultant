@@ -10,11 +10,6 @@ class Application extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
-    const TODAY = 'today';
-    const TOMORROW = 'tomorrow';
-    const IN_WEEK = 'in_week';
-    const WHENEVER = 'whenever';
-
     /** @var int application holati yani elon qilingan, consultant bn kelishilgan, chernovik qilib qoyilgan, tugatilgan */
     const PUBLISHED = 1; // e'lon qilingan
     const CONFIRMED = 2; //consultant bn kelishilgan

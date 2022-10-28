@@ -141,6 +141,9 @@ class BaseService
 
                 if ($item['type'] == 'isNull')
                     $query->whereNull($key);
+
+                if ($item['type'] == 'notNull')
+                    $query->whereNotNull($key);
             }
         }
         return $query;

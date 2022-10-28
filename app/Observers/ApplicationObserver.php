@@ -28,16 +28,16 @@ class ApplicationObserver
      */
     public function updated(Application $application)
     {
-        if($application->wasChanged('when')){
-            $when_date = match ($application->when){
-                Application::TODAY => Carbon::now()->format('Y-m-d'),
-                Application::TOMORROW => Carbon::now()->addDay()->format('Y-m-d'),
-                Application::IN_WEEK => Carbon::now()->addWeek()->format('Y-m-d')
-            };
-            $application->update([
-                'when_date' => $when_date
-            ]);
-        }
+//        if($application->wasChanged('when')){
+//            $when_date = match ($application->when){
+//                Application::TODAY => Carbon::now()->format('Y-m-d'),
+//                Application::TOMORROW => Carbon::now()->addDay()->format('Y-m-d'),
+//                Application::IN_WEEK => Carbon::now()->addWeek()->format('Y-m-d')
+//            };
+//            $application->update([
+//                'when_date' => $when_date
+//            ]);
+//        }
         /** agar birorta consultantga alohida yuborilsa unda private type buladi */
         if($application->wasChanged('resume_id')){
             if($application->resume_id)

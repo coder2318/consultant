@@ -258,4 +258,62 @@ class ApplicationController extends Controller
         return response()->errorJson('Не удалено|306', 404);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/self-application",
+     *      operationId="SelfApplciationIndex",
+     *      tags={"Application"},
+     *      security={{ "bearerAuth": {} }},
+     *      summary="Application belongs to consultant list",
+     *      description="index",
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="category_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="price_from",
+     *         in="query",
+     *         description="price_from to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="price_to",
+     *         in="query",
+     *         description="price_to to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function selfIndex(IndexRequest $request)
+    {
+        return response()->successJson($this->service->get($request->all()));
+    }
+
 }

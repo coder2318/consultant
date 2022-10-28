@@ -24,9 +24,12 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'resume_id' => 'nullable|exists:resumes,id',
-            'profile_id' => 'nullable|exists:profiles,id',
-            'category_id' => 'nullable|exists:categories,id',
+            'resume_id' => 'nullable',
+            'profile_id' => 'nullable',
+            'category_id' => 'nullable',
+            'price_from' => 'nullable',
+            'price_to' => 'nullable',
+            'when_date' => 'nullable'
         ];
     }
 }
