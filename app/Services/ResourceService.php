@@ -41,4 +41,19 @@ class ResourceService
             return [];
         }
     }
+
+    public function getLanguageDefault()
+    {
+        try {
+            $client = new Client();
+            $response = $client->get($this->coreUrl.'api/v1/language/default');
+            if($response->getStatusCode() == 200){
+                return json_decode($response->getBody(), true);
+            }
+            return [];
+
+        } catch (\Exception $exception){
+            return [];
+        }
+    }
 }

@@ -71,4 +71,31 @@ class ResourceController extends Controller
     {
         return $this->service->getLanguage();
     }
+
+    /**
+     * @OA\Get(
+     *      path="/language/default",
+     *      operationId="LanguageDefault",
+     *      tags={"Resource"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Language DEfault list",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function languageDefault()
+    {
+        return $this->service->getLanguageDefault();
+    }
 }
