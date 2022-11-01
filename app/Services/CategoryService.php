@@ -5,11 +5,13 @@ namespace App\Services;
 use App\Models\Resume;
 use App\Repositories\CategoryRepository;
 use App\Traits\FilesUpload;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService extends BaseService
 {
     use FilesUpload;
+
     public function __construct(CategoryRepository $repository, protected Resume $resumeModel)
     {
         $this->repo = $repository;
@@ -18,8 +20,8 @@ class CategoryService extends BaseService
 
     public function checkList(): array|\Illuminate\Support\Collection
     {
-        $profile = auth()->user()->profile??null;
-        if($profile){
+        $profile = auth()->user()->profile ?? null;
+        if ($profile) {
             return DB::table('categories')
                 ->leftJoin('resumes', 'categories.id', '=', 'resumes.category_id')
                 ->select(
@@ -31,7 +33,7 @@ class CategoryService extends BaseService
             ->select(
                 'categories.id as id', 'categories.name as name'
             )->get();
-        return $result->map(function ($item){
+        return $result->map(function ($item) {
             $item->disabled = false;
             return $item;
         });
@@ -49,5 +51,14 @@ class CategoryService extends BaseService
         $category = $this->repo->getById($id);
         $params = $this->fileUpload($params, 'categories', $category);
         return $this->repo->update($params, $id);
+    }
+
+    public function getSelfCategory(): array|Collection
+    {
+        $resumes = $this->resumeModel->where('profile_id', auth()->user()->profile->id)->get();
+        if($resumes){
+            return $this->repo->getQuery()->whereIn('id', $resumes->pluck('category_id'))->get();
+        }
+        return [];
     }
 }

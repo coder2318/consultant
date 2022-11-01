@@ -202,7 +202,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $this->service->delete((int) $category->id);
+        $this->service->delete((int)$category->id);
         return response()->successJson('Successfully deleted', ResponseFactoryMixin::CODE_SUCCESS_DELETED);
     }
 
@@ -232,5 +232,32 @@ class CategoryController extends Controller
     public function checkList()
     {
         return response()->successJson($this->service->checkList());
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/self-category",
+     *      operationId="SelfCategory",
+     *      tags={"Category"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Category checked list",
+     *      description="Self Category list",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function selfCategories()
+    {
+        return response()->successJson($this->service->getSelfCategory());
     }
 }
