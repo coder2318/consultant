@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Resume;
+namespace App\Http\Requests\Notification;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'nullable|exists:categories,id',
-            'language' => 'nullable|array',
-            'about' => 'nullable',
-            'files.*' => 'nullable|file|max:10240',
-            'status' => 'nullable|numeric',
-            'visible' => 'nullable|boolean'
+            'text' => 'required',
+            'description' => 'required',
+            'profile_id' => 'required',
         ];
     }
 }

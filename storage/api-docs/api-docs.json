@@ -374,6 +374,32 @@
                 ]
             }
         },
+        "/my-application": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Applications list for client self",
+                "description": "index",
+                "operationId": "MyApplciationIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
@@ -1150,6 +1176,316 @@
                 ]
             }
         },
+        "/notification": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Notification list",
+                "description": "index",
+                "operationId": "NotificationIndex",
+                "parameters": [
+                    {
+                        "name": "resume_id",
+                        "in": "query",
+                        "description": "resume_id to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Create new notification",
+                "description": "Create by comoany or recruter",
+                "operationId": "d8ad01fa2db3249db1569044b331b944",
+                "requestBody": {
+                    "description": "Create new notification",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "profile_id",
+                                    "text",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Sizning arizangiz korib chiqiladi "
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Ariza bir necha ish kuni mobaynida korib chiqiladi degan umiddamiz ))"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/my-notification": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Notifications list for client self",
+                "description": "index",
+                "operationId": "MyNotificationIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/notification/{notification}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Show notification",
+                "description": "Show by notification",
+                "operationId": "e5a47b03352c502ec82c49c86d59dc50",
+                "parameters": [
+                    {
+                        "name": "notification",
+                        "in": "path",
+                        "description": "notification ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Update notification",
+                "description": "Update by notification",
+                "operationId": "75190bfbb18583e52836b75af3a899cc",
+                "parameters": [
+                    {
+                        "name": "notification",
+                        "in": "path",
+                        "description": "notification ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update notification",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Sizning arizangiz korib chiqiladi "
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Ariza bir necha ish kuni mobaynida korib chiqiladi degan umiddamiz ))"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "delete notification",
+                "description": "delete by notification",
+                "operationId": "00a8f56f43a83144d42dd258e6fd43be",
+                "parameters": [
+                    {
+                        "name": "notification",
+                        "in": "path",
+                        "description": "notification ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/admin/notification/{notification}": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Show notification by admin",
+                "description": "Show by notification admin",
+                "operationId": "d173c80fa85e94d047c2e46be2309636",
+                "parameters": [
+                    {
+                        "name": "notification",
+                        "in": "path",
+                        "description": "notification ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/payment": {
             "get": {
                 "tags": [
@@ -1916,6 +2252,43 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/response-chat/{response}": {
+            "get": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "responseChatShow",
+                "description": "Show by response",
+                "operationId": "responseChatShow",
+                "parameters": [
+                    {
+                        "name": "response",
+                        "in": "path",
+                        "description": "response ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 },
                 "security": [

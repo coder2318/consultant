@@ -21,4 +21,9 @@ class Response extends BaseModel
         'status',
         'is_showed'
     ];
+
+    public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->BelongsTo(Application::class, 'application_id', 'id');
+    }
 }

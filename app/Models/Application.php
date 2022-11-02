@@ -10,14 +10,15 @@ class Application extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
-    /** @var int application holati yani elon qilingan, consultant bn kelishilgan, chernovik qilib qoyilgan, tugatilgan */
+    /** @var int application holati yani elon qilingan, consultant bn kelishilgan, chernovik qilib qoyilgan, tugatilgan -> status*/
     const PUBLISHED = 1; // e'lon qilingan
     const CONFIRMED = 2; //consultant bn kelishilgan
     const DRAFTED = 3; //chernovik qilib qoyilgan
     const FINISHED = 4; //tugatilgan
     const INACTIVE = 5; //deactivatsiya qilingan
+    const CANCELED = 6; //otmen qilingan
 
-    /** @var string application turi yani hammaga yoki aynan bitta consultantga  */
+    /** @var string application turi yani hammaga yoki aynan bitta consultantga -> type */
     const PUBLIC = 'public';
     const PRIVATE = 'private';
 
@@ -42,7 +43,8 @@ class Application extends BaseModel
         'reason_inactive'
     ];
 
-    protected $appends = ['user', 'category'];
+    protected $appends = ['user', 'category', 'response_count'];
+
     public static function boot()
     {
         parent::boot();
@@ -77,6 +79,11 @@ class Application extends BaseModel
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function response(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->HasMany(Response::class, 'application_id', 'id');
+    }
+
     public function getUserAttribute(): string
     {
         $user_id = Profile::find($this->profile_id)->user_id;
@@ -89,5 +96,10 @@ class Application extends BaseModel
         $category = Category::find($this->category_id);
         $lang = request()->header('Language');
         return $category->name[$lang]??'';
+    }
+
+    public function getResponseCountAttribute()
+    {
+        return Response::where('application_id', $this->id)->get()->count();
     }
 }

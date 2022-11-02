@@ -203,4 +203,39 @@ class ResponseController extends Controller
         $this->service->delete((int) $response->id);
         return response()->successJson('Successfully deleted');
     }
+
+    /**
+     * @OA\Get (
+     * path="/response-chat/{response}",
+     * summary="responseChatShow",
+     * operationId="responseChatShow",
+     * security={{ "bearerAuth": {} }},
+     * description="Show by response",
+     * tags={"Response"},
+     *     @OA\Parameter(
+     *         description="response ID",
+     *         in="path",
+     *         name="response",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
+    public function responseChat(Response $response)
+    {
+        return response()->successJson($this->service->redirectToChat($response));
+    }
 }

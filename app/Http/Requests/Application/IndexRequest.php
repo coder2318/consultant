@@ -29,7 +29,10 @@ class IndexRequest extends FormRequest
             'category_id' => 'nullable',
             'price_from' => 'nullable',
             'price_to' => 'nullable',
-            'when_date' => 'nullable'
+            'when_date' => 'nullable',
+            'limit' => 'nullable|numeric',
+            'status' => 'nullable',
+            'type' => 'nullable'
         ];
     }
 }

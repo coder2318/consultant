@@ -316,4 +316,34 @@ class ApplicationController extends Controller
         return response()->successJson($this->service->get($request->all()));
     }
 
+    /**
+     * @OA\Get(
+     *      path="/my-application",
+     *      operationId="MyApplciationIndex",
+     *      tags={"Application"},
+     *      security={{ "bearerAuth": {} }},
+     *      summary="Applications list for client self",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function myIndex(IndexRequest $request)
+    {
+        $data = $request->all();
+        $data['profile_id'] = auth()->user()->profile->id;
+        return response()->successJson($this->service->list($data));
+    }
+
 }

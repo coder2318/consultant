@@ -63,6 +63,9 @@ class BaseService
         $query = $this->relation($query, $this->relation);
         $query = $this->select($query, $this->attributes);
         $query = $this->sort($query, $this->sort_fields, $params);
+        if(isset($params['limit']))
+            $query = $query->limit($params['limit']);
+
         return $query->get();
     }
 

@@ -25,7 +25,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'nullable'
+            'language' => 'nullable|array',
+            'about' => 'nullable',
+            'files.*' => 'nullable|file|max:10240',
+            'skill_ids' => 'nullable|array'
         ];
     }
 }

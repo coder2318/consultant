@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
     ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,
-    SkillController, ResourceController};
+    SkillController, ResourceController, NotificationController};
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
                 'middleware' =>['role:admin'],
             ] , function () {
             Route::get('admin/application/{application}', [ApplicationController::class, 'showAdmin']);
+            Route::get('admin/notification/{notification}', [NotificationController::class, 'showAdmin']);
             Route::apiResource('category', CategoryController::class)->except('index');
         });
 
@@ -55,14 +56,20 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             [
                 'middleware' =>['auth:api', 'role:user'],
             ] , function () {
-            Route::apiResource('application', ApplicationController::class);
-            Route::apiResource('comment', Commentcontroller::class);
-            Route::apiResource('payment', PaymentController::class);
+                Route::get('my-application', [ApplicationController::class, 'myIndex']);
+                Route::get('response-chat/{response}', [ResponseController::class, 'responseChat']);
+                Route::apiResource('application', ApplicationController::class);
+                Route::apiResource('comment', Commentcontroller::class);
+                Route::apiResource('payment', PaymentController::class);
         });
+        Route::get('my-notification', [NotificationController::class, 'myIndex']);
+        /** authga kirgan apilar */
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);
-    });
+        Route::apiResource('notification', NotificationController::class);
 
+    });
+    /** umumiy apilar */
     Route::get('category', [CategoryController::class, 'index']);
     Route::get('translate/{lang}', [ResourceController::class, 'translate']);
     Route::get('language', [ResourceController::class, 'language']);
