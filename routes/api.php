@@ -44,6 +44,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
                 'middleware' =>['auth:api', 'role:consultant'],
             ] , function () {
             Route::get('category/check/list', [CategoryController::class, 'checkList']);
+            Route::get('my-response', [ResponseController::class, 'myResponses']);
             Route::get('self-application', [ApplicationController::class, 'selfIndex']);
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
             Route::apiResource('resume', ResumeController::class);

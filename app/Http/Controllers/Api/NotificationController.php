@@ -50,7 +50,7 @@ class NotificationController extends Controller
 
     public function index(Request $request)
     {
-        return response()->successJson($this->service->get($request->all()));
+        return response()->successJson($this->service->list($request->all()));
     }
 
     /**

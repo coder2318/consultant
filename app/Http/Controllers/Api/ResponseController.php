@@ -40,6 +40,35 @@ class ResponseController extends Controller
     {
         return response()->successJson($this->service->get($request->all()));
     }
+
+    /**
+     * @OA\Get(
+     *      path="/my-response",
+     *      operationId="myresponseIndex",
+     *      tags={"Response"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="My response list",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function myResponses(IndexRequest $request)
+    {
+        return response()->successJson($this->service->list($request->all()));
+    }
+
     /**
      * @OA\Post(
      * path="/response",
