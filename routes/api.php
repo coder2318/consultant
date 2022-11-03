@@ -44,8 +44,9 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
                 'middleware' =>['auth:api', 'role:consultant'],
             ] , function () {
             Route::get('category/check/list', [CategoryController::class, 'checkList']);
-            Route::get('my-response', [ResponseController::class, 'myResponses']);
-            Route::get('self-application', [ApplicationController::class, 'selfIndex']);
+            Route::get('my-response', [ResponseController::class, 'myResponses']); // mening otkliklarim
+            Route::get('self-application', [ApplicationController::class, 'selfIndex']); // consultant uchun categorysiga mos bogan takliflar
+            Route::get('my-order-application', [ApplicationController::class, 'myOrderIndex']); // consultant uchun mening zakazlarim
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
             Route::apiResource('resume', ResumeController::class);
             Route::apiResource('experience', ExperienceController::class);

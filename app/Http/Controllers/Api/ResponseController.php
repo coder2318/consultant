@@ -64,7 +64,7 @@ class ResponseController extends Controller
      *     )
      */
 
-    public function myResponses(IndexRequest $request)
+    public function myResponses(IndexRequest $request) // mening otkliklarim
     {
         return response()->successJson($this->service->list($request->all()));
     }

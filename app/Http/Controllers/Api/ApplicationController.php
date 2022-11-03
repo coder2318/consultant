@@ -311,9 +311,9 @@ class ApplicationController extends Controller
      *     )
      */
 
-    public function selfIndex(IndexRequest $request)
+    public function selfIndex(IndexRequest $request) // consultant uchun o'zini categorylariga mos keladigan zayavkalar royxati
     {
-        return response()->successJson($this->service->get($request->all()));
+        return response()->successJson($this->service->selfIndex($request->all()));
     }
 
     /**
@@ -339,11 +339,39 @@ class ApplicationController extends Controller
      *     )
      */
 
-    public function myIndex(IndexRequest $request)
+    public function myIndex(IndexRequest $request) // mening zayavkalarim
     {
         $data = $request->all();
         $data['profile_id'] = auth()->user()->profile->id;
         return response()->successJson($this->service->list($data));
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/my-order-application",
+     *      operationId="MyOrderApplciationIndex",
+     *      tags={"Application"},
+     *      security={{ "bearerAuth": {} }},
+     *      summary="my Order Applications list for consultant self",
+     *      description="Consultant uchun mening zakazlarim apisi",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function myOrderIndex(IndexRequest $request) // mening zakazlarim consultant uchun
+    {
+        return response()->successJson($this->service->myOrderIndex($request->all()));
     }
 
 }

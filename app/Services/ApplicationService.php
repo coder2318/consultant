@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
 use App\Traits\FilesUpload;
@@ -35,6 +36,26 @@ class ApplicationService extends BaseService
         if(!isset($params['category_id']))
             $query = $query->whereIn('category_id', $self_category_id);
 
+        $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $this->sort($query, $this->sort_fields, $params);
+        $query = $this->select($query, $this->attributes);
+        $query = $this->repo->getPaginate($query, $perPage);
+        return $query;
+    }
+
+    public function myOrderIndex(array $params, $pagination = true)
+    {
+        $perPage = null;
+        if ($pagination) {
+            $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
+        }
+        $query = $this->repo->getQuery();
+        $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        $responses_application_ids = Response::whereIn('resume_id', $resume_ids)->where('status', Response::ACCEPT)->get()->pluck('application_id');
+
+        $query = $query->where(function ($q) use ($resume_ids, $responses_application_ids){
+            $q->whereIn('id', $responses_application_ids)->orWhereIn('resume_id', $resume_ids);
+        });
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
