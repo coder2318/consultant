@@ -29,13 +29,9 @@ class StoreRequest extends FormRequest
             'title' => 'required',
             'description' => 'nullable',
             'files.*' => 'nullable|file|max:15240',
-            'is_visible' => 'nullable|boolean',
-            'expired_date' => 'nullable|date',
             'price_from' => 'required|numeric',
             'price_to' => 'required|numeric',
-            'when' => 'required|in:today,tomorrow,in_week,whenever',
             'when_date' => 'nullable|date',
-            'status' => 'nullable|numeric|in:1,2,3,4'
         ];
     }
 }

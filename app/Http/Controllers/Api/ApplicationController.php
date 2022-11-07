@@ -63,14 +63,15 @@ class ApplicationController extends Controller
      *    required=true,
      *    description="Create new application",
      *    @OA\JsonContent(
-     *       required={ "category_id", "text", "when"},
+     *       required={ "category_id", "description", "title", "price_from", "price_to"},
      *       @OA\Property(property="resume_id", type="number", example="1"),
-     *       @OA\Property(property="name", type="string", example="Mushugimda muammo "),
+     *       @OA\Property(property="title", type="string", example="Mushugimda muammo "),
      *       @OA\Property(property="category_id", type="number", example="1"),
-     *       @OA\Property(property="text", type="string", example="Mushugimda muammo "),
-     *       @OA\Property(property="when", type="string", example="today"),
+     *       @OA\Property(property="description", type="string", example="Mushugimda muammo description"),
+     *       @OA\Property(property="when_date", type="string", example="srochno or nesrochno"),
      *       @OA\Property(property="price_from", type="number", example="100000"),
-     *       @OA\Property(property="price_to", type="number", example="150000")
+     *       @OA\Property(property="price_to", type="number", example="150000"),
+     *       @OA\Property(property="files", type="string", example="file"),
      *    ),
      * ),
      * @OA\Response(
@@ -190,8 +191,14 @@ class ApplicationController extends Controller
      *    @OA\JsonContent(
      *       @OA\Property(property="resume_id", type="number", example="1"),
      *       @OA\Property(property="category_id", type="number", example="1"),
-     *       @OA\Property(property="text", type="string", example="Mushugimda muammo update"),
-     *       @OA\Property(property="date", type="string", example="2022-10-12")
+     *       @OA\Property(property="title", type="string", example="Mushugimda muammo update"),
+     *       @OA\Property(property="status", type="number", example="3"),
+*            @OA\Property(property="description", type="string", example="Mushugimda muammo description"),
+     *       @OA\Property(property="when_date", type="string", example="srochno or nesrochno"),
+     *       @OA\Property(property="price_from", type="number", example="100000"),
+     *       @OA\Property(property="price_to", type="number", example="150000"),
+     *       @OA\Property(property="files", type="string", example="file"),
+     *       @OA\Property(property="reason_inactive", type="string", example="reason inactive"),
      *    ),
      * ),
      *      @OA\Response(

@@ -64,15 +64,17 @@
                             "schema": {
                                 "required": [
                                     "category_id",
-                                    "text",
-                                    "when"
+                                    "description",
+                                    "title",
+                                    "price_from",
+                                    "price_to"
                                 ],
                                 "properties": {
                                     "resume_id": {
                                         "type": "number",
                                         "example": "1"
                                     },
-                                    "name": {
+                                    "title": {
                                         "type": "string",
                                         "example": "Mushugimda muammo "
                                     },
@@ -80,13 +82,13 @@
                                         "type": "number",
                                         "example": "1"
                                     },
-                                    "text": {
+                                    "description": {
                                         "type": "string",
-                                        "example": "Mushugimda muammo "
+                                        "example": "Mushugimda muammo description"
                                     },
-                                    "when": {
+                                    "when_date": {
                                         "type": "string",
-                                        "example": "today"
+                                        "example": "srochno or nesrochno"
                                     },
                                     "price_from": {
                                         "type": "number",
@@ -95,6 +97,10 @@
                                     "price_to": {
                                         "type": "number",
                                         "example": "150000"
+                                    },
+                                    "files": {
+                                        "type": "string",
+                                        "example": "file"
                                     }
                                 },
                                 "type": "object"
@@ -204,13 +210,37 @@
                                         "type": "number",
                                         "example": "1"
                                     },
-                                    "text": {
+                                    "title": {
                                         "type": "string",
                                         "example": "Mushugimda muammo update"
                                     },
-                                    "date": {
+                                    "status": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "description": {
                                         "type": "string",
-                                        "example": "2022-10-12"
+                                        "example": "Mushugimda muammo description"
+                                    },
+                                    "when_date": {
+                                        "type": "string",
+                                        "example": "srochno or nesrochno"
+                                    },
+                                    "price_from": {
+                                        "type": "number",
+                                        "example": "100000"
+                                    },
+                                    "price_to": {
+                                        "type": "number",
+                                        "example": "150000"
+                                    },
+                                    "files": {
+                                        "type": "string",
+                                        "example": "file"
+                                    },
+                                    "reason_inactive": {
+                                        "type": "string",
+                                        "example": "reason inactive"
                                     }
                                 },
                                 "type": "object"
