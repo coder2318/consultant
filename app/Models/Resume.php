@@ -16,7 +16,6 @@ class Resume extends BaseModel
     protected $fillable = [
         'profile_id',
         'category_id',
-        'sub_category_id',
         'language',
         'about',
         'files',

@@ -55,8 +55,11 @@ class ResumeController extends Controller
      *    description="Create new Resume",
      *    @OA\JsonContent(
      *       required={"category_id"},
-     *       @OA\Property(property="category_id", type="number", example="1"),
-     *       @OA\Property(property="sub_category_id", type="number", example="1")
+     *       @OA\Property(property="category_id", type="number", example="12"),
+     *       @OA\Property(property="language", type="string", example={"english", "russian"}),
+     *       @OA\Property(property="about", type="string", example="about"),
+     *       @OA\Property(property="files", type="string", example={"files"}),
+     *       @OA\Property(property="skill_ids", type="string", example={1, 2}),
      *    ),
      * ),
      * @OA\Response(
@@ -139,11 +142,13 @@ class ResumeController extends Controller
      * @OA\RequestBody(
      *    description="Update Category",
      *    @OA\JsonContent(
-     *       @OA\Property(property="category_id", type="number", example="1"),
-     *       @OA\Property(property="sub_category_id", type="number", example="1"),
-     *       @OA\Property(property="language", type="text", example="['english', 'russian']"),
-     *       @OA\Property(property="about", type="string", example="AgroConsult"),
-     *       @OA\Property(property="status", type="number", example="2"),
+     *       @OA\Property(property="category_id", type="number", example="12"),
+     *       @OA\Property(property="language", type="string", example={"english", "russian"}),
+     *       @OA\Property(property="about", type="string", example="about"),
+     *       @OA\Property(property="files", type="string", example={"files"}),
+     *       @OA\Property(property="skill_ids", type="string", example={1, 2}),
+     *       @OA\Property(property="status", type="string", example="type number: 1-> created, 2-> confirmed, 3-> blocked"),
+     *       @OA\Property(property="visible", type="string", example="true or false"),
      *    ),
      * ),
      *      @OA\Response(

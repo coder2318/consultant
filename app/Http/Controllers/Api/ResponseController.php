@@ -170,7 +170,7 @@ class ResponseController extends Controller
      *    @OA\JsonContent(
      *       @OA\Property(property="amount", type="text", example="250000"),
      *       @OA\Property(property="text", type="text", example="backend dasturchi"),
-     *       @OA\Property(property="status", type="number", example="1")
+    *       @OA\Property(property="status", type="string", example="type number: 1-> yuborilgan, 2->qabul qilingan, 3->bekor qilingan")
      *    ),
      * ),
      *      @OA\Response(

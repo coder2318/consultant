@@ -214,10 +214,6 @@
                                         "type": "string",
                                         "example": "Mushugimda muammo update"
                                     },
-                                    "status": {
-                                        "type": "number",
-                                        "example": "3"
-                                    },
                                     "description": {
                                         "type": "string",
                                         "example": "Mushugimda muammo description"
@@ -237,6 +233,10 @@
                                     "files": {
                                         "type": "string",
                                         "example": "file"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": " type number: 1->e'lon qilingan, 2-> consultant bn kelishilgan, 3->chernovik qilib qoyilgan, 4->tugatilgan, 5->deactivatsiya qilingan, 6->otmen qilingan"
                                     },
                                     "reason_inactive": {
                                         "type": "string",
@@ -2273,8 +2273,8 @@
                                         "example": "backend dasturchi"
                                     },
                                     "status": {
-                                        "type": "number",
-                                        "example": "1"
+                                        "type": "string",
+                                        "example": "type number: 1-> yuborilgan, 2->qabul qilingan, 3->bekor qilingan"
                                     }
                                 },
                                 "type": "object"
@@ -2424,11 +2424,31 @@
                                 "properties": {
                                     "category_id": {
                                         "type": "number",
-                                        "example": "1"
+                                        "example": "12"
                                     },
-                                    "sub_category_id": {
-                                        "type": "number",
-                                        "example": "1"
+                                    "language": {
+                                        "type": "string",
+                                        "example": [
+                                            "english",
+                                            "russian"
+                                        ]
+                                    },
+                                    "about": {
+                                        "type": "string",
+                                        "example": "about"
+                                    },
+                                    "files": {
+                                        "type": "string",
+                                        "example": [
+                                            "files"
+                                        ]
+                                    },
+                                    "skill_ids": {
+                                        "type": "string",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -2531,23 +2551,39 @@
                                 "properties": {
                                     "category_id": {
                                         "type": "number",
-                                        "example": "1"
-                                    },
-                                    "sub_category_id": {
-                                        "type": "number",
-                                        "example": "1"
+                                        "example": "12"
                                     },
                                     "language": {
-                                        "type": "text",
-                                        "example": "['english', 'russian']"
+                                        "type": "string",
+                                        "example": [
+                                            "english",
+                                            "russian"
+                                        ]
                                     },
                                     "about": {
                                         "type": "string",
-                                        "example": "AgroConsult"
+                                        "example": "about"
+                                    },
+                                    "files": {
+                                        "type": "string",
+                                        "example": [
+                                            "files"
+                                        ]
+                                    },
+                                    "skill_ids": {
+                                        "type": "string",
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
                                     },
                                     "status": {
-                                        "type": "number",
-                                        "example": "2"
+                                        "type": "string",
+                                        "example": "type number: 1-> created, 2-> confirmed, 3-> blocked"
+                                    },
+                                    "visible": {
+                                        "type": "string",
+                                        "example": "true or false"
                                     }
                                 },
                                 "type": "object"

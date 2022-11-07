@@ -18,6 +18,14 @@ class ApplicationObserver
         $application->update([
             'expired_date' => Carbon::now()->addDays(30)->format('Y-m-d')
         ]);
+        if($application->resume_id)
+                $application->update([
+                    'type' => Application::PRIVATE
+                ]);
+        else
+            $application->update([
+                'type' => Application::PUBLIC
+            ]);
     }
 
     /**
