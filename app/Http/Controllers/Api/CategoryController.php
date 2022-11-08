@@ -58,7 +58,9 @@ class CategoryController extends Controller
      *    @OA\JsonContent(
      *       required={"name"},
      *       @OA\Property(property="name", type="string", example={"uz_cyrl": "service nomi", "uz_latn": "service", "ru": "service"}),
-     *       @OA\Property(property="parent_id", type="number", example="1")
+     *       @OA\Property(property="parent_id", type="number", example="1"),
+     *       @OA\Property(property="icon", type="string", example="icon"),
+     *       @OA\Property(property="file", type="string", example="file"),
      *    ),
      * ),
      * @OA\Response(
@@ -143,7 +145,9 @@ class CategoryController extends Controller
      *    description="Update Category",
      *    @OA\JsonContent(
      *       @OA\Property(property="name", type="string", example="Product"),
-     *       @OA\Property(property="parent_id", type="number", example="2")
+     *       @OA\Property(property="parent_id", type="number", example="2"),
+     *      @OA\Property(property="icon", type="string", example="icon"),
+     *       @OA\Property(property="file", type="string", example="file"),
      *    ),
      * ),
      *      @OA\Response(

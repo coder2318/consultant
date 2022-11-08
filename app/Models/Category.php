@@ -12,7 +12,8 @@ class Category extends BaseModel
     protected $fillable = [
         'name',
         'parent_id',
-        'icon'
+        'icon',
+        'file'
     ];
 
     protected $casts = [
@@ -20,6 +21,13 @@ class Category extends BaseModel
     ];
 
     public function getIconAttribute($value)
+    {
+        if($value)
+            return url('/').'/'.$value;
+        return null;
+    }
+
+    public function getFileAttribute($value)
     {
         if($value)
             return url('/').'/'.$value;

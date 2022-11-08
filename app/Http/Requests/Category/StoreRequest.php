@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required',
             'parent_id' => 'nullable|exists:categories,id',
-            'icon' => 'nullable|file|max:1024'
+            'icon' => 'nullable|file|max:1024',
+            'file' => 'nullable|file|max:4024',
         ];
     }
 }

@@ -26,7 +26,8 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'nullable',
             'parent_id' => 'nullable|exists:categories,id',
-            'icon' => 'nullable|file|max:1024'
+            'icon' => 'nullable|file|max:1024',
+            'file' => 'nullable|file|max:4024',
         ];
     }
 }
