@@ -19,10 +19,8 @@ class StoreRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'language' => json_decode($this->language),
             'category_id' => json_decode($this->category_id),
-            'about' => json_decode($this->about),
-            'skill_ids' => json_decode($this->skill_ids)
+            'about' => json_decode($this->about)
         ]);
     }
 
