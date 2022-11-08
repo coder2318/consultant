@@ -346,7 +346,7 @@
                 ]
             }
         },
-        "/self-application": {
+        "/self-application?category_id={category_id}&price_from={price_from}&price_to={price_to}&when_date={when_date}&type={type}": {
             "get": {
                 "tags": [
                     "Application"
@@ -354,38 +354,6 @@
                 "summary": "Application belongs to consultant list",
                 "description": "index",
                 "operationId": "SelfApplciationIndex",
-                "parameters": [
-                    {
-                        "name": "category_id",
-                        "in": "query",
-                        "description": "category_id to filter by",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "price_from",
-                        "in": "query",
-                        "description": "price_from to filter by",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "price_to",
-                        "in": "query",
-                        "description": "price_to to filter by",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
