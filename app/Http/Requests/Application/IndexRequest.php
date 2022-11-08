@@ -30,7 +30,7 @@ class IndexRequest extends FormRequest
             'price_from' => 'nullable',
             'price_to' => 'nullable',
             'when_date' => 'nullable',
-            'limit' => 'nullable|numeric',
+            'limit' => 'nullable',
             'status' => 'nullable',
             'type' => 'nullable'
         ];
