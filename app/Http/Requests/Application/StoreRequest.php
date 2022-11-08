@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Application;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Str;
 class StoreRequest extends FormRequest
 {
     /**
@@ -14,6 +14,21 @@ class StoreRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'category_id' => json_decode($this->category_id),
+            'price_from' => json_decode($this->price_from),
+            'price_to' => json_decode($this->price_to),
+            'when_date' => json_decode($this->when_date),
+        ]);
     }
 
     /**
