@@ -295,12 +295,26 @@ class ApplicationController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/my-application?status={status}&limit={limit}",
+     *      path="/my-application",
      *      operationId="MyApplciationIndex",
      *      tags={"Application"},
      *      security={{ "bearerAuth": {} }},
      *      summary="Applications list for client self",
      *      description="index",
+     *      @OA\Parameter(
+     *         description="status",
+     *         in="query",
+     *         name="status",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Parameter(
+     *         description="limit",
+     *         in="query",
+     *         name="limit",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

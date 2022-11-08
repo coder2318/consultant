@@ -22,8 +22,28 @@ class Response extends BaseModel
         'is_showed'
     ];
 
+    protected $appends = ['user'];
+
     public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->BelongsTo(Application::class, 'application_id', 'id');
+    }
+
+    public function resume(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->BelongsTo(Resume::class, 'resume_id', 'id');
+    }
+
+    public function getUserAttribute()
+    {
+        $resume = Resume::find($this->resume_id);
+        if($resume){
+            $user_id = Profile::find($resume->profile_id)->user_id;
+            $user = User::find($user_id);
+            return [
+                'fullname' => $user->l_name . ' '.$user->f_name, 
+                'avatar' => $user->photo
+            ];
+        }
     }
 }

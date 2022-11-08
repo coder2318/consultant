@@ -372,7 +372,7 @@
                 ]
             }
         },
-        "/my-application?status={status}&limit={limit}": {
+        "/my-application": {
             "get": {
                 "tags": [
                     "Application"
@@ -380,6 +380,26 @@
                 "summary": "Applications list for client self",
                 "description": "index",
                 "operationId": "MyApplciationIndex",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "status",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
