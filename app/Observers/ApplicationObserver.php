@@ -22,10 +22,6 @@ class ApplicationObserver
                 $application->update([
                     'type' => Application::PRIVATE
                 ]);
-        else
-            $application->update([
-                'type' => Application::PUBLIC
-            ]);
     }
 
     /**
