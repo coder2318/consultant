@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Application;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationObserver
 {
@@ -32,27 +33,14 @@ class ApplicationObserver
      */
     public function updated(Application $application)
     {
-//        if($application->wasChanged('when')){
-//            $when_date = match ($application->when){
-//                Application::TODAY => Carbon::now()->format('Y-m-d'),
-//                Application::TOMORROW => Carbon::now()->addDay()->format('Y-m-d'),
-//                Application::IN_WEEK => Carbon::now()->addWeek()->format('Y-m-d')
-//            };
-//            $application->update([
-//                'when_date' => $when_date
-//            ]);
-//        }
         /** agar birorta consultantga alohida yuborilsa unda private type buladi */
-        if($application->wasChanged('resume_id')){
-            if($application->resume_id)
-                $application->update([
-                    'type' => Application::PRIVATE
-                ]);
-            else
-                $application->update([
-                    'type' => Application::PUBLIC
-                ]);
-        }
+        // if($application->wasChanged('resume_id')){
+        //     if($application->resume_id)
+        //         DB::statement("update applications set type=".Application::PRIVATE." where id=$application->id");
+        //     else
+        //         DB::statement("update applications set type=".Application::PUBLIC." where id=$application->id");
+
+        // }
     }
 
     /**

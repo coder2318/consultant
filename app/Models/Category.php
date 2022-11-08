@@ -25,4 +25,11 @@ class Category extends BaseModel
             return url('/').'/'.$value;
         return null;
     }
+
+    public function getNameAttribute($value): string
+    {
+        $lang = request()->header('Language');
+        $name = json_decode($value, true);
+        return $name[$lang]??'';
+    }
 }

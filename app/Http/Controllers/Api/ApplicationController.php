@@ -295,7 +295,7 @@ class ApplicationController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/my-application?status={status}",
+     *      path="/my-application?status={status}&limit={limit}",
      *      operationId="MyApplciationIndex",
      *      tags={"Application"},
      *      security={{ "bearerAuth": {} }},
