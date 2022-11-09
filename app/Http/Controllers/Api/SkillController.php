@@ -51,7 +51,7 @@ class SkillController extends Controller
 
     public function index(IndexRequest $request)
     {
-        return response()->successJson($this->service->get($request->all()));
+        return response()->successJson($this->service->list($request->all()));
     }
 
     /**
