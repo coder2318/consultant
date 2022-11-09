@@ -848,6 +848,32 @@
                 ]
             }
         },
+        "/select-category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Category list for select",
+                "description": "index",
+                "operationId": "SelectCategoryIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/comment": {
             "get": {
                 "tags": [

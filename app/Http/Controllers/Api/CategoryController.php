@@ -265,4 +265,40 @@ class CategoryController extends Controller
     {
         return response()->successJson($this->service->getSelfCategory());
     }
+
+    /**
+     * @OA\Get(
+     *      path="/select-category",
+     *      operationId="SelectCategoryIndex",
+     *      tags={"Category"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Category list for select",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function selectCategory(IndexRequest $request)
+    {
+        $list = $this->service->list($request->all());
+        
+        return response()->successJson(
+            $list->map(function ($category) {
+            return collect($category->toArray())
+                ->only(['id', 'name'])
+                ->all();
+            })
+        );
+    }
 }

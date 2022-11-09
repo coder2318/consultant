@@ -73,6 +73,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     });
     /** umumiy apilar */
     Route::get('category', [CategoryController::class, 'index']);
+    Route::get('select-category', [CategoryController::class, 'selectCategory']);
     Route::get('translate/{lang}', [ResourceController::class, 'translate']);
     Route::get('language', [ResourceController::class, 'language']);
     Route::get('language/default', [ResourceController::class, 'languageDefault']);
