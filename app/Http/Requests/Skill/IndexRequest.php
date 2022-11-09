@@ -26,7 +26,10 @@ class IndexRequest extends FormRequest
         return [
             'name' => 'nullable',
             'category_id' => 'nullable',
-            'is_main' => 'nullable'
+            'is_main' => 'nullable',
+            'id' => 'nullable',
+            'sort_by' => 'nullable',
+            'order_by' => 'required_with:sort_by'
         ];
     }
 }
