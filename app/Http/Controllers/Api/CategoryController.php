@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\IndexRequest;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
+use App\Http\Resources\CategoryListResource;
 use App\Mixins\ResponseFactoryMixin;
 use App\Models\Category;
 use App\Services\CategoryService;
@@ -42,7 +43,7 @@ class CategoryController extends Controller
 
     public function index(IndexRequest $request)
     {
-        return response()->successJson($this->service->list($request->all()));
+        return response()->successJson(CategoryListResource::collection($this->service->list($request->all())));
     }
 
     /**

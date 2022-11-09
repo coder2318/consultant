@@ -604,6 +604,14 @@
                                     "parent_id": {
                                         "type": "number",
                                         "example": "1"
+                                    },
+                                    "icon": {
+                                        "type": "string",
+                                        "example": "icon"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "example": "file"
                                     }
                                 },
                                 "type": "object"
@@ -712,6 +720,14 @@
                                     "parent_id": {
                                         "type": "number",
                                         "example": "2"
+                                    },
+                                    "icon": {
+                                        "type": "string",
+                                        "example": "icon"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "example": "file"
                                     }
                                 },
                                 "type": "object"

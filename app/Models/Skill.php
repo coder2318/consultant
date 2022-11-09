@@ -14,4 +14,12 @@ class Skill extends BaseModel
         'category_id',
         'is_main'
     ];
+
+    protected $appends = ['category'];
+
+    public function getCategoryAttribute(): string
+    {
+        $category = Category::find($this->category_id);
+        return $category->name;
+    }
 }
