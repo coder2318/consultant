@@ -211,7 +211,6 @@ class SkillController extends Controller
 
     public function destroy(Skill $skill)
     {
-        $this->authorize('delete', $skill);
         $model = $this->service->delete((int) $skill->id);
         if($model)
             return response()->successJson('Successfully deleted');
