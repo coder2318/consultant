@@ -165,9 +165,9 @@ class BaseService
             $key = $sort_fields['sort_key'];
             $order = $sort_fields['sort_type'];
         }
-        if (isset($params) and isset($params['sort_key'])) {
-            $key = $params['sort_key'];
-            $order = $params['sort_type'];
+        if (isset($params) and isset($params['sort_by'])) {
+            $key = $params['sort_by'];
+            $order = $params['order_by'];
         }
         $query->orderBy($key, $order);
 

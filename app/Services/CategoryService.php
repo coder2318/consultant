@@ -15,7 +15,7 @@ class CategoryService extends BaseService
     public function __construct(CategoryRepository $repository, protected Resume $resumeModel)
     {
         $this->repo = $repository;
-        $this->filter_fields = ['name' => ['type' => 'string']];
+        $this->filter_fields = ['name' => ['type' => 'string'], 'id' => ['type' => 'number']];
     }
 
     public function checkList(): array|\Illuminate\Support\Collection

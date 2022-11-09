@@ -25,8 +25,9 @@ class IndexRequest extends FormRequest
     {
         return [
             'name' => 'nullable',
-            'sort_key' => 'nullable',
-            'sort_type' => 'required_with:sort_key'
+            'id' => 'nullable',
+            'sort_by' => 'nullable',
+            'order_by' => 'required_with:sort_by'
         ];
     }
 }

@@ -38,6 +38,6 @@ class Category extends BaseModel
     {
         $lang = request()->header('Language');
         $name = json_decode($value, true);
-        return $name[$lang]??'';
+        return $name[$lang]??$name['ru'];
     }
 }
