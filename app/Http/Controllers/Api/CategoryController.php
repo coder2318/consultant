@@ -43,6 +43,34 @@ class CategoryController extends Controller
 
     public function index(IndexRequest $request)
     {
+        return response()->successJson($this->service->list($request->all()));
+    }
+    
+    /**
+     * @OA\Get(
+     *      path="/admin-category",
+     *      operationId="CategoryAdminIndex",
+     *      tags={"Category"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Category Admin list",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function adminIndex(IndexRequest $request)
+    {
         return response()->successJson(CategoryListResource::collection($this->service->list($request->all())));
     }
 
