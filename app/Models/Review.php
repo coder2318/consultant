@@ -15,4 +15,15 @@ class Review extends Model
         'text',
         'rating'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            if(auth()->user() && auth()->user()->profile)
+                $model->profile_id = auth()->user()->profile->id;
+        });
+
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
     ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,
-    SkillController, ResourceController, NotificationController};
+    SkillController, ResourceController, NotificationController, ReviewController};
 
 /*
 |--------------------------------------------------------------------------
@@ -65,10 +65,12 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
                 Route::apiResource('payment', PaymentController::class);
         });
         Route::get('my-notification', [NotificationController::class, 'myIndex']);
+        Route::get('review-list/{resume_id}', [ReviewController::class, 'index']);
         /** authga kirgan apilar */
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);
         Route::apiResource('notification', NotificationController::class);
+        Route::apiResource('review', ReviewController::class)->except('index','update');
 
     });
     /** umumiy apilar */

@@ -2754,6 +2754,159 @@
                 ]
             }
         },
+        "/review-list/{resume_id}": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "review list",
+                "description": "index",
+                "operationId": "reviewIndex",
+                "parameters": [
+                    {
+                        "name": "resume_id",
+                        "in": "path",
+                        "description": "resume ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/review": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Create new review",
+                "description": "Create review",
+                "operationId": "32e21e659f17744ae0c9d1ef7c58b202",
+                "requestBody": {
+                    "description": "Create new review",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "resume_id",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "resume_id": {
+                                        "type": "number",
+                                        "example": "3"
+                                    },
+                                    "text": {
+                                        "type": "text",
+                                        "example": "backend dasturchi"
+                                    },
+                                    "rating": {
+                                        "type": "number",
+                                        "example": "5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/review/{review}": {
+            "delete": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "delete review",
+                "description": "delete ",
+                "operationId": "3158910a4808e1fd0335192877a8c75e",
+                "parameters": [
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "description": "review ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/skill": {
             "get": {
                 "tags": [
