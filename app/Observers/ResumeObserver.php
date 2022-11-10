@@ -15,9 +15,9 @@ class ResumeObserver
      */
     public function creating()
     {
-        $resumes_count = Resume::where('profile_id', auth()->user()->profile->id)->get()->count();
-        if($resumes_count >= 3)
-            abort(422, 'You have already 3 resumes');
+        // $resumes_count = Resume::where('profile_id', auth()->user()->profile->id)->get()->count();
+        // if($resumes_count >= 3)
+        //     abort(422, 'You have already 3 resumes');
     }
 
     public function created(Resume $resume)
