@@ -46,7 +46,7 @@ class Resume extends BaseModel
     {
         $profile = Profile::find($this->profile_id);
         $user = User::find($profile->user_id);
-        return ['fullname' => $user->l_name . ' '.$user->f_name, 'avatar' => $user->photo, 'last_online_at' => $profile->last_online_at];
+        return ['fullname' => $user->l_name . ' '.$user->f_name, 'avatar' => config('services.core_address').$user->photo, 'last_online_at' => $profile->last_online_at];
     }
 
     public function getReviewAttribute()
