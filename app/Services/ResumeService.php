@@ -14,6 +14,14 @@ class ResumeService extends BaseService
         $this->filter_fields = ['category_id' => ['type' => 'integer'], 'sub_category_id' => ['type' => 'integer']];
     }
 
+    public function create($params): object
+    {
+        if(isset($params['files'])){
+            $params = $this->fileUpload($params, 'applications');
+        }
+        return $this->repo->store($params);
+    }
+
     public function edit($params, $id): mixed
     {
         if(isset($params['files'])){

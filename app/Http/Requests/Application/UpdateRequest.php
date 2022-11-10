@@ -16,21 +16,6 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'resume_id' => json_decode($this->resume_id),
-            'category_id' => json_decode($this->category_id),
-            'price_from' => json_decode($this->price_from),
-            'price_to' => json_decode($this->price_to),
-            'when_date' => json_decode($this->when_date),
-            'title' => json_decode($this->title),
-            'description' => json_decode($this->description),
-            'status' => json_decode($this->status),
-            'reason_inactive' => json_decode($this->reason_inactive),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
