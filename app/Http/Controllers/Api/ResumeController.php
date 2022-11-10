@@ -23,6 +23,20 @@ class ResumeController extends Controller
      *      summary="Resume list",
      *     security={{ "bearerAuth": {} }},
      *      description="index",
+     * @OA\Parameter(
+     *         description="Category ID",
+     *         in="query",
+     *         name="category_id",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     * @OA\Parameter(
+     *         description="Status CREATED = 1, CONFIRMED = 2, BLOCKED = 3",
+     *         in="query",
+     *         name="status",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

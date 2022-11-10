@@ -94,7 +94,6 @@ class Application extends BaseModel
     public function getCategoryAttribute(): string
     {
         $category = Category::find($this->category_id);
-        // $lang = request()->header('Language');
         return $category->name;
     }
 

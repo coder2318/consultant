@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Application;
 use App\Models\Resume;
 use App\Repositories\CategoryRepository;
 use App\Traits\FilesUpload;
@@ -60,5 +61,18 @@ class CategoryService extends BaseService
             return $this->repo->getQuery()->whereIn('id', $resumes->pluck('category_id'))->get();
         }
         return [];
+    }
+
+    public function topCategories()
+    {
+        $category_ids = DB::table('applications')
+            ->select(
+                'category_id',
+                DB::raw("count(id) as count")
+            )->groupBy('category_id')
+            ->orderBy('count', 'desc')
+            ->limit(4)->get()->pluck('category_id');
+
+        return $this->repo->getQuery()->whereIn('id', $category_ids)->get();
     }
 }

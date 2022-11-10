@@ -29,6 +29,8 @@ class Resume extends BaseModel
         'skill_ids' => ArrayStringCast::class
     ];
 
+    protected $appends = ['user'];
+
     public static function boot()
     {
         parent::boot();
@@ -38,5 +40,12 @@ class Resume extends BaseModel
                 $model->profile_id = auth()->user()->profile->id;
         });
 
+    }
+
+    public function getUserAttribute(): array
+    {
+        $profile = Profile::find($this->profile_id);
+        $user = User::find($profile->user_id);
+        return ['fullname' => $user->l_name . ' '.$user->f_name, 'avatar' => $user->photo, 'last_online_at' => $profile->last_online_at];
     }
 }

@@ -329,4 +329,32 @@ class CategoryController extends Controller
             })
         );
     }
+
+    /**
+     * @OA\Get(
+     *      path="/top-category",
+     *      operationId="TOPCategory",
+     *      tags={"Category"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="TOP Category list",
+     *      description="TOP Category list",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function topCategories()
+    {
+        return response()->successJson($this->service->topCategories());
+    }
+
 }

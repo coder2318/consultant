@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\LastOnlineAtMiddleware;
 use App\Http\Middleware\Role;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -38,11 +39,13 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            LastOnlineAtMiddleware::class
         ],
 
         'api' => [
             'throttle:1000,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            LastOnlineAtMiddleware::class
         ],
     ];
 

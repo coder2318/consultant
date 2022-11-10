@@ -16,7 +16,12 @@ class Profile extends BaseModel
         'user_id',
         'role',
         'is_active',
-        'is_consultant'
+        'is_consultant',
+        'last_online_at'
+    ];
+
+    protected $casts = [
+        "last_online_at" => "datetime"
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
