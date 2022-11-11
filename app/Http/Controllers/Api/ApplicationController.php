@@ -394,7 +394,7 @@ class ApplicationController extends Controller
      *      operationId="MyOrderApplciationIndex",
      *      tags={"Application"},
      *      security={{ "bearerAuth": {} }},
-     *      summary="my Order Applications list for consultant self",
+     *      summary="mening zakazlarim consultant uchun",
      *      description="Consultant uchun mening zakazlarim apisi",
      *      @OA\Response(
      *          response=200,

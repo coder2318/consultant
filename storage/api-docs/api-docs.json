@@ -479,7 +479,7 @@
                 "tags": [
                     "Application"
                 ],
-                "summary": "my Order Applications list for consultant self",
+                "summary": "mening zakazlarim consultant uchun",
                 "description": "Consultant uchun mening zakazlarim apisi",
                 "operationId": "MyOrderApplciationIndex",
                 "responses": {
@@ -2801,6 +2801,32 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/my-resume": {
+            "get": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "My Resume list",
+                "description": "index",
+                "operationId": "MyResumeIndex",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 },
                 "security": [

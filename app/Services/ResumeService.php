@@ -14,6 +14,17 @@ class ResumeService extends BaseService
         $this->filter_fields = ['category_id' => ['type' => 'integer'], 'status' => ['type' => 'integer']];
     }
 
+    public function myIndex()
+    {
+        $query = $this->repo->getQuery();
+        $query = $this->select($query, $this->attributes);
+        $query = $query->where('profile_id', auth()->user()->profile->id);
+        if(isset($params['limit']))
+            $query = $query->limit($params['limit']);
+
+        return $query->get();
+    }
+
     public function create($params): object
     {
         if(isset($params['files'])){

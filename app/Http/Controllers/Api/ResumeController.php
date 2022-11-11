@@ -225,4 +225,32 @@ class ResumeController extends Controller
         $this->service->delete((int) $resume->id);
         return response()->successJson('Successfully deleted');
     }
+
+    /**
+     * @OA\Get(
+     *      path="/my-resume",
+     *      operationId="MyResumeIndex",
+     *      tags={"Resume"},
+     *      summary="My Resume list",
+     *     security={{ "bearerAuth": {} }},
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function myIndex()
+    {
+        return response()->successJson($this->service->myIndex());
+    }
 }

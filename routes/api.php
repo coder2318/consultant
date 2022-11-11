@@ -48,6 +48,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::get('self-application', [ApplicationController::class, 'selfIndex']); // consultant uchun categorysiga mos bogan takliflar
             Route::get('my-order-application', [ApplicationController::class, 'myOrderIndex']); // consultant uchun mening zakazlarim
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
+            Route::get('my-resume', [ResumeController::class, 'myIndex']);
             Route::apiResource('resume', ResumeController::class);
             Route::apiResource('experience', ExperienceController::class);
             Route::apiResource('response', ResponseController::class);
