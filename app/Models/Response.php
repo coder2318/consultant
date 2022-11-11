@@ -22,7 +22,7 @@ class Response extends BaseModel
         'is_showed'
     ];
 
-    protected $appends = ['user'];
+    protected $appends = ['user', 'category'];
 
     public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -45,5 +45,11 @@ class Response extends BaseModel
                 'avatar' => config('services.core_address').$user->photo
             ];
         }
+    }
+
+    public function getCategoryAttribute()
+    {
+        $resume = Resume::find($this->resume_id);
+        return $resume->category;
     }
 }

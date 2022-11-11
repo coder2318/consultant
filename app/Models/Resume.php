@@ -42,6 +42,19 @@ class Resume extends BaseModel
 
     }
 
+    public function getFilesAttribute($value)
+    {
+        if($value){
+            $files = [];
+            $arr = explode(',', $value);
+            foreach ($arr as $item) {
+                $files[] = url('/').'/'.$item;
+            }
+            return $files;
+        }
+        return null;
+    }
+    
     public function getUserAttribute(): array
     {
         $profile = Profile::find($this->profile_id);
