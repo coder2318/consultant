@@ -16,7 +16,8 @@ class ApplicationService extends BaseService
         $this->repo = $repo;
         $this->filter_fields = ['resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
                 'category_id' => ['type' => 'number'], 'price_from' => ['type' => 'from'], 'price_to' => ['type' => 'to'],
-                'when_date' => ['type' => 'notNull'], 'profile_id' => ['type' => 'number'], 'status' => ['type' => 'number']
+                'when_date' => ['type' => 'notNull'], 'profile_id' => ['type' => 'number'], 'status' => ['type' => 'number'],
+                'type' => ['type' => 'number']
             ];
         $this->attributes = [
             'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 

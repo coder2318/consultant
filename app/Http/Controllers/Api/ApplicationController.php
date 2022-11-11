@@ -268,12 +268,62 @@ class ApplicationController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/self-application?category_id={category_id}&price_from={price_from}&price_to={price_to}&when_date={when_date}&type={type}",
+     *      path="/self-application",
      *      operationId="SelfApplciationIndex",
      *      tags={"Application"},
      *      security={{ "bearerAuth": {} }},
      *      summary="Application belongs to consultant list",
-     *      description="index",
+     *      description="consultant uchun o'zini categorylariga mos keladigan zayavkalar royxati",
+     *      @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="category_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     * @OA\Parameter(
+     *         name="price_from",
+     *         in="query",
+     *         description="price_from to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     * @OA\Parameter(
+     *         name="price_to",
+     *         in="query",
+     *         description="price_to to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     * @OA\Parameter(
+     *         name="when_date",
+     *         in="query",
+     *         description="when_date to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
+     * @OA\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="type to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
