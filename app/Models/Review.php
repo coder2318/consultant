@@ -16,6 +16,8 @@ class Review extends Model
         'rating'
     ];
 
+    protected $appends = ['user'];
+
     public static function boot()
     {
         parent::boot();
@@ -25,5 +27,12 @@ class Review extends Model
                 $model->profile_id = auth()->user()->profile->id;
         });
 
+    }
+
+    public function getUserAttribute(): array
+    {
+        $profile = Profile::find($this->profile_id);
+        $user = User::find($profile->user_id);
+        return ['fullname' => $user->l_name . ' '.$user->f_name, 'avatar' => config('services.core_address').$user->photo, 'last_online_at' => $profile->last_online_at];
     }
 }

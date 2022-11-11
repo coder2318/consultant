@@ -136,6 +136,7 @@ class ResumeController extends Controller
     public function show(Resume $resume)
     {
         $model = $this->service->show((int) $resume->id);
+        $model->reviews;
         return response()->successJson($model);
     }
 

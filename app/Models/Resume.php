@@ -29,7 +29,7 @@ class Resume extends BaseModel
         'skill_ids' => ArrayStringCast::class
     ];
 
-    protected $appends = ['user', 'review'];
+    protected $appends = ['user', 'review', 'category', 'skills'];
 
     public static function boot()
     {
@@ -64,5 +64,22 @@ class Resume extends BaseModel
             'count' => $reviews->count(),
             'rating' => 0 
         ];
+    }
+
+    public function getCategoryAttribute(): string
+    {
+        $category = Category::find($this->category_id);
+        return $category->name;
+    }
+
+    public function getSkillsAttribute()
+    {
+        $skills = Skill::whereIn('id',$this->skill_ids)->get()->pluck('name');
+        return $skills;
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'resume_id', 'id');
     }
 }
