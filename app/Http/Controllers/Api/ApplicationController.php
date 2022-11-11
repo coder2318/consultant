@@ -199,6 +199,7 @@ class ApplicationController extends Controller
      *       @OA\Property(property="files", type="string", example="file"),
      *       @OA\Property(property="status", type="string", example=" type number: 1->e'lon qilingan, 2-> consultant bn kelishilgan, 3->chernovik qilib qoyilgan, 4->tugatilgan, 5->deactivatsiya qilingan, 6->otmen qilingan"),
      *       @OA\Property(property="reason_inactive", type="string", example="reason inactive"),
+     *       @OA\Property(property="is_visible", type="bool", example="false"),
      *    ),
      * ),
      *      @OA\Response(

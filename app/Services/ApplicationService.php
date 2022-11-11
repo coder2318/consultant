@@ -20,7 +20,7 @@ class ApplicationService extends BaseService
             ];
         $this->attributes = [
             'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 
-            'category_id', 'showed', 'reason_inactive', 'when_date', 'views'
+            'category_id', 'showed', 'reason_inactive', 'when_date', 'views', 'is_visible'
         ];
         $this->relation = ['response'];
     }

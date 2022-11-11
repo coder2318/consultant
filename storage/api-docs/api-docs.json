@@ -241,6 +241,10 @@
                                     "reason_inactive": {
                                         "type": "string",
                                         "example": "reason inactive"
+                                    },
+                                    "is_visible": {
+                                        "type": "boolean",
+                                        "example": "false"
                                     }
                                 },
                                 "type": "object"
