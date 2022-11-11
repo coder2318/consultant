@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\ApplicationJob;
 use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
@@ -80,8 +81,9 @@ class ApplicationService extends BaseService
     public function show($id)
     {
         $model = $this->repo->getById($id);
-        $model->update([
-            'views' => (int) $model->views + 1
+        ApplicationJob::dispatch([
+            'id' => $id,
+            'profile_id' => auth()->user()->profile->id
         ]);
         $model->response;
         return $model;
