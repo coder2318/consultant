@@ -107,8 +107,9 @@ class ApplicationService extends BaseService
         $query = $this->repo->getQuery();
         $query = $query->whereIn('id', $application_ids);
         $query = $this->filter($query, $this->filter_fields, $params);
-        $query = $this->select($query, $this->attributes);
-        return $query->get();
+        $query = $this->select($query, $this->attributes)->get();
+        $query->append('response_status');
+        return $query;
     }
 
 }

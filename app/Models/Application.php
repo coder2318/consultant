@@ -111,4 +111,11 @@ class Application extends BaseModel
     {
         $query->whereIn('status', [self::CONFIRMED, self::FINISHED, self::CANCELED]);
     }
+
+    public function getResponseStatusAttribute()
+    {
+        $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        $response = Response::where('application_id', $this->id)->whereIn('resume_id', $resume_ids)->first();
+        return $response ? $response->status : null;
+    }
 }
