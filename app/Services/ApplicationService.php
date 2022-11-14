@@ -60,6 +60,7 @@ class ApplicationService extends BaseService
             $q->whereIn('id', $responses_application_ids)->orWhereIn('resume_id', $resume_ids);
         });
         $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $query->confirm();
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
         $query = $this->repo->getPaginate($query, $perPage);
@@ -98,4 +99,16 @@ class ApplicationService extends BaseService
         ]);
         return $model;
     }
+
+    public function myResponseApplication(array $params)
+    {
+        $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        $application_ids = Response::whereIn('resume_id', $resume_ids)->get()->pluck('application_id');
+        $query = $this->repo->getQuery();
+        $query = $query->whereIn('id', $application_ids);
+        $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $this->select($query, $this->attributes);
+        return $query->get();
+    }
+
 }

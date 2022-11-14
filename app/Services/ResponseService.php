@@ -14,21 +14,6 @@ class ResponseService extends BaseService
         $this->filter_fields = [];
     }
 
-    public function list(array $params)
-    {
-        $resume_ids = $this->resumeModel::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
-        $query = $this->repo->getQuery();
-        $query = $this->filter($query, $this->filter_fields, $params);
-        $query = $query->whereIn('resume_id', $resume_ids);
-        $query = $this->relation($query, $this->relation);
-        $query = $this->select($query, $this->attributes);
-        $query = $this->sort($query, $this->sort_fields, $params);
-        if(isset($params['limit']))
-            $query = $query->limit($params['limit']);
-
-        return $query->get();
-    }
-
     public function redirectToChat($response)
     {
         $resume = $this->resumeModel->where('id', $response->resume_id)->first();

@@ -101,4 +101,14 @@ class Application extends BaseModel
     {
         return Response::where('application_id', $this->id)->get()->count();
     }
+
+    public function scopePublish($query)
+    {
+        $query->where('status', self::PUBLISHED);
+    }
+
+    public function scopeConfirm($query)
+    {
+        $query->whereIn('status', [self::CONFIRMED, self::FINISHED, self::CANCELED]);
+    }
 }
