@@ -16,13 +16,13 @@ class StoreRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'language' => json_decode($this->language),
-            'skill_ids' => json_decode($this->skill_ids),
-        ]);
-    }
+    // protected function prepareForValidation()
+    // {
+    //     $this->merge([
+    //         'language' => json_decode($this->language),
+    //         'skill_ids' => json_decode($this->skill_ids),
+    //     ]);
+    // }
 
     /**
      * Get the validation rules that apply to the request.
