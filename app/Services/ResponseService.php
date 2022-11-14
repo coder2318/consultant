@@ -34,4 +34,13 @@ class ResponseService extends BaseService
         $resume = $this->resumeModel->where('id', $response->resume_id)->first();
         return $this->chatModel->where('application_id', $response->application_id)->where('profile_ids', '&&', '{'.auth()->user()->profile->id. ','.$resume->profile_id.'}')->first();
     }
+
+    public function checkResponse($application_id)
+    {
+        $resume_ids = $this->resumeModel->where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        $response = $this->repo->getQuery()->where('application_id', $application_id)->whereIn('resume_id', $resume_ids)->get()->count();
+        if($response > 0)
+            return true;
+        return false;
+    }
 }

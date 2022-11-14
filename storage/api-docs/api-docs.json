@@ -2518,6 +2518,43 @@
                 ]
             }
         },
+        "/response-check/{application_id}": {
+            "get": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "responseCheckApplication",
+                "description": "Applicationda otklik yuborgan yoki yubormaganligini tekshiradigan api",
+                "operationId": "responseCheckApplication",
+                "parameters": [
+                    {
+                        "name": "application_id",
+                        "in": "path",
+                        "description": "application ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/resume": {
             "get": {
                 "tags": [

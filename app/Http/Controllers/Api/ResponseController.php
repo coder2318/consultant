@@ -267,4 +267,39 @@ class ResponseController extends Controller
     {
         return response()->successJson($this->service->redirectToChat($response));
     }
+
+    /**
+     * @OA\Get (
+     * path="/response-check/{application_id}",
+     * summary="responseCheckApplication",
+     * operationId="responseCheckApplication",
+     * security={{ "bearerAuth": {} }},
+     * description="Applicationda otklik yuborgan yoki yubormaganligini tekshiradigan api",
+     * tags={"Response"},
+     *     @OA\Parameter(
+     *         description="application ID",
+     *         in="path",
+     *         name="application_id",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
+    public function responseCheck($application_id)
+    {
+        return response()->successJson($this->service->checkResponse($application_id));
+    }
 }
