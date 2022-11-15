@@ -100,16 +100,28 @@ class ApplicationService extends BaseService
         return $model;
     }
 
-    public function myResponseApplication(array $params)
+    public function myResponseApplication(array $params, $pagination = true)
     {
+        $perPage = null;
+        if ($pagination) {
+            $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
+        }
         $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
         $application_ids = Response::whereIn('resume_id', $resume_ids)->get()->pluck('application_id');
         $query = $this->repo->getQuery();
         $query = $query->whereIn('id', $application_ids);
         $query = $this->filter($query, $this->filter_fields, $params);
-        $query = $this->select($query, $this->attributes)->get();
+        $query = $this->select($query, $this->attributes)->paginate($perPage);
+        // $query = $this->repo->getPaginate($query, $perPage);
         $query->append('response_status');
-        return $query;
+        return [
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+            'per_page' => $query->perPage(),
+            'to' => $query->lastItem(),
+            'total' => $query->total(),
+            'data' => $query->items(),
+        ];
     }
 
 }
