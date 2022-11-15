@@ -32,7 +32,8 @@ class IndexRequest extends FormRequest
             'when_date' => 'nullable',
             'limit' => 'nullable',
             'status' => 'nullable',
-            'type' => 'nullable'
+            'type' => 'nullable',
+            'name' => 'nullable'
         ];
     }
 }
