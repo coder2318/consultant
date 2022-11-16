@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
     public function index(IndexRequest $request)
     {
-        broadcast(new TestEvent('notification websocket test'));
+//        broadcast(new TestEvent('notification websocket test'));
         return response()->successJson($this->service->list($request->all()));
     }
     
