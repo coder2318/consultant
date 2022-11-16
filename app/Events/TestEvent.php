@@ -35,7 +35,7 @@ class TestEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         info('websocket', [$this->order]);
-        return new PrivateChannel('order.' . $this->order);
+        return new PrivateChannel('notifications.'.$this->order);
     }
 
     public function broadcastAs()

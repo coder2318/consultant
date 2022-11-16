@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\MessageSent;
+use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\IndexRequest;
 use App\Http\Requests\Category\StoreRequest;
@@ -45,8 +46,7 @@ class CategoryController extends Controller
 
     public function index(IndexRequest $request)
     {
-        $chat_message = ChatMessage::find(1);
-        broadcast(new MessageSent($chat_message));
+        broadcast(new TestEvent('notification websocket test'));
         return response()->successJson($this->service->list($request->all()));
     }
     
