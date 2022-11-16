@@ -42,6 +42,7 @@ class ChatService extends BaseService
         $to_profile_id = $params['to_profile_id'];
         $user  = auth()->user()->profile??$params['user'];
         $inputs['profile_ids'] = [$user->id, $to_profile_id];
+        $inputs['application_id'] = $params['application_id'];
         $chat = $this->getByUserIds($inputs['profile_ids']);
 
         if(!$chat){

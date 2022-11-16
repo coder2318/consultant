@@ -55,8 +55,9 @@ class ChatController extends Controller
      *    required=true,
      *    description="Create new Chat",
      *    @OA\JsonContent(
-     *       required={"to_profile_id"},
-     *       @OA\Property(property="to_profile_id", type="number", example="1")
+     *       required={"to_profile_id", "application_id"},
+     *       @OA\Property(property="to_profile_id", type="number", example="1"),
+     *       @OA\Property(property="application_id", type="number", example="1"),
      *    ),
      * ),
      * @OA\Response(
