@@ -1047,10 +1047,15 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "to_profile_id"
+                                    "to_profile_id",
+                                    "application_id"
                                 ],
                                 "properties": {
                                     "to_profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "application_id": {
                                         "type": "number",
                                         "example": "1"
                                     }
