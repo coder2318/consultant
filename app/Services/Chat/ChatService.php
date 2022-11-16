@@ -13,7 +13,9 @@ class ChatService extends BaseService
     public function __construct(ChatRepository $repository)
     {
         $this->repo = $repository;
-        $this->filter_fields = [];
+        $this->filter_fields = [
+            'profile_ids' => ['type' => 'intarray'],
+        ];
     }
 
     public function get(array $params, $pagination =  true)
@@ -40,25 +42,21 @@ class ChatService extends BaseService
     public function create($params): object
     {
         $to_profile_id = $params['to_profile_id'];
-        $user  = auth()->user()->profile??$params['user'];
+        $user  = auth()->user()->profile;
         $inputs['profile_ids'] = [$user->id, $to_profile_id];
         $inputs['application_id'] = $params['application_id'];
         $chat = $this->getByUserIds($inputs['profile_ids']);
 
-        if(!$chat){
+        if(!$chat)
             $chat = $this->repo->store($inputs);
 
-        }
-
         return  $chat;
-
     }
 
     public function getByUserIds(array $userIDs, $operator = '@>')
     {
         $userIDs = "{" . implode(',', $userIDs) . "}";
         $chatQuery = $this->repo->getQuery();
-        $chat = $chatQuery->where('profile_ids', $operator,  $userIDs)->first();
-        return $chat;
+        return $chatQuery->where('profile_ids', $operator,  $userIDs)->first();
     }
 }

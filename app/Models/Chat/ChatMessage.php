@@ -36,7 +36,7 @@ class ChatMessage extends BaseModel
         return $this->hasOne(Chat::class,'id', 'chat_id');
     }
 
-    public function scopenotShowed($query)
+    public function scopeNotShowed($query)
     {
         return $query->where('is_showed', false);
     }

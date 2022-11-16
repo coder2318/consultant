@@ -25,7 +25,6 @@ class Chat extends BaseModel
     protected $appends = ['to_profile_id', 'unread_count'];
 
     protected $hidden = [
-        'to_profile_id',
         'created_at',
         'updated_at'
     ];
