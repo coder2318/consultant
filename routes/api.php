@@ -77,6 +77,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     });
     /** umumiy apilar */
     Route::get('category', [CategoryController::class, 'index']);
+    Route::get('skill-list', [SkillController::class, 'indexList']);
     Route::get('admin-category', [CategoryController::class, 'adminIndex']);
     Route::get('top-category', [CategoryController::class, 'topCategories']);
     Route::get('select-category', [CategoryController::class, 'selectCategory']);

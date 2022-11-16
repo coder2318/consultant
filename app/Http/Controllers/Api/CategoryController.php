@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\IndexRequest;
 use App\Http\Requests\Category\StoreRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\CategoryListResource;
 use App\Mixins\ResponseFactoryMixin;
 use App\Models\Category;
+use App\Models\Chat\ChatMessage;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
@@ -43,6 +45,8 @@ class CategoryController extends Controller
 
     public function index(IndexRequest $request)
     {
+        $chat_message = ChatMessage::find(1);
+        broadcast(new MessageSent($chat_message));
         return response()->successJson($this->service->list($request->all()));
     }
     
