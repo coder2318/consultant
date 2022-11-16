@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'to_profile_id' => 'required|exists:profiles,id',
+            'application_id' => 'required|exists:applications,id',
         ];
     }
 }
