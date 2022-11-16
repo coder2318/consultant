@@ -29,10 +29,10 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(ChatMessage $chatMessage)
+    public function __construct(ChatMessage $chatMessage, $to_profile_id)
     {
         $this->chatMessage = $chatMessage;
-        $this->userID  = $chatMessage->chat->to_profile_id;
+        $this->userID  = $to_profile_id;
     }
 
     /**
@@ -42,8 +42,7 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        info('conn', [$this->chatMessage]);
-
+        info('conn', [$this->userID]);
         return [
             new Channel('chat.'.$this->chatMessage->chat_id),
             new PrivateChannel('notifications.'.$this->userID),

@@ -28,7 +28,8 @@ class ChatMessageService extends BaseService
         }
         if($this->validForChat($params)){
             $chatMessage = $this->repo->store($params);
-            broadcast(new MessageSent($chatMessage));
+            $to_profile_id = $chatMessage->chat->to_profile_id;
+            broadcast(new MessageSent($chatMessage, $to_profile_id));
             return  $chatMessage;
         }
         abort(422,'Chat is invalid for sending|201');

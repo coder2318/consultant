@@ -4,6 +4,7 @@
 namespace App\Services\Chat;
 
 
+use App\Models\Chat\ChatMessage;
 use App\Repositories\Chat\ChatRepository;
 use App\Services\BaseService;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,6 +16,10 @@ class ChatService extends BaseService
         $this->repo = $repository;
         $this->filter_fields = [
             'profile_ids' => ['type' => 'intarray'],
+        ];
+        $this->attributes = ['*'];
+        $this->sort_fields = [
+            'last_time' => 'desc'
         ];
     }
 
@@ -58,5 +63,21 @@ class ChatService extends BaseService
         $userIDs = "{" . implode(',', $userIDs) . "}";
         $chatQuery = $this->repo->getQuery();
         return $chatQuery->where('profile_ids', $operator,  $userIDs)->first();
+    }
+
+    public function sendResponseMessage($chat_id, $from_user_id, $response)
+    {
+        $chatMessage = $response->comment ?? 'response send';
+
+        $chatMessage = $response->vacancy_id.'|'.$chatMessage;
+
+        $inputs = [
+            'chat_id' => $chat_id,
+            'from_user_id' => $from_user_id,
+            'message' => $chatMessage,
+            'created_at' => date('Y-m-d H:i:s', strtotime($response->created_at)),
+        ];
+
+        ChatMessage::create($inputs);
     }
 }
