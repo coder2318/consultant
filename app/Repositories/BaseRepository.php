@@ -31,7 +31,7 @@ class BaseRepository
         return $query->get();
     }
 
-    public function store($params): object
+    public function store($params)
     {
         return $this->entity->create($params);
     }

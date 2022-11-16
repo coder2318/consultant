@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
     ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,
-    SkillController, ResourceController, NotificationController, ReviewController};
+    SkillController, ResourceController, NotificationController, ReviewController, Chat\ChatController, Chat\ChatMessageController};
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +66,20 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
                 Route::apiResource('comment', Commentcontroller::class);
                 Route::apiResource('payment', PaymentController::class);
         });
+        /** authga kirgan apilar */
         Route::get('my-notification', [NotificationController::class, 'myIndex']);
         Route::get('review-list/{resume_id}', [ReviewController::class, 'index']);
-        /** authga kirgan apilar */
+        /** Chat routes */
+        Route::prefix('chat-messages')->group(function () {
+            Route::get('/', [ChatMessageController::class, 'index']);
+            Route::post('/send', [ChatMessageController::class, 'send']);
+            Route::put('/update-showed', [ChatMessageController::class, 'updateShowed']);
+        });
+        Route::prefix('chats')->group(function () {
+            Route::get('/', [ChatController::class, 'index']);
+            Route::post('/', [ChatController::class, 'store']);
+        });
+
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);
         Route::apiResource('notification', NotificationController::class);

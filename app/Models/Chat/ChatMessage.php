@@ -15,6 +15,37 @@ class ChatMessage extends BaseModel
         'from_profile_id',
         'message',
         'is_showed',
-        'showed_at'
+        'showed_at',
+        'created_at',
+        'updated_at'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::created(function ($model) {
+            $model->chat()->update([
+                'last_time' => $model->created_at
+            ]);
+        });
+    }
+
+    public function chat()
+    {
+        return $this->hasOne(Chat::class,'id', 'chat_id');
+    }
+
+    public function scopenotShowed($query)
+    {
+        return $query->where('is_showed', false);
+    }
+
+    public function scopeUnread($query)
+    {
+        return $query->where([
+            ['is_showed', false],
+            ['from_profile_id', '!=',  auth()->id()]
+        ]);
+    }
 }
