@@ -51,6 +51,44 @@ class SkillController extends Controller
 
     public function index(IndexRequest $request)
     {
+        return response()->successJson($this->service->get($request->all()));
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/skill-list",
+     *      operationId="SkillListIndex",
+     *      tags={"Skill"},
+     *      security={{ "bearerAuth": {} }},
+     *      summary="Skill list without pagination",
+     *      description="index",
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="category_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function indexList(IndexRequest $request)
+    {
         return response()->successJson($this->service->list($request->all()));
     }
 
