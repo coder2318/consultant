@@ -38,7 +38,36 @@ class ChatController extends Controller
      */
     public function index(IndexRequest $request)
     {
-        $chats = $this->service->get($request->all());
+        $chats = $this->service->index($request->all());
+
+        return response()->successJson($chats);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/consultant-chats",
+     *      operationId="ConsultantChatIndex",
+     *      tags={"Chat"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="Consultant Chat list",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function indexConsultant(IndexRequest $request)
+    {
+        $chats = $this->service->index($request->all(), true);
 
         return response()->successJson($chats);
     }

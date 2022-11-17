@@ -76,6 +76,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::post('/send', [ChatMessageController::class, 'send']);
             Route::put('/update-showed', [ChatMessageController::class, 'updateShowed']);
         });
+        Route::get('/consultant-chats', [ChatController::class, 'indexConsultant']);
         Route::prefix('chats')->group(function () {
             Route::get('/', [ChatController::class, 'index']);
             Route::post('/', [ChatController::class, 'store']);

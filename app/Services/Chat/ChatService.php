@@ -4,6 +4,7 @@
 namespace App\Services\Chat;
 
 
+use App\Models\Application;
 use App\Models\Chat\ChatMessage;
 use App\Repositories\Chat\ChatRepository;
 use App\Services\BaseService;
@@ -24,7 +25,7 @@ class ChatService extends BaseService
         $this->relation = ['application:id,title,profile_id,category_id', 'messages'];
     }
 
-    public function get(array $params, $pagination =  true)
+    public function index(array $params, $consultant = false)
     {
         //faqat oziga tegishli chatlarni royxatini olishi kerak
         $userID = auth()->user()->profile->id;
@@ -37,9 +38,15 @@ class ChatService extends BaseService
                 $builder->unread();
             });
         }
-
         $query->orderBy('last_time', 'desc');
         $query = $this->relation($query, $this->relation);
+
+        $application_ids = Application::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        if($consultant)
+            $query = $query->whereNotIn('application_id', $application_ids);
+         else
+            $query = $query->whereIn('application_id', $application_ids);
+
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->select($query, $this->attributes);
         return $query->get();
