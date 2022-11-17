@@ -21,6 +21,7 @@ class ChatService extends BaseService
         $this->sort_fields = [
             'last_time' => 'desc'
         ];
+        $this->relation = ['application:id,title,profile_id,category_id', 'messages'];
     }
 
     public function get(array $params, $pagination =  true)
@@ -38,6 +39,7 @@ class ChatService extends BaseService
         }
 
         $query->orderBy('last_time', 'desc');
+        $query = $this->relation($query, $this->relation);
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->select($query, $this->attributes);
         return $query->get();

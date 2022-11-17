@@ -3,7 +3,10 @@
 namespace App\Models\Chat;
 
 use App\Casts\ArrayStringCast;
+use App\Models\Application;
 use App\Models\BaseModel;
+use App\Models\Profile;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +25,7 @@ class Chat extends BaseModel
         'profile_ids' => ArrayStringCast::class
     ];
 
-    protected $appends = ['to_profile_id', 'unread_count'];
+    protected $appends = ['to_profile_id', 'unread_count', 'profile'];
 
     protected $hidden = [
         'created_at',
@@ -53,6 +56,19 @@ class Chat extends BaseModel
         return $userID;
     }
 
+    public function getProfileAttribute()
+    {
+        if(auth()->check()){
+            $user_id = Profile::find($this->to_profile_id)->user_id;
+            $user = User::find($user_id);
+            return [
+                'fullname' => $user->l_name . ' '.$user->f_name,
+                'avatar' => config('services.core_address').$user->photo
+            ];
+        }
+        return null;
+    }
+
     public function getUnreadCountAttribute($value)
     {
         return $this->messages()->unread()->count();
@@ -60,7 +76,12 @@ class Chat extends BaseModel
 
     public function messages()
     {
-        return $this->hasOne(ChatMessage::class);
+        return $this->hasOne(ChatMessage::class)->orderBy('created_at', 'desc');
+    }
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
     }
 
 }

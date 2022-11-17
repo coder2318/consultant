@@ -18,7 +18,7 @@ trait FilesUpload
         if (isset($params['file']) && $params['file']) {
             if ($model) {
                 if (isset($model->file)){
-                    unlink($model->file);
+                    unlink($model->getRawOriginal('file'));
                 }
             }
             $fileName = time() . '.' . $params['file']->extension();
@@ -30,7 +30,7 @@ trait FilesUpload
         if (isset($params['icon']) && $params['icon']) {
             if ($model) {
                 if (isset($model->icon)){
-                    unlink($model->icon);
+                    unlink($model->getRawOriginal('icon'));
                 }
             }
             $fileName = time() . '.' . $params['icon']->extension();

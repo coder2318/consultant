@@ -20,6 +20,8 @@ class ChatMessage extends BaseModel
         'updated_at'
     ];
 
+    protected $appends = ['owner'];
+
     public static function boot()
     {
         parent::boot();
@@ -36,7 +38,7 @@ class ChatMessage extends BaseModel
         return $this->hasOne(Chat::class,'id', 'chat_id');
     }
 
-    public function scopenotShowed($query)
+    public function scopeNotShowed($query)
     {
         return $query->where('is_showed', false);
     }
@@ -47,5 +49,15 @@ class ChatMessage extends BaseModel
             ['is_showed', false],
             ['from_profile_id', '!=',  auth()->check() ? auth()->user()->profile->id : auth()->id()]
         ]);
+    }
+
+    public function getOwnerAttribute()
+    {
+        if(auth()->check()){
+            if(auth()->user()->profile->id == $this->from_profile_id)
+                return true;
+            return false;
+        }
+        return true;
     }
 }
