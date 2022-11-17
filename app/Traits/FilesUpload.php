@@ -43,8 +43,8 @@ trait FilesUpload
         if (isset($params['files']) && count($params['files'])) {
             if ($model) {
                 if ($model->files) {
-                    $i = explode(',', $model->files);
-                    foreach ($i as $item) {
+//                    $i = explode(',', $model->files);
+                    foreach ($model->files as $item) {
                         unlink($item);
                     }
                 }
