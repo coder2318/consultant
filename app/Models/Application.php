@@ -84,11 +84,12 @@ class Application extends BaseModel
         return $this->HasMany(Response::class, 'application_id', 'id');
     }
 
-    public function getUserAttribute(): string
+    public function getUserAttribute()
     {
-        $user_id = Profile::find($this->profile_id)->user_id;
-        $user = User::find($user_id);
-        return $user->l_name . ' '.$user->f_name;
+        $profile = Profile::find($this->profile_id);
+        $user = User::find($profile->user_id);
+        return ['fullname' => $user->l_name . ' '.$user->f_name, 'avatar' => config('services.core_address').$user->photo, 'last_online_at' => $profile->last_online_at];
+
     }
 
     public function getCategoryAttribute(): string

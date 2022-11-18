@@ -25,6 +25,14 @@ class ResumeService extends BaseService
         return $query->get();
     }
 
+    public function checkHasResume()
+    {
+        $resumes = $this->repo->getQuery()->where('profile_id', auth()->user()->profile->id)->get()->count();
+        if($resumes)
+            return true;
+        return false;
+    }
+
     public function create($params): object
     {
         if(isset($params['files'])){

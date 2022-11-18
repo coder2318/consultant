@@ -51,7 +51,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
             Route::get('my-resume', [ResumeController::class, 'myIndex']);
             Route::post('resume/{resume}', [ResumeController::class, 'update']);
-            Route::apiResource('resume', ResumeController::class)->except('update');
+            Route::apiResource('resume', ResumeController::class)->except('update', 'index');
             Route::apiResource('experience', ExperienceController::class);
             Route::apiResource('response', ResponseController::class);
         });
@@ -70,6 +70,8 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         /** authga kirgan apilar */
         Route::get('my-notification', [NotificationController::class, 'myIndex']);
         Route::get('review-list/{resume_id}', [ReviewController::class, 'index']);
+        Route::get('check-has-resume', [ResumeController::class, 'checkHasResume']);
+
         /** Chat routes */
         Route::prefix('chat-messages')->group(function () {
             Route::get('/', [ChatMessageController::class, 'index']);
@@ -89,6 +91,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
 
     });
     /** umumiy apilar */
+    Route::get('resume', [ResumeController::class, 'index']);
     Route::get('category', [CategoryController::class, 'index']);
     Route::get('skill-list', [SkillController::class, 'indexList']);
     Route::get('admin-category', [CategoryController::class, 'adminIndex']);

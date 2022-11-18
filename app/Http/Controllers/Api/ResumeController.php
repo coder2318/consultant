@@ -253,4 +253,32 @@ class ResumeController extends Controller
     {
         return response()->successJson($this->service->myIndex());
     }
+
+    /**
+     * @OA\Get(
+     *      path="/check-has-resume",
+     *      operationId="check-has-resume",
+     *      tags={"Resume"},
+     *      summary="check-has-resume",
+     *     security={{ "bearerAuth": {} }},
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function checkHasResume()
+    {
+        return response()->successJson($this->service->checkHasResume());
+    }
 }

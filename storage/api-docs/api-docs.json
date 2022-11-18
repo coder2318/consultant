@@ -3168,6 +3168,32 @@
                 ]
             }
         },
+        "/check-has-resume": {
+            "get": {
+                "tags": [
+                    "Resume"
+                ],
+                "summary": "check-has-resume",
+                "description": "index",
+                "operationId": "check-has-resume",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/review-list/{resume_id}": {
             "get": {
                 "tags": [
