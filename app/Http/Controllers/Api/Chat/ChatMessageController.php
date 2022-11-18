@@ -71,7 +71,16 @@ class ChatMessageController extends Controller
      *    @OA\JsonContent(
      *       required={"chat_id", "message"},
      *       @OA\Property(property="chat_id", type="number", example="1"),
-     *       @OA\Property(property="message", type="text", example="hello world"),
+     *       @OA\Property(property="msg", type="string", example={
+                        {
+                        "message" : "hello",
+                        "is_price" : false
+                        },
+                        {
+                        "message" : 70000,
+                        "is_price" : true
+                        }
+            }),
      *    ),
      * ),
      * @OA\Response(
@@ -98,6 +107,7 @@ class ChatMessageController extends Controller
 
     public function send(SendRequest $request)
     {
+//        dd($request->all());
         $chatMessage = $this->service->create($request->all());
 
         return response()->successJson($chatMessage);

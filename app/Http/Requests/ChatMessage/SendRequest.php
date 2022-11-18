@@ -25,7 +25,7 @@ class SendRequest extends FormRequest
     {
         return [
             'chat_id' => 'required|exists:chats,id',
-            'message'=> 'required',
+            'msg.*'=> 'required'
         ];
     }
 }

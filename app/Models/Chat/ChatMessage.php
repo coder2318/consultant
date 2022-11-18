@@ -17,7 +17,8 @@ class ChatMessage extends BaseModel
         'is_showed',
         'showed_at',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'is_price'
     ];
 
     protected $appends = ['owner'];

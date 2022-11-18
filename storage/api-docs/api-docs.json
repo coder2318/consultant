@@ -1186,9 +1186,18 @@
                                         "type": "number",
                                         "example": "1"
                                     },
-                                    "message": {
-                                        "type": "text",
-                                        "example": "hello world"
+                                    "msg": {
+                                        "type": "string",
+                                        "example": [
+                                            {
+                                                "message": "hello",
+                                                "is_price": false
+                                            },
+                                            {
+                                                "message": 70000,
+                                                "is_price": true
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
