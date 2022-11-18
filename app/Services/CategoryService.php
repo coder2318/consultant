@@ -43,7 +43,6 @@ class CategoryService extends BaseService
     public function create($params): object
     {
         $params = $this->fileUpload($params, 'categories');
-        $params['name'] = json_decode($params['name']);
         return $this->repo->store($params);
     }
 
