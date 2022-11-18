@@ -33,7 +33,7 @@ trait FilesUpload
                     unlink($model->getRawOriginal('icon'));
                 }
             }
-            $fileName = time() . '.' . $params['icon']->extension();
+            $fileName = 'icon_'.time() . '.' . $params['icon']->extension();
             $params['icon']->storeAs('public/'.$pathFile, $fileName);
             $params['icon'] ='storage/'.$pathFile.'/'.$fileName;
 
