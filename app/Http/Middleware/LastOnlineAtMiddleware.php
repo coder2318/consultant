@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Profile;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +22,18 @@ class LastOnlineAtMiddleware
         if (auth()->guest()) {
             return $next($request);
         }
-        if (auth()->user()->profile->last_online_at->diffInMinutes(now()) >= 1)
-        {
-            DB::table("profiles")
-                ->where("id", auth()->user()->profile->id)
-                ->update(["last_online_at" => now()]);
+        if(auth()->user()->profile){
+            if (auth()->user()->profile->last_online_at->diffInMinutes(now()) >= 1)
+            {
+                DB::table("profiles")
+                    ->where("id", auth()->user()->profile->id)
+                    ->update(["last_online_at" => now()]);
+            }
+        } else {
+            Profile::create([
+                'user_id' => auth()->id(),
+                'role' => Profile::USER_ROLE
+            ]);
         }
         return $next($request);
     }
