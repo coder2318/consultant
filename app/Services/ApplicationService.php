@@ -14,7 +14,7 @@ class ApplicationService extends BaseService
     public function __construct(ApplicationRepository $repo)
     {
         $this->repo = $repo;
-        $this->filter_fields = ['resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
+        $this->filter_fields = ['title' => ['type' => 'string'], 'resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
                 'category_id' => ['type' => 'number'], 'price_from' => ['type' => 'from'], 'price_to' => ['type' => 'to'],
                 'when_date' => ['type' => 'notNull'], 'profile_id' => ['type' => 'number'], 'status' => ['type' => 'number'],
                 'type' => ['type' => 'number']
