@@ -111,17 +111,8 @@ class ApplicationService extends BaseService
         $query = $this->repo->getQuery();
         $query = $query->whereIn('id', $application_ids);
         $query = $this->filter($query, $this->filter_fields, $params);
-        $query = $this->select($query, $this->attributes)->paginate($perPage);
-        // $query = $this->repo->getPaginate($query, $perPage);
-//        $query->append('response_status');
-        return [
-            'current_page' => $query->currentPage(),
-            'last_page' => $query->lastPage(),
-            'per_page' => $query->perPage(),
-            'to' => $query->lastItem(),
-            'total' => $query->total(),
-            'data' => $query->items(),
-        ];
+        $query = $this->select($query, $this->attributes);
+         return $this->repo->getPaginate($query, $perPage);
     }
 
 }
