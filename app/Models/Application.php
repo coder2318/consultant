@@ -43,7 +43,7 @@ class Application extends BaseModel
         'reason_inactive'
     ];
 
-    protected $appends = ['user', 'category', 'response_count'];
+    protected $appends = ['user', 'category', 'response_count', 'response_status'];
 
     public static function boot()
     {
@@ -115,8 +115,11 @@ class Application extends BaseModel
 
     public function getResponseStatusAttribute()
     {
-        $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
-        $response = Response::where('application_id', $this->id)->whereIn('resume_id', $resume_ids)->first();
-        return $response ? $response->status : null;
+        if(auth()->check()){
+            $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+            $response = Response::where('application_id', $this->id)->whereIn('resume_id', $resume_ids)->first();
+            return $response ? $response->status : null;
+        }
+        return null;
     }
 }

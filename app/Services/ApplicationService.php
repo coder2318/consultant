@@ -113,7 +113,7 @@ class ApplicationService extends BaseService
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->select($query, $this->attributes)->paginate($perPage);
         // $query = $this->repo->getPaginate($query, $perPage);
-        $query->append('response_status');
+//        $query->append('response_status');
         return [
             'current_page' => $query->currentPage(),
             'last_page' => $query->lastPage(),

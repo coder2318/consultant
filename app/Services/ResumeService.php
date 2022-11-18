@@ -11,7 +11,7 @@ class ResumeService extends BaseService
     public function __construct(ResumeRepository $repository)
     {
         $this->repo = $repository;
-        $this->filter_fields = ['category_id' => ['type' => 'integer'], 'status' => ['type' => 'integer']];
+        $this->filter_fields = ['category_id' => ['type' => 'number'], 'status' => ['type' => 'number']];
     }
 
     public function myIndex()
