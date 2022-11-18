@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\LastOnlineAtMiddleware;
 use App\Http\Middleware\Role;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminatech\MultipartMiddleware\MultipartFormDataParser;
 
 class Kernel extends HttpKernel
 {
@@ -23,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        MultipartFormDataParser::class
     ];
 
     /**

@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
+        "illuminatech/multipart-middleware": "^1.1",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.2",
         "laravel/sanctum": "^3.0",
