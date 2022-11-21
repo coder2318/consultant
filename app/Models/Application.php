@@ -49,12 +49,19 @@ class Application extends BaseModel
     public static function boot()
     {
         parent::boot();
-
         self::creating(function ($model) {
             if(auth()->user() && auth()->user()->profile)
                 $model->profile_id = auth()->user()->profile->id;
         });
+    }
 
+    protected static function booted()
+    {
+        static::addGlobalScope('visible', function (Builder $builder) {
+
+            $builder->where('is_visible', true);
+
+        });
     }
 
     public function getFilesAttribute($value)
