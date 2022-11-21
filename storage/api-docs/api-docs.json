@@ -1175,6 +1175,43 @@
                 ]
             }
         },
+        "/chats/{chat_id}": {
+            "get": {
+                "tags": [
+                    "Chat"
+                ],
+                "summary": "Chat Show",
+                "description": "Show Chat",
+                "operationId": "chats Show",
+                "parameters": [
+                    {
+                        "name": "chat_id",
+                        "in": "path",
+                        "description": "chat ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/chat-messages": {
             "get": {
                 "tags": [

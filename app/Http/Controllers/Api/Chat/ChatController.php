@@ -116,4 +116,41 @@ class ChatController extends Controller
         $model = $this->service->create($request->all());
         return response()->successJson($model);
     }
+
+    /**
+     * @OA\Get (
+     * path="/chats/{chat_id}",
+     * summary="Chat Show",
+     * operationId="chats Show",
+     * security={{ "bearerAuth": {} }},
+     * description="Show Chat",
+     * tags={"Chat"},
+     *     @OA\Parameter(
+     *         description="chat ID",
+     *         in="path",
+     *         name="chat_id",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
+    public function show(int $chat_id)
+    {
+        $model = $this->service->show($chat_id);
+        $model->application->status;
+        return response()->successJson($model);
+    }
 }
