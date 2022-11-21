@@ -558,6 +558,18 @@
                 "summary": "My response list",
                 "description": "index",
                 "operationId": "myresponseIndex",
+                "parameters": [
+                    {
+                        "name": "response_status",
+                        "in": "query",
+                        "description": "response_status to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

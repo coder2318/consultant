@@ -474,6 +474,16 @@ class ApplicationController extends Controller
      *     security={{ "bearerAuth": {} }},
      *      summary="My response list",
      *      description="index",
+     *     @OA\Parameter(
+     *         name="response_status",
+     *         in="query",
+     *         description="response_status to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

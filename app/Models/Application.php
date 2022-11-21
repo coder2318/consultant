@@ -57,15 +57,6 @@ class Application extends BaseModel
 
     }
 
-    protected static function booted()
-    {
-        static::addGlobalScope('public', function (Builder $builder) {
-
-            $builder->where('type', self::PUBLIC);
-
-        });
-    }
-
     public function getFilesAttribute($value)
     {
         if($value){

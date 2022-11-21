@@ -51,7 +51,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
             Route::get('my-resume', [ResumeController::class, 'myIndex']);
             Route::post('resume/{resume}', [ResumeController::class, 'update']);
-            Route::apiResource('resume', ResumeController::class)->except('update', 'index');
+            Route::apiResource('resume', ResumeController::class)->except('update', 'index', 'show');
             Route::apiResource('experience', ExperienceController::class);
             Route::apiResource('response', ResponseController::class);
         });
@@ -92,6 +92,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
 
     });
     /** umumiy apilar */
+    Route::get('resume/{resume}', [ResumeController::class, 'show']);
     Route::get('resume', [ResumeController::class, 'index']);
     Route::get('category', [CategoryController::class, 'index']);
     Route::get('skill-list', [SkillController::class, 'indexList']);
