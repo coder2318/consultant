@@ -23,6 +23,8 @@ Broadcast::channel('notifications.{userId}', function ($user, $userId) {
 });
 
 Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
+    info('profile_ids', [App\Models\Chat\Chat::find($chatId)->profile_ids]);
+    info('profile_id', [$user->profile->id]);
     return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
 });
 
