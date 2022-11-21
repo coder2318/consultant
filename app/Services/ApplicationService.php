@@ -110,6 +110,7 @@ class ApplicationService extends BaseService
         $application_ids = Response::whereIn('resume_id', $resume_ids)->get()->pluck('application_id');
         $query = $this->repo->getQuery();
         $query = $query->whereIn('id', $application_ids);
+        $query = $query->withoutGlobalScope('public');
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->select($query, $this->attributes);
          return $this->repo->getPaginate($query, $perPage);

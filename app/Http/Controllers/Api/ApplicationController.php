@@ -23,6 +23,56 @@ class ApplicationController extends Controller
      *      summary="Application list",
      *      description="index",
      *     @OA\Parameter(
+     *         name="title",
+     *         in="query",
+     *         description="title to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="text",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="price_from",
+     *         in="query",
+     *         description="price_from to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="price_to",
+     *         in="query",
+     *         description="price_to to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="status to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="category_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
      *         name="resume_id",
      *         in="query",
      *         description="resume_id to filter by",

@@ -46,6 +46,7 @@ class Response extends BaseModel
                 'avatar' => config('services.core_address').$user->photo
             ];
         }
+        return null;
     }
 
     public function getCategoryAttribute()

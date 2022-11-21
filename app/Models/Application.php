@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,6 +55,15 @@ class Application extends BaseModel
                 $model->profile_id = auth()->user()->profile->id;
         });
 
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('public', function (Builder $builder) {
+
+            $builder->where('type', self::PUBLIC);
+
+        });
     }
 
     public function getFilesAttribute($value)
@@ -122,4 +132,6 @@ class Application extends BaseModel
         }
         return null;
     }
+
+
 }
