@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Chat\Chat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +23,7 @@ class Response extends BaseModel
         'is_showed'
     ];
 
-    protected $appends = ['user', 'category'];
+    protected $appends = ['user', 'category', 'chat_id'];
 
     public function application(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -51,5 +52,13 @@ class Response extends BaseModel
     {
         $resume = Resume::find($this->resume_id);
         return $resume->category;
+    }
+
+    public function getChatIdAttribute()
+    {
+        $chat = Chat::where('application_id', $this->application_id)->where('profile_ids', '&&', '{'.auth()->user()->profile->id . '}')->first();
+        if($chat)
+            return $chat->id;
+        return null;
     }
 }
