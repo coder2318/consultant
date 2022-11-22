@@ -29,7 +29,7 @@ class Resume extends BaseModel
         'skill_ids' => ArrayStringCast::class
     ];
 
-    protected $appends = ['user', 'review', 'category', 'skills'];
+    protected $appends = ['user', 'review', 'category', 'skills', 'file_names'];
 
     public static function boot()
     {
@@ -53,6 +53,12 @@ class Resume extends BaseModel
             return $files;
         }
         return null;
+    }
+
+    public function getFileNamesAttribute()
+    {
+        $files = $this->getRawOriginal('files');
+        return explode(',', $files);
     }
     
     public function getUserAttribute(): array

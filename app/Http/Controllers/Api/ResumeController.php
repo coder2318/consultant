@@ -164,6 +164,7 @@ class ResumeController extends Controller
      *       @OA\Property(property="skill_ids", type="string", example={1, 2}),
      *       @OA\Property(property="status", type="string", example="type number: 1-> created, 2-> confirmed, 3-> blocked"),
      *       @OA\Property(property="visible", type="string", example="true or false"),
+     *     @OA\Property(property="file_delete", type="string", example={"file_1", "file_2"}),
      *    ),
      * ),
      *      @OA\Response(

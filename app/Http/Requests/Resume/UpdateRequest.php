@@ -30,7 +30,8 @@ class UpdateRequest extends FormRequest
             'about' => 'nullable',
             'files.*' => 'nullable|file|max:10240',
             'status' => 'nullable|numeric',
-            'visible' => 'nullable|boolean'
+            'visible' => 'nullable|boolean',
+            'file_delete' => 'nullable|array'
         ];
     }
 }

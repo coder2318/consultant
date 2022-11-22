@@ -77,14 +77,6 @@ class ApplicationService extends BaseService
     {
         $application = $this->repo->getById($id);
         $params = $this->fileUpload($params, 'applications', $application);
-        if(isset($params['file_delete']) && count($params['file_delete'])) {
-            $fileNames = array_diff($application->file_names, $params['file_delete']);
-            foreach ($params['file_delete'] as $item) {
-                unlink($item);
-            }
-            $fileString = implode(',', $fileNames);
-            $params['files'] = $fileString;
-        }
         return $this->repo->update($params, $id);
     }
 
