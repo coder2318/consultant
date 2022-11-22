@@ -21,6 +21,20 @@ class ChatMessageService extends BaseService
         $this->chatService = $chatService;
     }
 
+    public function list(array $params)
+    {
+        $query = $this->repo->getQuery();
+        $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $this->relation($query, $this->relation);
+        $query = $this->select($query, $this->attributes);
+        $query = $this->sort($query, $this->sort_fields, $params);
+        if(isset($params['limit']))
+            $query = $query->limit($params['limit']);
+        $query = $query->get();
+        $this->updateShowed(['message_ids' => $query->pluck('id')]);
+        return $query;
+    }
+
     public function create($params, $is_response = false): object
     {
         if(!$is_response){
@@ -44,7 +58,7 @@ class ChatMessageService extends BaseService
     {
         $query = $this->repo->getQuery();
 
-        $messages = $query->whereIn('id',$params['message_ids'])->notShowed()->get();
+        $messages = $query->where('from_profile_id', '!=', auth()->user()->profile->id)->whereIn('id',$params['message_ids'])->notShowed()->get();
 
         if($messages->count()){
 

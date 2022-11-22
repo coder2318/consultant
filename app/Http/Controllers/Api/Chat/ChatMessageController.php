@@ -51,7 +51,7 @@ class ChatMessageController extends Controller
     {
         if($this->service->validForChat($request->all())){
 
-            $chatMessages = $this->service->get($request->all(),true);
+            $chatMessages = $this->service->list($request->all());
             return response()->successJson($chatMessages);
         }
         abort(403,'Ushbu chat xabarlarini olish uchun sizda huquq yetarli emas!|202');
