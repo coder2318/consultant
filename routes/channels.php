@@ -19,12 +19,14 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 
 
 Broadcast::channel('notifications.{userId}', function ($user, $userId) {
-    return (int) $user->profile->id === (int) $userId;
+//    return (int) $user->profile->id === (int) $userId;
+    return true;
 });
 
 Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
     info('profile_ids', [App\Models\Chat\Chat::find($chatId)->profile_ids]);
     info('profile_id', [$user->profile->id]);
-    return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
+//    return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
+    return true;
 });
 
