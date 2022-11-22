@@ -59,7 +59,7 @@ class ChatService extends BaseService
         $user  = auth()->user()->profile;
         $inputs['profile_ids'] = [$user->id, $to_profile_id];
         $inputs['application_id'] = $params['application_id'];
-        $chat = $this->getByUserIds($inputs['profile_ids']);
+        $chat = $this->getByUserIds($inputs['profile_ids'], $params['application_id']);
 
         if(!$chat)
             $chat = $this->repo->store($inputs);
@@ -67,11 +67,11 @@ class ChatService extends BaseService
         return  $chat;
     }
 
-    public function getByUserIds(array $userIDs, $operator = '@>')
+    public function getByUserIds(array $userIDs, $application_id, $operator = '@>')
     {
         $userIDs = "{" . implode(',', $userIDs) . "}";
         $chatQuery = $this->repo->getQuery();
-        return $chatQuery->where('profile_ids', $operator,  $userIDs)->first();
+        return $chatQuery->where('application_id', $application_id)->where('profile_ids', $operator,  $userIDs)->first();
     }
 
     public function sendResponseMessage($chat_id, $from_user_id, $response)

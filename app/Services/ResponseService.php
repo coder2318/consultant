@@ -26,7 +26,7 @@ class ResponseService extends BaseService
             $application = $this->applicationModel->find($response->application_id);
             $inputs['profile_ids'] = [auth()->user()->profile->id, $application->profile_id];
             $inputs['application_id'] = $application->id;
-            $chat = $this->chatService->getByUserIds($inputs['profile_ids']);
+            $chat = $this->chatService->getByUserIds($inputs['profile_ids'], $application->id);
             if(!$chat){
                 $chat = $this->chatService->repo->store($inputs);
             }
