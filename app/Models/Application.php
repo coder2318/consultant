@@ -44,7 +44,7 @@ class Application extends BaseModel
         'reason_inactive'
     ];
 
-    protected $appends = ['user', 'category', 'response_count', 'response_status'];
+    protected $appends = ['user', 'category', 'response_count', 'response_status', 'file_names'];
 
     public static function boot()
     {
@@ -75,6 +75,12 @@ class Application extends BaseModel
             return $files;
         }
         return null;
+    }
+
+    public function getFileNamesAttribute()
+    {
+        $files = $this->getRawOriginal('files');
+        return explode(',', $files);
     }
 
     public function profile(): \Illuminate\Database\Eloquent\Relations\BelongsTo

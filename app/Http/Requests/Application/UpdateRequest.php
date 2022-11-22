@@ -35,7 +35,8 @@ class UpdateRequest extends FormRequest
             'price_to' => 'nullable|numeric',
             'when_date' => 'nullable|date',
             'status' => 'nullable|numeric|in:1,2,3,4,5,6',
-            'reason_inactive' => 'nullable'
+            'reason_inactive' => 'nullable',
+            'file_delete' => 'nullable|array'
         ];
     }
 }

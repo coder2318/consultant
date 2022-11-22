@@ -70,7 +70,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         /** authga kirgan apilar */
         Route::get('my-notification', [NotificationController::class, 'myIndex']);
         Route::get('review-list/{resume_id}', [ReviewController::class, 'index']);
-        Route::get('check-has-resume', [ResumeController::class, 'checkHasResume']);
+        Route::get('check-has-resume', [ResumeController::class, 'checkHasResume']); // resume bor yoki yoligini tekshiradigan api
 
         /** Chat routes */
         Route::prefix('chat-messages')->group(function () {
