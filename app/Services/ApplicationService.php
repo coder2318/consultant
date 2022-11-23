@@ -171,9 +171,9 @@ class ApplicationService extends BaseService
         $query2 = $this->filter($query, $this->filter_fields, $params);
         $query3 = $this->filter($query, $this->filter_fields, $params);
 
+        $response = $query3->whereIn('id', $application_ids)->get()->count();
         $immediately = $query1->whereNotNull('when_date')->get()->count();
         $private = $query2->where('type', Application::PRIVATE)->whereIn('resume_id', $resume_ids)->get()->count();
-        $response = $query3->whereIn('id', $application_ids)->get()->count();
 
         return [
             'immediately' => $immediately,
