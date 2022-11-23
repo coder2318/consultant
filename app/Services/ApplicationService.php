@@ -89,9 +89,7 @@ class ApplicationService extends BaseService
 
     public function edit($params, $id): mixed
     {
-        $application = $this->repo->getQuery();
-        $application = $application->withoutGlobalScope('visible')->find($id);
-
+        $application = $this->repo->getById($id);
         $params = $this->fileUpload($params, 'applications', $application);
         if(isset($params['profile_id']) && isset($params['status'])){
             $resume_ids = Resume::where('profile_id', $params['profile_id'])->get()->pluck('id');
@@ -104,8 +102,7 @@ class ApplicationService extends BaseService
 
     public function show($id)
     {
-        $model = $this->repo->getQuery();
-        $model = $model->withoutGlobalScope('visible')->find($id);
+        $model = $this->repo->getById($id);
         ApplicationJob::dispatch([
             'id' => $id,
             'profile_id' => auth()->user()->profile->id
@@ -116,8 +113,7 @@ class ApplicationService extends BaseService
 
     public function showAdmin($id)
     {
-        $model = $this->repo->getQuery();
-        $model = $model->withoutGlobalScope('visible')->find($id);
+        $model = $this->repo->getById($id);
         $model->update([
             'showed' => true
         ]);
