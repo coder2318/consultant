@@ -376,6 +376,26 @@ class ApplicationController extends Controller
      *         ),
      *         style="form"
      *     ),
+     *     @OA\Parameter(
+     *         name="response_status",
+     *         in="query",
+     *         description="response_status to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         description="search to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

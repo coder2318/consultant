@@ -34,7 +34,8 @@ class IndexRequest extends FormRequest
             'status' => 'nullable',
             'type' => 'nullable',
             'title' => 'nullable',
-            'response_status' => 'nullable'
+            'response_status' => 'nullable',
+            'search' => 'nullable'
         ];
     }
 }

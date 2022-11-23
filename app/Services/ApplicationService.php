@@ -7,6 +7,7 @@ use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
 use App\Traits\FilesUpload;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationService extends BaseService
 {
@@ -17,7 +18,7 @@ class ApplicationService extends BaseService
         $this->filter_fields = ['title' => ['type' => 'string'], 'resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
                 'category_id' => ['type' => 'number'], 'price_from' => ['type' => 'from'], 'price_to' => ['type' => 'to'],
                 'when_date' => ['type' => 'notNull'], 'profile_id' => ['type' => 'number'], 'status' => ['type' => 'number'],
-                'type' => ['type' => 'number'], 'response_status' => ['type' => 'number']
+                'type' => ['type' => 'number']
             ];
         $this->attributes = [
             'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 
@@ -38,11 +39,27 @@ class ApplicationService extends BaseService
 
         if(!isset($params['category_id']))
             $query = $query->whereIn('category_id', $self_category_id);
-
         $query = $this->filter($query, $this->filter_fields, $params);
+        if(isset($params['search'])){
+            $query = $query->where(function($q) use ($params){
+                $q->where('title', 'ilike', '%'.$params['search'].'%')->orWhere('description', 'ilike', '%'.$params['search'].'%');
+            });
+        }
+//        if(isset($params['response_status']))
+//            $res = $query->get();
+
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
         $query = $this->repo->getPaginate($query, $perPage);
+
+//        if(isset($params['response_status'])){
+//            $result = $query->map(function ($item, $key) use ($params) {
+//                if($item->response_status == $params['response_status']){
+//                    return $item;
+//                }
+//            });
+//            return $result;
+//        }
         return $query;
     }
 

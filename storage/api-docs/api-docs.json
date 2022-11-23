@@ -256,6 +256,10 @@
                                         "type": "number",
                                         "example": "1"
                                     },
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
                                     "category_id": {
                                         "type": "number",
                                         "example": "1"
@@ -460,6 +464,26 @@
                         "name": "type",
                         "in": "query",
                         "description": "type to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "response_status",
+                        "in": "query",
+                        "description": "response_status to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search to filter by",
                         "required": false,
                         "style": "form",
                         "schema": {
