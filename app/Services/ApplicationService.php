@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Jobs\ApplicationJob;
+use App\Models\Application;
 use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
@@ -34,32 +35,37 @@ class ApplicationService extends BaseService
             $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
         }
 
+        $resumes = Resume::where('profile_id', auth()->user()->profile->id)->get();
+        $params['self_category_ids'] = $resumes->pluck('category_id');
         $query = $this->repo->getQuery();
-        $self_category_id = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('category_id');
+        $query = $this->selfCategory($query, $params);
 
-        if(!isset($params['category_id']))
-            $query = $query->whereIn('category_id', $self_category_id);
-        $query = $this->filter($query, $this->filter_fields, $params);
         if(isset($params['search'])){
             $query = $query->where(function($q) use ($params){
                 $q->where('title', 'ilike', '%'.$params['search'].'%')->orWhere('description', 'ilike', '%'.$params['search'].'%');
             });
         }
-//        if(isset($params['response_status']))
-//            $res = $query->get();
 
+        if(isset($params['response_status'])){
+            // TODO search
+        }
+
+        if(isset($params['type']) && $params['type'] == Application::PRIVATE){
+            $resume_ids = $resumes->pluck('id');
+            $query = $query->whereIn('resume_id', $resume_ids);
+        }
+
+        $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
         $query = $this->repo->getPaginate($query, $perPage);
+        return $query;
+    }
 
-//        if(isset($params['response_status'])){
-//            $result = $query->map(function ($item, $key) use ($params) {
-//                if($item->response_status == $params['response_status']){
-//                    return $item;
-//                }
-//            });
-//            return $result;
-//        }
+    public function selfCategory($query, $params)
+    {
+        if(!isset($params['category_id']))
+            $query = $query->whereIn('category_id', $params['self_category_ids']);
         return $query;
     }
 
@@ -150,6 +156,28 @@ class ApplicationService extends BaseService
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $this->select($query, $this->attributes);
          return $this->repo->getPaginate($query, $perPage);
+    }
+
+    public function getCountBadges($params)
+    {
+        $resumes = Resume::where('profile_id', auth()->user()->profile->id)->get();
+        $resume_ids = $resumes->pluck('id');
+        $params['self_category_ids'] = $resumes->pluck('category_id');
+        $application_ids = Response::whereIn('resume_id', $resume_ids)->get()->pluck('application_id');
+
+        $query = $this->repo->getQuery();
+        $query = $this->selfCategory($query, $params);
+        $query = $this->filter($query, $this->filter_fields, $params);
+
+        $immediately = $query->whereNotNull('when_date')->get()->count();
+        $private = $query->where('type', Application::PRIVATE)->whereIn('resume_id', $resume_ids)->get()->count();
+        $response = $query->whereIn('id', $application_ids)->get()->count();
+
+        return [
+            'immediately' => $immediately,
+            'private' => $private,
+            'response' => $response
+        ];
     }
 
 }

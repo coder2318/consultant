@@ -48,6 +48,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::get('response-check/{application_id}', [ResponseController::class, 'responseCheck']); // applicationga otklik bosganligini tekshiradigan api
             Route::get('self-application', [ApplicationController::class, 'selfIndex']); // consultant uchun categorysiga mos bogan takliflar
             Route::get('my-order-application', [ApplicationController::class, 'myOrderIndex']); // consultant uchun mening zakazlarim
+            Route::get('my-application-count', [ApplicationController::class, 'countBadges']); // filterga countlarni chiqarib beruvchi badge api
             Route::get('self-category', [CategoryController::class, 'selfCategories']);
             Route::get('my-resume', [ResumeController::class, 'myIndex']);
             Route::put('resume/{resume}', [ResumeController::class, 'update']);

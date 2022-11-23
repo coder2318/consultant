@@ -526,4 +526,41 @@ class ApplicationController extends Controller
         return response()->successJson($this->service->myResponseApplication($request->all()));
     }
 
+    /**
+     * @OA\Get(
+     *      path="/my-application-count",
+     *      operationId="my-applicationcount",
+     *      tags={"Application"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="My-application-count list",
+     *      description="index",
+     *     @OA\Parameter(
+     *         name="category_id",
+     *         in="query",
+     *         description="category_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function countBadges(IndexRequest $request) // filterga countlarni chiqarib beruvchi badge api
+    {
+        return response()->successJson($this->service->getCountBadges($request->all()));
+    }
+
 }
