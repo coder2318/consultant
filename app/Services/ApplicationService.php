@@ -8,6 +8,7 @@ use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
 use App\Traits\FilesUpload;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class ApplicationService extends BaseService
@@ -25,7 +26,7 @@ class ApplicationService extends BaseService
             'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 
             'category_id', 'showed', 'reason_inactive', 'when_date', 'views', 'is_visible'
         ];
-        $this->relation = ['response'];
+        $this->relation = ['response:id,application_id,resume_id'];
     }
 
     public function selfIndex(array $params, $pagination = true)
@@ -39,6 +40,7 @@ class ApplicationService extends BaseService
         $params['self_category_ids'] = $resumes->pluck('category_id');
         $query = $this->repo->getQuery();
         $query = $this->selfCategory($query, $params);
+        $query = $this->relation($query, $this->relation);
 
         if(isset($params['search'])){
             $query = $query->where(function($q) use ($params){
@@ -47,7 +49,10 @@ class ApplicationService extends BaseService
         }
 
         if(isset($params['response_status'])){
-            // TODO search
+            $query = $query->whereHas('response', function(Builder $q) use ($params, $resumes) {
+                $resume_ids = $resumes->pluck('id');
+                $q->whereIn('resume_id', $resume_ids);
+            });
         }
 
         if(isset($params['type']) && $params['type'] == Application::PRIVATE){
