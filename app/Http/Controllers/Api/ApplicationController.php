@@ -181,9 +181,9 @@ class ApplicationController extends Controller
      * )
      */
 
-    public function show(Application $application)
+    public function show($id)
     {
-        $model = $this->service->show($application->id);
+        $model = $this->service->show($id);
         return response()->successJson($model);
     }
 
@@ -216,9 +216,9 @@ class ApplicationController extends Controller
      * )
      */
 
-    public function showAdmin(Application $application)
+    public function showAdmin($id)
     {
-        $model = $this->service->showAdmin($application->id);
+        $model = $this->service->showAdmin($id);
         return response()->successJson($model);
     }
 
@@ -268,9 +268,9 @@ class ApplicationController extends Controller
      *      ),
      * )
      */
-    public function update(UpdateRequest $request, Application $application)
+    public function update(UpdateRequest $request, $id)
     {
-        $model = $this->service->edit($request->all(), $application->id);
+        $model = $this->service->edit($request->all(), $id);
         return response()->successJson($model);
     }
 
