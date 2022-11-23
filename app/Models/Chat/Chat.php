@@ -62,6 +62,7 @@ class Chat extends BaseModel
             $user_id = Profile::find($this->to_profile_id)->user_id;
             $user = User::find($user_id);
             return [
+                'profile_id' => $this->to_profile_id,
                 'fullname' => $user->l_name . ' '.$user->f_name,
                 'avatar' => config('services.core_address').$user->photo
             ];

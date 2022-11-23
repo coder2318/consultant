@@ -240,6 +240,7 @@ class ApplicationController extends Controller
      *    description="Update application",
      *    @OA\JsonContent(
      *       @OA\Property(property="resume_id", type="number", example="1"),
+     *       @OA\Property(property="profile_id", type="number", example="1"),
      *       @OA\Property(property="category_id", type="number", example="1"),
      *       @OA\Property(property="title", type="string", example="Mushugimda muammo update"),
      *            @OA\Property(property="description", type="string", example="Mushugimda muammo description"),

@@ -25,6 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'resume_id' => 'nullable|exists:resumes,id',
+            'profile_id' => 'nullable|exists:profiles,id',
             'category_id' => 'nullable|exists:categories,id',
             'title' => 'nullable',
             'description' => 'nullable',
