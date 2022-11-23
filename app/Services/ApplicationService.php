@@ -167,11 +167,11 @@ class ApplicationService extends BaseService
 
         $query = $this->repo->getQuery();
         $query = $this->selfCategory($query, $params);
-        $query = $this->filter($query, $this->filter_fields, $params);
+        $query1 = $query2 = $query3 = $this->filter($query, $this->filter_fields, $params);
 
-        $immediately = $query->whereNotNull('when_date')->get()->count();
-        $private = $query->where('type', Application::PRIVATE)->whereIn('resume_id', $resume_ids)->get()->count();
-        $response = $query->whereIn('id', $application_ids)->get()->count();
+        $immediately = $query1->whereNotNull('when_date')->get()->count();
+        $private = $query2->where('type', Application::PRIVATE)->whereIn('resume_id', $resume_ids)->get()->count();
+        $response = $query3->whereIn('id', $application_ids)->get()->count();
 
         return [
             'immediately' => $immediately,
