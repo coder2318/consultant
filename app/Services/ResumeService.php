@@ -45,7 +45,7 @@ class ResumeService extends BaseService
     {
         $resume = $this->repo->getById($id);
         if(isset($params['files'])){
-            $params = $this->fileUpload($params, 'applications', $resume);
+            $params = $this->fileUpload($params, 'resumes', $resume);
         }
         if(isset($params['file_delete']) && count($params['file_delete'])) {
             $fileNames = array_diff($resume->file_names, $params['file_delete']);

@@ -46,6 +46,20 @@ class ApplicationService extends BaseService
         return $query;
     }
 
+    public function list(array $params)
+    {
+        $query = $this->repo->getQuery();
+        $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $query->withoutGlobalScope('visible');
+        $query = $this->relation($query, $this->relation);
+        $query = $this->select($query, $this->attributes);
+        $query = $this->sort($query, $this->sort_fields, $params);
+        if(isset($params['limit']))
+            $query = $query->limit($params['limit']);
+
+        return $query->get();
+    }
+
     public function myOrderIndex(array $params, $pagination = true)
     {
         $perPage = null;

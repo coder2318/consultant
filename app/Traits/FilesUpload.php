@@ -41,16 +41,16 @@ trait FilesUpload
 
 
         if (isset($params['files']) && count($params['files'])) {
+            $fileNames = [];
             if ($model) {
                 if ($model->files) {
-//                    dd($model->getRawOriginal('files'));
                     $i = explode(',', $model->getRawOriginal('files'));
-                    foreach ($i as $item) {
-                        unlink($item);
-                    }
+//                    foreach ($i as $item) {
+//                        unlink($item);
+//                    }
+                    $fileNames = $i;
                 }
             }
-            $fileNames = [];
             foreach ($params['files'] as $key => $item) {
                 $fileName = time() . '_' . $key . '.' . $item->extension();
                 $item->storeAs('public/'.$pathFile, $fileName);

@@ -3180,6 +3180,13 @@
                                     "visible": {
                                         "type": "string",
                                         "example": "true or false"
+                                    },
+                                    "file_delete": {
+                                        "type": "string",
+                                        "example": [
+                                            "file_1",
+                                            "file_2"
+                                        ]
                                     }
                                 },
                                 "type": "object"
