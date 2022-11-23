@@ -44,9 +44,16 @@ class ResumeService extends BaseService
     public function edit($params, $id): mixed
     {
         $resume = $this->repo->getById($id);
+        $this->fileDelete($params, $resume);
         if(isset($params['files'])){
             $params = $this->fileUpload($params, 'resumes', $resume);
         }
+
+        return $this->repo->update($params, $id);
+    }
+
+    public function fileDelete($params, $resume)
+    {
         if(isset($params['file_delete']) && count($params['file_delete'])) {
             $fileNames = array_diff($resume->file_names, $params['file_delete']);
             foreach ($params['file_delete'] as $item) {
@@ -54,7 +61,8 @@ class ResumeService extends BaseService
             }
             $fileString = implode(',', $fileNames);
             $params['files'] = $fileString;
+            $resume->files = $params['files'];
+            $resume->save();
         }
-        return $this->repo->update($params, $id);
     }
 }
