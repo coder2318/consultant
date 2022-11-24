@@ -3018,6 +3018,82 @@
                 ]
             }
         },
+        "/create-chat": {
+            "post": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "Create new chat",
+                "description": "Create chat ",
+                "operationId": "252a649d7529a1a83517f19cad35aed8",
+                "requestBody": {
+                    "description": "Create new chat",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "application_id",
+                                    "msg"
+                                ],
+                                "properties": {
+                                    "application_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "msg": {
+                                        "type": "string",
+                                        "example": [
+                                            {
+                                                "message": "hello",
+                                                "is_price": false
+                                            },
+                                            {
+                                                "message": 70000,
+                                                "is_price": true
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/resume": {
             "get": {
                 "tags": [

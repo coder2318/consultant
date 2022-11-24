@@ -69,10 +69,10 @@ class ResponseService extends BaseService
         ];
     }
 
-    public function createChat($params): object
+    public function createChat($params)
     {
         DB::beginTransaction();
-        $application = $this->applicationModel->find($params['application_id']);
+        $application = $this->applicationModel->newQueryWithoutScopes()->find($params['application_id']);
         $inputs['profile_ids'] = [auth()->user()->profile->id, $application->profile_id];
         $inputs['application_id'] = $application->id;
         $chat = $this->chatService->getByUserIds($inputs['profile_ids'], $application->id);
