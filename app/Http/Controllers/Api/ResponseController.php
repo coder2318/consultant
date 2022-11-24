@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chat\CreateChatRequest;
 use App\Http\Requests\Response\{IndexRequest, StoreRequest, UpdateRequest};
 use App\Models\Response;
 use App\Services\ResponseService;
@@ -273,5 +274,58 @@ class ResponseController extends Controller
     public function responseCheck($application_id)
     {
         return response()->successJson($this->service->checkResponse($application_id));
+    }
+
+    /**
+     * @OA\Post(
+     * path="/create-chat",
+     * summary="Create new chat",
+     * security={{ "bearerAuth": {} }},
+     * description="Create chat ",
+     * tags={"Response"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Create new chat",
+     *    @OA\JsonContent(
+     *       required={"application_id", "msg"},
+     *       @OA\Property(property="application_id", type="number", example="1"),
+     *        @OA\Property(property="msg", type="string", example={
+            {
+            "message" : "hello",
+            "is_price" : false
+            },
+            {
+            "message" : 70000,
+            "is_price" : true
+            }
+            }),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=422,
+     *    description="Unprocessable Content",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, filled input. Please try again")
+     *        )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
+    public function storeChat(CreateChatRequest $request)
+    {
+        $response = $this->service->createChat($request->all());
+        return response()->successJson($response);
     }
 }

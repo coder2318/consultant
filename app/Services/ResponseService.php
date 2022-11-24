@@ -68,4 +68,26 @@ class ResponseService extends BaseService
             'check_response' => false
         ];
     }
+
+    public function createChat($params): object
+    {
+        DB::beginTransaction();
+        $application = $this->applicationModel->find($params['application_id']);
+        $inputs['profile_ids'] = [auth()->user()->profile->id, $application->profile_id];
+        $inputs['application_id'] = $application->id;
+        $chat = $this->chatService->getByUserIds($inputs['profile_ids'], $application->id);
+        if(!$chat){
+            $chat = $this->chatService->repo->store($inputs);
+        }
+        foreach ($params['msg'] as $msg){
+            ChatMessage::create([
+                'chat_id' => $chat->id,
+                'from_profile_id' => auth()->user()->profile->id,
+                'message' => $msg['message'],
+                'is_price' => $msg['is_price']
+            ]);
+        }
+        DB::commit();
+        return $chat;
+    }
 }
