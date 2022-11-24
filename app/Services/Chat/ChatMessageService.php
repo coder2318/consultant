@@ -46,9 +46,9 @@ class ChatMessageService extends BaseService
                 $input['message'] = $item['message'];
                 $input['is_price'] = $item['is_price'];
                 $chatMessage = $this->repo->store($input);
+                $to_profile_id = $chatMessage->chat->to_profile_id;
+                broadcast(new MessageSent($chatMessage, $to_profile_id));
             }
-            $to_profile_id = $chatMessage->chat->to_profile_id;
-            broadcast(new MessageSent($chatMessage, $to_profile_id));
             return  $chatMessage;
         }
         abort(422,'Chat is invalid for sending|201');
