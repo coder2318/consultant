@@ -22,7 +22,7 @@ class MessageSent implements ShouldBroadcast
      * @var \App\Models\Chat\ChatMessage
      */
     public $chatMessage;
-    public $userID;
+    public $to_profile_id;
 
     /**
      * Create a new event instance.
@@ -32,7 +32,7 @@ class MessageSent implements ShouldBroadcast
     public function __construct(ChatMessage $chatMessage, $to_profile_id)
     {
         $this->chatMessage = $chatMessage;
-        $this->userID  = $to_profile_id;
+        $this->to_profile_id  = $to_profile_id;
     }
 
     /**
@@ -42,11 +42,11 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        info('conn', [$this->userID]);
+        info('conn', [$this->to_profile_id]);
         info('auth_info', [auth()->user()]);
         return [
             new PrivateChannel('chat.'.$this->chatMessage->chat_id),
-            new PrivateChannel('notifications.'.$this->userID),
+            new PrivateChannel('notifications.'.$this->to_profile_id),
         ];
 
     }
