@@ -41,12 +41,7 @@ class ApplicationService extends BaseService
         $query = $this->repo->getQuery();
         $query = $this->selfCategory($query, $params);
         $query = $this->relation($query, $this->relation);
-
-        if(isset($params['search'])){
-            $query = $query->where(function($q) use ($params){
-                $q->where('title', 'ilike', '%'.$params['search'].'%')->orWhere('description', 'ilike', '%'.$params['search'].'%');
-            });
-        }
+        $query = $this->searchByTitle($query, $params);
 
         if(isset($params['response_status'])){
             $query = $query->whereHas('response', function(Builder $q) use ($params, $resumes) {
@@ -61,6 +56,7 @@ class ApplicationService extends BaseService
         }
 
         $query = $this->filter($query, $this->filter_fields, $params);
+        $query = $query->publish();
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
         $query = $this->repo->getPaginate($query, $perPage);
@@ -79,6 +75,7 @@ class ApplicationService extends BaseService
         $query = $this->repo->getQuery();
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $query->withoutGlobalScope('visible');
+        $query = $this->searchByTitle($query, $params);
         $query = $this->relation($query, $this->relation);
         $query = $this->select($query, $this->attributes);
         $query = $this->sort($query, $this->sort_fields, $params);
@@ -101,6 +98,8 @@ class ApplicationService extends BaseService
         $query = $query->where(function ($q) use ($resume_ids, $responses_application_ids){
             $q->whereIn('id', $responses_application_ids)->orWhereIn('resume_id', $resume_ids);
         });
+
+        $query = $this->searchByTitle($query, $params);
         $query = $this->filter($query, $this->filter_fields, $params);
         $query = $query->confirm();
         $query = $this->sort($query, $this->sort_fields, $params);
@@ -186,6 +185,16 @@ class ApplicationService extends BaseService
         $query = $this->repo->getQuery();
         $query = $this->selfCategory($query, $params);
         $this->filter($query, $this->filter_fields, $params);
+        return $query;
+    }
+
+    function searchByTitle($query, $params)
+    {
+        if(isset($params['search'])){
+            $query = $query->where(function($q) use ($params){
+                $q->where('title', 'ilike', '%'.$params['search'].'%')->orWhere('description', 'ilike', '%'.$params['search'].'%');
+            });
+        }
         return $query;
     }
 

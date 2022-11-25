@@ -38,6 +38,15 @@ class ChatService extends BaseService
                 $builder->unread();
             });
         }
+
+        if(isset($params['search'])){
+            $query->whereHas('application', function (Builder $builder) use ($params){
+                $builder->where(function($q) use ($params){
+                    $q->where('title', 'ilike', '%'.$params['search'].'%');
+                });
+            });
+        }
+
         $query->orderBy('last_time', 'desc');
         $query = $this->relation($query, $this->relation);
 

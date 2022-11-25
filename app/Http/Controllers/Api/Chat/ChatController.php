@@ -22,6 +22,16 @@ class ChatController extends Controller
      *     security={{ "bearerAuth": {} }},
      *      summary="Chat list",
      *      description="index",
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         description="search to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
