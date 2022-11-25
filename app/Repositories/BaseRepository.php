@@ -18,7 +18,10 @@ class BaseRepository
 
     public function getById($id)
     {
-        return $this->entity->withoutGlobalScopes()->find($id);
+        $model = $this->entity->withoutGlobalScopes()->find($id);
+        if(!$model)
+            abort(404);
+        return $model;
     }
 
     public function getPaginate($query, int $perPage = null)

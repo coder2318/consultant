@@ -309,9 +309,9 @@ class ApplicationController extends Controller
      * )
      */
 
-    public function destroy(Application $application)
+    public function destroy($id)
     {
-        $model = $this->service->delete((int) $application->id);
+        $model = $this->service->delete((int) $id);
         if($model)
             return response()->successJson('Successfully deleted');
 
