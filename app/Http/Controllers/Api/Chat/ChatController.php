@@ -32,6 +32,36 @@ class ChatController extends Controller
      *         ),
      *         style="form"
      *     ),
+     *     @OA\Parameter(
+     *         name="type",
+     *         in="query",
+     *         description="type to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="status to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="application_id",
+     *         in="query",
+     *         description="application_id to filter by",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *         ),
+     *         style="form"
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

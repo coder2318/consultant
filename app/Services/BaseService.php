@@ -147,6 +147,15 @@ class BaseService
 
                 if ($item['type'] == 'notNull')
                     $query->whereNotNull($key);
+
+                if ($params[$key] and $item['type'] == 'whereHas' and array_key_exists('relation', $item)) {
+                    $query->whereHas($item['relation'], function (Builder $builder) use ($params, $key, $item){
+                        if ($item['search'] == 'number')
+                            $builder->where($key, $params[$key]);
+                        if ($item['search'] == 'string')
+                            $builder->where($key, 'ilike', '%'.$params[$key].'%');
+                    });
+                }
             }
         }
         return $query;

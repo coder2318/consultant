@@ -1147,6 +1147,48 @@
                 "summary": "Chat list",
                 "description": "index",
                 "operationId": "ChatIndex",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "status to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "application_id",
+                        "in": "query",
+                        "description": "application_id to filter by",
+                        "required": false,
+                        "style": "form",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

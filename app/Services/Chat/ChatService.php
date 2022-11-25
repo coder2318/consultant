@@ -16,13 +16,16 @@ class ChatService extends BaseService
     {
         $this->repo = $repository;
         $this->filter_fields = [
-            'profile_ids' => ['type' => 'intarray'],
+            'profile_ids' => ['type' => 'intarray'], 'application_id' => ['type' => 'number'],
+            'status' => ['type' => 'whereHas', 'relation' => 'application', 'search' => 'number'],
+            'type' => ['type' => 'whereHas', 'relation' => 'application', 'search' => 'number']
+
         ];
         $this->attributes = ['*'];
         $this->sort_fields = [
             'last_time' => 'desc'
         ];
-        $this->relation = ['application:id,title,profile_id,category_id', 'messages'];
+        $this->relation = ['application:id,title,profile_id,category_id,status,type', 'messages'];
     }
 
     public function index(array $params, $consultant = false)
@@ -32,6 +35,7 @@ class ChatService extends BaseService
         $params['profile_ids'] = [$userID];
 
         $query = $this->repo->getQuery();
+        $query = $this->relation($query, $this->relation);
 
         if(isset($params['not_showed']) && $params['not_showed']){
             $query->whereHas('messages', function (Builder $builder){
@@ -47,16 +51,14 @@ class ChatService extends BaseService
             });
         }
 
-        $query->orderBy('last_time', 'desc');
-        $query = $this->relation($query, $this->relation);
-
         $application_ids = Application::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
         if($consultant)
             $query = $query->whereNotIn('application_id', $application_ids);
-         else
+        else
             $query = $query->whereIn('application_id', $application_ids);
 
         $query = $this->filter($query, $this->filter_fields, $params);
+        $query->orderBy('last_time', 'desc');
         $query = $this->select($query, $this->attributes);
         return $query->get();
 

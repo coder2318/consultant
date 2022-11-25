@@ -25,7 +25,10 @@ class IndexRequest extends FormRequest
     {
         return [
             'not_showed' => 'nullable|boolean',
-            'username' => 'nullable'
+            'username' => 'nullable',
+            'status' => 'nullable',
+            'type' => 'nullable',
+            'application_id' => 'nullable',
         ];
     }
 }

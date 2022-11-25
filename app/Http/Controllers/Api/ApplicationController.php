@@ -378,6 +378,7 @@ class ApplicationController extends Controller
      *     ),
      *     @OA\Parameter(
      *         name="response_status",
+     *     in="query",
      *         description="response_status to filter by",
      *         required=false,
      *         @OA\Schema(
