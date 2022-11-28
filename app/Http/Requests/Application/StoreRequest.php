@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
             'title' => 'required',
             'description' => 'nullable',
             'files.*' => 'nullable|file|max:15240',
-            'price_from' => 'required|numeric',
+            'price_from' => 'nullable|numeric',
             'price_to' => 'required|numeric',
             'when_date' => 'nullable|date',
         ];
