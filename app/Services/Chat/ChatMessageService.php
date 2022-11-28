@@ -17,7 +17,7 @@ class ChatMessageService extends BaseService
     public function __construct(ChatMessageRepository $repository, ChatService $chatService)
     {
         $this->repo = $repository;
-        $this->filter_fields = [];
+        $this->filter_fields = ['chat_id' => ['type' => 'number']];
         $this->chatService = $chatService;
     }
 
