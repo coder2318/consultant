@@ -63,7 +63,13 @@ class ResponseService extends BaseService
                 'chat_id' => $chat->id,
                 'check_response' => true
             ];
-        return [
+        else if($chat)
+            return [
+                'chat_id' => $chat->id,
+                'check_response' => true
+            ];
+        else
+            return [
             'chat_id' => null,
             'check_response' => false
         ];
