@@ -15,10 +15,10 @@ class VideoChatController extends Controller
         $data['signalData'] = $request->signal_data;
         $data['from'] = auth()->user()->profile->id;
         $data['type'] = 'incomingCall';
-        Zoom::create([
-            'profile_ids' => [$data['from'], $data['userToCall']],
-            'application_id' => $request->application_id ?? 1
-        ]);
+//        Zoom::create([
+//            'profile_ids' => [$data['from'], $data['userToCall']],
+//            'application_id' => $request->application_id ?? 1
+//        ]);
         broadcast(new StartVideoChat($data))->toOthers();
     }
 
