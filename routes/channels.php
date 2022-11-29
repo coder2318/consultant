@@ -27,7 +27,7 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
 });
 
 /** video chat uchun eventlar */
-Broadcast::channel('presence-video-channel', function ($user) {
+Broadcast::channel('presence-video-channel', function () {
 //    return ['id' => $user->id, 'name' => $user->name];
     return true;
 });
