@@ -32,6 +32,6 @@ class StartVideoChat implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('presence-video-channel');
+        return new PrivateChannel('presence-video-channel');
     }
 }
