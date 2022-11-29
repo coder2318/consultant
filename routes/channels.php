@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+//Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
 
 
 Broadcast::channel('notifications.{userId}', function ($user, $userId) {
@@ -26,3 +26,7 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
     return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
 });
 
+/** video chat uchun eventlar */
+Broadcast::channel('presence-video-channel', function ($user) {
+    return ['id' => $user->id, 'name' => $user->name];
+});

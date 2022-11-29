@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{ApplicationController, ProfileController, CategoryController, ResumeController,
     ExperienceController, ResponseController, Commentcontroller, AuthController, Payment\PaymentController,
-    SkillController, ResourceController, NotificationController, ReviewController, Chat\ChatController, Chat\ChatMessageController};
+    SkillController, ResourceController, NotificationController, ReviewController, Chat\ChatController, Chat\ChatMessageController, Chat\VideoChatController};
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +86,12 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
             Route::get('/{chat_id}', [ChatController::class, 'show']);
             Route::post('/', [ChatController::class, 'store']);
         });
+
+        /** video chat routes. Endpoints to alert call or receive call */
+
+        Route::post('/video/call-user', [VideoChatController::class, 'callUser']);
+        Route::post('/video/accept-call', [VideoChatController::class, 'acceptCall']);
+        /**  */
 
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);
