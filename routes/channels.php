@@ -29,7 +29,7 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
 /** video chat uchun eventlar */
 Broadcast::channel('presence-video-channel', function ($user) {
     if ($user->profile){
-        info('profile_channel', [$user]);
+        \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->profile->id]);
         return ['id' => $user->profile->id, 'name' => $user->f_name];
     }
 });
