@@ -28,5 +28,8 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
 
 /** video chat uchun eventlar */
 Broadcast::channel('presence-video-channel', function ($user) {
-    return ['id' => $user->profile->id, 'name' => $user->f_name];
+    if ($user->profile){
+        info('profile_channel', [$user]);
+        return ['id' => $user->profile->id, 'name' => $user->f_name];
+    }
 });
