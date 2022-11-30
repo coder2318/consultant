@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StartVideoChat implements ShouldBroadcastNow
+class StartVideoChat implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -33,6 +33,7 @@ class StartVideoChat implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
+        info('video_data', $this->data);
         return new PresenceChannel('presence-video-channel');
     }
 }
