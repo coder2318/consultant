@@ -19,7 +19,7 @@ class VideoChatController extends Controller
 //            'profile_ids' => [$data['from'], $data['userToCall']],
 //            'application_id' => $request->application_id ?? 1
 //        ]);
-        broadcast(new StartVideoChat($data))->toOthers();
+        broadcast(new StartVideoChat($data));
     }
 
     public function acceptCall(Request $request)
@@ -28,6 +28,6 @@ class VideoChatController extends Controller
         $data['to'] = $request->to;
         $data['type'] = 'callAccepted';
 
-        broadcast(new StartVideoChat($data))->toOthers();
+        broadcast(new StartVideoChat($data));
     }
 }
