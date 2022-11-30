@@ -112,5 +112,3 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     Route::get('language/default', [ResourceController::class, 'languageDefault']);
 
 });
-
-Broadcast::routes(['middleware' => ['auth:api']]);
