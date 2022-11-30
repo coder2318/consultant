@@ -113,4 +113,4 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
 
 });
 
-Broadcast::routes(['middleware' => ['auth:sanctum']]);
+Broadcast::routes(['middleware' => ['auth:api']]);
