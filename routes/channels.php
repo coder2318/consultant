@@ -28,6 +28,6 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
 
 /** video chat uchun eventlar */
 Broadcast::channel('client-video-channel', function ($user) {
-        \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->profile->id]);
+        \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->f_name]);
         return ['id' => $user->id, 'name' => $user->f_name];
 });
