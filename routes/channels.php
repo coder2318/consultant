@@ -27,7 +27,9 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
 });
 
 /** video chat uchun eventlar */
-Broadcast::channel('presence-video-channel', function ($user) {
-    \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->profile->id]);
-    return ['id' => $user->profile->id, 'name' => $user->f_name];
+Broadcast::channel('presence-video-channel.{roomId}', function ($user, $roomId) {
+    if ($user->canJoinRoom($roomId)) {
+        \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->profile->id]);
+        return ['id' => $user->profile->id, 'name' => $user->f_name];
+    }
 });

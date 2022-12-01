@@ -34,7 +34,7 @@ class StartVideoChat implements ShouldBroadcast
     public function broadcastOn()
     {
         info('video_data', $this->data);
-        return new PresenceChannel('presence-video-channel');
+        return new PresenceChannel('presence-video-channel.1');
     }
 
     public function broadcastAs()
