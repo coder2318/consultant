@@ -91,6 +91,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
 
         Route::post('/video/call-user', [VideoChatController::class, 'callUser']);
         Route::post('/video/accept-call', [VideoChatController::class, 'acceptCall']);
+        Route::post('/video/disconnect-call', [VideoChatController::class, 'disconnectCall']);
         /**  */
 
         Route::apiResource('profile', ProfileController::class);

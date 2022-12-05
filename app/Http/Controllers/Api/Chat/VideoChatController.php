@@ -30,4 +30,13 @@ class VideoChatController extends Controller
 
         broadcast(new StartVideoChat($data))->toOthers();
     }
+
+    public function disconnectCall(Request $request)
+    {
+        $data['signal'] = null;
+        $data['to'] = $request->to;
+        $data['type'] = 'disconnect';
+
+        broadcast(new StartVideoChat($data))->toOthers();
+    }
 }
