@@ -64,7 +64,8 @@ class Chat extends BaseModel
             return [
                 'profile_id' => $this->to_profile_id,
                 'fullname' => $user->l_name . ' '.$user->f_name,
-                'avatar' => config('services.core_address').$user->photo
+                'avatar' => config('services.core_address').$user->photo,
+                'id' => $user->id
             ];
         }
         return null;
