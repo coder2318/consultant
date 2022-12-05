@@ -37,4 +37,9 @@ class StartVideoChat implements ShouldBroadcastNow
         return new PresenceChannel('client-video-channel');
     }
 
+    public function broadcastAs()
+    {
+        return 'video-event';
+    }
+
 }
