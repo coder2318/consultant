@@ -15,11 +15,12 @@ class VideoChatController extends Controller
         $data['signalData'] = $request->signal_data;
         $data['from'] = auth()->user()->id;
         $data['type'] = 'incomingCall';
+        $data['chat_id'] = $request->chat_id;
 //        Zoom::create([
 //            'profile_ids' => [$data['from'], $data['userToCall']],
 //            'application_id' => $request->application_id ?? 1
 //        ]);
-        broadcast(new StartVideoChat($data))->toOthers();
+        broadcast(new StartVideoChat($data));
     }
 
     public function acceptCall(Request $request)
@@ -27,8 +28,9 @@ class VideoChatController extends Controller
         $data['signal'] = $request->signal;
         $data['to'] = $request->to;
         $data['type'] = 'callAccepted';
+        $data['chat_id'] = $request->chat_id;
 
-        broadcast(new StartVideoChat($data))->toOthers();
+        broadcast(new StartVideoChat($data));
     }
 
     public function disconnectCall(Request $request)
@@ -36,7 +38,8 @@ class VideoChatController extends Controller
         $data['signal'] = null;
         $data['to'] = $request->to;
         $data['type'] = 'disconnect';
+        $data['chat_id'] = $request->chat_id;
 
-        broadcast(new StartVideoChat($data))->toOthers();
+        broadcast(new StartVideoChat($data));
     }
 }

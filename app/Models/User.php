@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Chat\Chat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,6 +51,17 @@ class User extends Authenticatable
     public function admin(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Profile::class, 'user_id', 'id')->where('role', Profile::ADMIN_ROLE);
+    }
+
+    public function canAccept($chat_id): bool
+    {
+        $chat = Chat::find($chat_id);
+        if($chat){
+            if(in_array($this->profile->id, $chat->profile_ids))
+                return true;
+            return false;
+        }
+        return false;
     }
 
 }
