@@ -59,13 +59,17 @@ class Chat extends BaseModel
     public function getProfileAttribute()
     {
         if(auth()->check()){
-            $user_id = Profile::find($this->to_profile_id)->user_id;
-            $user = User::find($user_id);
+            $profile = Profile::find($this->to_profile_id);
+            $user = User::find($profile->user_id);
+            $is_online = false;
+            if(Carbon::createFromDate($profile->last_online_at)->addMinutes(2)->gte(Carbon::now()))
+                $is_online = true;
             return [
                 'profile_id' => $this->to_profile_id,
                 'fullname' => $user->l_name . ' '.$user->f_name,
                 'avatar' => config('services.core_address').$user->photo,
-                'id' => $user->id
+                'id' => $user->id,
+                'is_online' => $is_online
             ];
         }
         return null;

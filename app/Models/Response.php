@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Chat\Chat;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,12 +40,16 @@ class Response extends BaseModel
     {
         $resume = Resume::find($this->resume_id);
         if($resume){
-            $user_id = Profile::find($resume->profile_id)->user_id;
-            $user = User::find($user_id);
+            $profile = Profile::find($resume->profile_id);
+            $user = User::find($profile->user_id);
+            $is_online = false;
+            if(Carbon::createFromDate($profile->last_online_at)->addMinutes(2)->gte(Carbon::now()))
+                $is_online = true;
             return [
                 'fullname' => $user->l_name . ' '.$user->f_name, 
                 'avatar' => config('services.core_address').$user->photo,
-                'id' => $user->id
+                'id' => $user->id,
+                'is_online' => $is_online
             ];
         }
         return null;
