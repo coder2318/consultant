@@ -42,4 +42,14 @@ class VideoChatController extends Controller
 
         broadcast(new StartVideoChat($data));
     }
+
+    public function declineCall(Request $request)
+    {
+        $data['signal'] = null;
+        $data['to'] = $request->to;
+        $data['type'] = 'decline';
+        $data['chat_id'] = $request->chat_id;
+
+        broadcast(new StartVideoChat($data));
+    }
 }
