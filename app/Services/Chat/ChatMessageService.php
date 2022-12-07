@@ -37,7 +37,7 @@ class ChatMessageService extends BaseService
         /** last chat of messages for event socket */
 
         $last_chat = $query->first();
-        if($last_chat && $last_chat->is_price){
+        if($last_chat){
             $chat = Chat::find($last_chat->chat_id);
             $application = Application::find($chat->application_id);
             if($application)
