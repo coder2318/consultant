@@ -306,6 +306,10 @@
                                             "file_1",
                                             "file_2"
                                         ]
+                                    },
+                                    "chat_id": {
+                                        "type": "number",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"

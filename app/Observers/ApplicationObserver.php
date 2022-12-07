@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Application;
+use App\Models\Chat\Chat;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -63,7 +64,7 @@ class ApplicationObserver
      */
     public function deleted(Application $application)
     {
-        //
+        Chat::where('application_id', $application->id)->delete();
     }
 
     /**

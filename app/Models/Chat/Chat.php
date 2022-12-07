@@ -10,15 +10,17 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chat extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'application_id',
         'profile_ids',
-        'last_time'
+        'last_time',
+        'deleted_at'
     ];
 
     protected $casts = [
@@ -29,7 +31,8 @@ class Chat extends BaseModel
 
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
     public static function boot()
     {
