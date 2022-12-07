@@ -37,7 +37,9 @@ class ChatMessageService extends BaseService
 
         $last_chat = $query->first();
         if($last_chat && $last_chat->is_price){
-            dealDataForm('offer', $last_chat->chat_id, Application::PUBLISHED, false, $last_chat->from_profile_id);
+            $application = Application::find($last_chat->chat_id);
+            if($application)
+                dealDataForm('offer', $last_chat->chat_id, $application->status, $application->payment_verified, $last_chat->from_profile_id);
         }
 
         return $query;
