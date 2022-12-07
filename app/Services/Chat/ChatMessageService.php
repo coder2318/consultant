@@ -7,6 +7,7 @@ namespace App\Services\Chat;
 use App\Events\MessageSent;
 use App\Events\MessageShowed;
 use App\Models\Application;
+use App\Models\Chat\Chat;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
 use Carbon\Carbon;
@@ -37,7 +38,8 @@ class ChatMessageService extends BaseService
 
         $last_chat = $query->first();
         if($last_chat && $last_chat->is_price){
-            $application = Application::find($last_chat->chat_id);
+            $chat = Chat::find($last_chat->chat_id);
+            $application = Application::find($chat->application_id);
             if($application)
                 dealDataForm('offer', $last_chat->chat_id, $application->status, $application->payment_verified, $last_chat->from_profile_id);
         }
