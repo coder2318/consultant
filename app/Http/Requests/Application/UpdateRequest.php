@@ -35,7 +35,7 @@ class UpdateRequest extends FormRequest
             'price_from' => 'nullable|numeric',
             'price_to' => 'nullable|numeric',
             'when_date' => 'nullable|date',
-            'status' => 'nullable|numeric|in:1,2,3,4,5,6',
+            'status' => 'nullable|numeric|in:1,2,3,4,5,6,7',
             'reason_inactive' => 'nullable',
             'file_delete' => 'nullable|array',
             'chat_id' => 'nullable|exists:chats,id'
