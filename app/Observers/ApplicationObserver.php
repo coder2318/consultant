@@ -49,6 +49,10 @@ class ApplicationObserver
                 DB::statement("update applications set status=".Application::DRAFTED." where id=$application->id");
 
         }
+
+        if($application->wasChanged('status') && $application->status == Application::CONFIRMED){
+            DB::statement("update applications set payment_verified=true id=$application->id");
+        }
     }
 
     /**

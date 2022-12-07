@@ -6,6 +6,7 @@ namespace App\Services\Chat;
 
 use App\Events\MessageSent;
 use App\Events\MessageShowed;
+use App\Models\Application;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
 use Carbon\Carbon;
@@ -32,6 +33,13 @@ class ChatMessageService extends BaseService
             $query = $query->limit($params['limit']);
         $query = $query->get();
         $this->updateShowed(['message_ids' => $query->pluck('id')]);
+        /** last chat of messages for event socket */
+
+        $last_chat = $query->first();
+        if($last_chat && $last_chat->is_price){
+            dealDataForm('offer', $last_chat->chat_id, Application::PUBLISHED, false, $last_chat->from_profile_id);
+        }
+
         return $query;
     }
 
@@ -41,6 +49,7 @@ class ChatMessageService extends BaseService
             $input['from_profile_id'] = auth()->user()->profile->id;
         }
         if($this->validForChat($params)){
+            $chatMessage = $this->repo->getQuery()->orderBy('id', 'desc')->first();
             $input['chat_id'] = $params['chat_id'];
             foreach ($params['msg'] as $item){
                 $input['message'] = $item['message'];
@@ -48,6 +57,9 @@ class ChatMessageService extends BaseService
                 $chatMessage = $this->repo->store($input);
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
+            }
+            if($chatMessage && $chatMessage->is_price){
+                dealDataForm('offer', $chatMessage->chat_id, Application::PUBLISHED, false, $chatMessage->from_profile_id);
             }
             return  $chatMessage;
         }

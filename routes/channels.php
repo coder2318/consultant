@@ -26,6 +26,10 @@ Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
     return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
 });
 
+Broadcast::channel('discussion.{chatId}', function ($user, $chatId) {
+    return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
+});
+
 /** video chat uchun eventlar */
 Broadcast::channel('video-channel.{chatId}', function ($user, $chatId) {
         \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->f_name]);

@@ -252,6 +252,7 @@ class ApplicationController extends Controller
      *       @OA\Property(property="reason_inactive", type="string", example="reason inactive"),
      *       @OA\Property(property="is_visible", type="bool", example="false"),
      *       @OA\Property(property="file_delete", type="string", example={"file_1", "file_2"}),
+     *       @OA\Property(property="chat_id", type="number", example="1"),
      *    ),
      * ),
      *      @OA\Response(

@@ -23,7 +23,7 @@ class ApplicationService extends BaseService
                 'type' => ['type' => 'number']
             ];
         $this->attributes = [
-            'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id', 
+            'id', 'description', 'status', 'files', 'created_at', 'type', 'price_from', 'price_to', 'title', 'profile_id',
             'category_id', 'showed', 'reason_inactive', 'when_date', 'views', 'is_visible'
         ];
         $this->relation = ['response:id,application_id,resume_id'];
@@ -124,7 +124,22 @@ class ApplicationService extends BaseService
             if($response_resume)
                 $params['resume_id'] = $response_resume->id;
         }
-        return $this->repo->update($params, $id);
+        $application = $this->repo->update($params, $id);
+
+        if(isset($params['status']) && isset($params['chat_id']))
+            $this->changeStatus($id, $params['chat_id']);
+
+        return $application;
+    }
+
+    public function changeStatus($application_id, $chat_id)
+    {
+        $application = $this->repo->getById($application_id);
+        $type = match ($application->status) {
+            Application::CONFIRMED => 'accept',
+            default => 'waiting'
+        };
+        dealDataForm($type, $chat_id, $application->status, $application->payment_verified);
     }
 
     public function show($id)

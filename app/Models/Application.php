@@ -19,6 +19,7 @@ class Application extends BaseModel
     const FINISHED = 4; //tugatilgan
     const INACTIVE = 5; //deactivatsiya qilingan
     const CANCELED = 6; //otmen qilingan
+    const WAIT_CONFIRM = 7; //otmen qilingan
 
     /** @var string application turi yani hammaga yoki aynan bitta consultantga -> type */
     const PUBLIC = 'public';
