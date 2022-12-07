@@ -38,7 +38,7 @@ class UpdateRequest extends FormRequest
             'status' => 'nullable|numeric|in:1,2,3,4,5,6',
             'reason_inactive' => 'nullable',
             'file_delete' => 'nullable|array',
-            'chat_id' => 'required|exists:chats,id'
+            'chat_id' => 'nullable|exists:chats,id'
         ];
     }
 }
