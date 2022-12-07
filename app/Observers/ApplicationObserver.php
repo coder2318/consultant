@@ -51,7 +51,7 @@ class ApplicationObserver
         }
 
         if($application->wasChanged('status') && $application->status == Application::CONFIRMED){
-            DB::statement("update applications set payment_verified=true id=$application->id");
+            DB::statement("update applications set payment_verified=true where id=$application->id");
         }
     }
 
