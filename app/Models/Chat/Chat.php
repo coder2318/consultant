@@ -45,7 +45,7 @@ class Chat extends BaseModel
 
     public function getToProfileIdAttribute()
     {
-        $currentUserId = auth()->check() ? auth()->user()->profile->id : auth()->id();
+        $currentUserId = auth()->user()->profile->id;
 
         $userArray = explode(',', str_replace(['{','}'], '',$this->attributes['profile_ids']));
         $userArray = array_map('intval',$userArray);

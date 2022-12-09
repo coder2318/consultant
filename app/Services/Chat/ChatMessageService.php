@@ -54,7 +54,7 @@ class ChatMessageService extends BaseService
         if($this->validForChat($params)){
             $chatMessage = $this->repo->getQuery()->orderBy('id', 'desc')->first();
             foreach ($params['msg'] as $item){
-                $input['message'] = $item['message'];
+                $input['message'] = $item['message']??'';
                 $input['is_price'] = $item['is_price'];
                 if(isset($item['file'])){
                     $input = $this->fileUpload($item, 'chat-messages');
