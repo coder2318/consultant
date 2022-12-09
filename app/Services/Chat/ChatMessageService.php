@@ -65,7 +65,7 @@ class ChatMessageService extends BaseService
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
             }
-            if($chatMessage && $chatMessage->is_price){
+            if($chatMessage && $chatMessage->is_price === true){
                 info('$chatMessage->is_price', [$chatMessage->is_price]);
                 dealDataForm('offer', $chatMessage->chat_id, Application::PUBLISHED, false, $chatMessage->from_profile_id);
             }
