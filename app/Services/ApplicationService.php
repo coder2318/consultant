@@ -184,7 +184,7 @@ class ApplicationService extends BaseService
         $params['self_category_ids'] = $resumes->pluck('category_id');
         $application_ids = Response::whereIn('resume_id', $resume_ids)->get()->pluck('application_id');
 
-        $response = $this->query($params)->whereIn('id', $application_ids)->get()->count();
+        $response = $this->query($params)->whereIn('id', $application_ids)->where('status', Application::PUBLISHED)->get()->count();
         $immediately = $this->query($params)->whereNotNull('when_date')->get()->count();
         $private = $this->query($params)->where('type', Application::PRIVATE)->whereIn('resume_id', $resume_ids)->get()->count();
 
