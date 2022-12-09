@@ -18,7 +18,8 @@ class ChatMessage extends BaseModel
         'showed_at',
         'created_at',
         'updated_at',
-        'is_price'
+        'is_price',
+        'file'
     ];
 
     protected $appends = ['owner'];
@@ -32,6 +33,13 @@ class ChatMessage extends BaseModel
                 'last_time' => $model->created_at
             ]);
         });
+    }
+
+    public function getFileAttribute($value)
+    {
+        if($value)
+            return url('/').'/'.$value;
+        return null;
     }
 
     public function chat(): \Illuminate\Database\Eloquent\Relations\HasOne

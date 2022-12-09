@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Application;
 use App\Models\Chat\Chat;
+use App\Models\Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -53,6 +54,11 @@ class ApplicationObserver
 
         if($application->wasChanged('status') && $application->status == Application::CONFIRMED){
             DB::statement("update applications set payment_verified=true where id=$application->id");
+            $response  = Response::where('application_id', $application->id)->where('resume_id', $application->resume_id)->first();
+            if($response)
+                $response->update([
+                    'status' => Response::ACCEPT
+                ]);
         }
     }
 

@@ -10,10 +10,12 @@ use App\Models\Application;
 use App\Models\Chat\Chat;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
+use App\Traits\FilesUpload;
 use Carbon\Carbon;
 
 class ChatMessageService extends BaseService
 {
+    use FilesUpload;
     protected $chatService;
 
     public function __construct(ChatMessageRepository $repository, ChatService $chatService)
@@ -58,6 +60,9 @@ class ChatMessageService extends BaseService
             foreach ($params['msg'] as $item){
                 $input['message'] = $item['message'];
                 $input['is_price'] = $item['is_price'];
+                if(isset($item['file'])){
+                    $input = $this->fileUpload($item, 'chat-messages');
+                }
                 $chatMessage = $this->repo->store($input);
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
