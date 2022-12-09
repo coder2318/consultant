@@ -51,18 +51,16 @@ class ChatMessageService extends BaseService
 
     public function create($params, $is_response = false): object
     {
-        if(!$is_response){
-            $input['from_profile_id'] = auth()->user()->profile->id;
-        }
         if($this->validForChat($params)){
             $chatMessage = $this->repo->getQuery()->orderBy('id', 'desc')->first();
-            $input['chat_id'] = $params['chat_id'];
             foreach ($params['msg'] as $item){
                 $input['message'] = $item['message'];
                 $input['is_price'] = $item['is_price'];
                 if(isset($item['file'])){
                     $input = $this->fileUpload($item, 'chat-messages');
                 }
+                $input['chat_id'] = $params['chat_id'];
+                $input['from_profile_id'] = auth()->user()->profile->id;
                 $chatMessage = $this->repo->store($input);
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
