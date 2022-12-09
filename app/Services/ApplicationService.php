@@ -122,7 +122,7 @@ class ApplicationService extends BaseService
             $resume_ids = Resume::where('profile_id', $params['profile_id'])->get()->pluck('id');
             $response_resume = Response::where('application_id', $id)->whereIn('resume_id', $resume_ids)->first();
             if($response_resume)
-                $params['resume_id'] = $response_resume->id;
+                $params['resume_id'] = $response_resume->resume_id;
         }
         $application = $this->repo->update($params, $id);
 
