@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 class ResourceService
 {
-    public function __construct(protected $coreUrl = 'http://62.209.129.41:8000/')
+    public function __construct(protected $coreUrl = 'https://aztester.uz/api-core/')
     {
     }
 

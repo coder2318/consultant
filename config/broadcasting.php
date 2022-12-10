@@ -37,8 +37,8 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-//                'encrypted' => true,
-                'host' => '62.209.129.41',
+               'encrypted' => true,
+                'host' => 'aztester.uz/api-consultant',
                 'port' => 6001,
                 'scheme' => 'http',
                 'useTLS' => true,
