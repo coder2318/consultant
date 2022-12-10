@@ -20,7 +20,7 @@ use Illuminate\Routing\Controller as BaseController;
  * )
  *
  * @OA\SecurityScheme(
- *     type="https",
+ *     type="http",
  *     description="Login with username and password to get the authentication token",
  *     name="Token based Based",
  *     in="header",
