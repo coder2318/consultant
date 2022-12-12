@@ -44,6 +44,8 @@ class MessageSent implements ShouldBroadcast
     public function broadcastOn()
     {
         info('file', [$this->chatMessage->file]);
+        info('to_profile_id', [$this->to_profile_id]);
+        info('chat_id', [$this->chatMessage->chat_id]);
         return [
             new PrivateChannel('chat.'.$this->chatMessage->chat_id),
             new PrivateChannel('notifications.'.$this->to_profile_id),
