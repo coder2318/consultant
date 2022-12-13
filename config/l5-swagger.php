@@ -41,6 +41,10 @@ return [
                 'annotations' => [
                     base_path('app.url'),
                 ],
+                /*
+             * Edit to set the api's base path
+            */
+                'base' => env('L5_SWAGGER_BASE_PATH', 'https://aztester.uz/api-consultant'),
 
             ],
         ],
