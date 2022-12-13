@@ -23,14 +23,14 @@ class Category extends BaseModel
     public function getIconAttribute($value)
     {
         if($value)
-            return url('/').'/'.$value;
+            return url('/api-consultant').'/'.$value;
         return null;
     }
 
     public function getFileAttribute($value)
     {
         if($value)
-            return url('/').'/'.$value;
+            return url('/api-consultant').'/'.$value;
         return null;
     }
 
