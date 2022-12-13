@@ -38,7 +38,7 @@ class ChatMessage extends BaseModel
     public function getFileAttribute($value)
     {
         if($value)
-            return url('/').'/'.$value;
+            return url('/api-consultant').'/'.$value;
         return null;
     }
 
