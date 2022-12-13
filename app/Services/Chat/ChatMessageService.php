@@ -63,8 +63,8 @@ class ChatMessageService extends BaseService
                 $input['chat_id'] = $params['chat_id'];
                 $input['from_profile_id'] = auth()->user()->profile->id;
                 $chatMessage = $this->repo->store($input);
-                $userId = Profile::find($chatMessage->chat->to_profile_id)->user_id;
-                broadcast(new MessageSent($chatMessage, $userId));
+                $to_profile_id = $chatMessage->chat->to_profile_id;
+                broadcast(new MessageSent($chatMessage, $to_profile_id));
             }
             if($chatMessage && $chatMessage->is_price === true){
                 info('$chatMessage->is_price', [$chatMessage->is_price]);
