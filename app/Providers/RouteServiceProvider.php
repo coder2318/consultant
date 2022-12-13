@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use http\Url;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -39,8 +39,8 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         if(config('app.env' != 'local')) {
-            Url::forceScheme('https');
-            Url::forceRootUrl(env('APP_URL'));
+            URL::forceScheme('https');
+            URL::forceRootUrl(env('APP_URL'));
         }
     }
 
