@@ -27,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(config('app.env' != 'local')) {
+            URL::forceScheme('https');
+            URL::forceRootUrl(env('APP_URL'));
+        }
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -37,11 +41,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
         });
-
-        if(config('app.env' != 'local')) {
-            URL::forceScheme('https');
-            URL::forceRootUrl(env('APP_URL'));
-        }
     }
 
     /**
