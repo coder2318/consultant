@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/ws', function () {
-    broadcast(new \App\Events\MessageSent('created'));
-
+//    broadcast(new \App\Events\MessageSent('created'));
+    return url('/');
     return view('welcome');
 });
