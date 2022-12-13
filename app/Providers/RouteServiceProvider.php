@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use http\Url;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -36,6 +37,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
         });
+
+        if(config('app.env' != 'local')) {
+            Url::forceScheme('https');
+            Url::forceRootUrl(env('APP_URL'));
+        }
     }
 
     /**

@@ -10,8 +10,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Chat\ChatMessage;
-use Illuminate\Support\Facades\Log;
 
 class MessageSent implements ShouldBroadcast
 {
@@ -43,7 +41,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        info('file', [$this->chatMessage->file]);
         info('to_profile_id', [$this->to_profile_id]);
         info('chat_id', [$this->chatMessage->chat_id]);
         return [
