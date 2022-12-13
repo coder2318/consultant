@@ -52,6 +52,8 @@ class ChatService extends BaseService
         }
 
         $application_ids = Application::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
+        info('application_ids', $application_ids);
+        info('profile_ids', $params['profile_ids']);
         if($consultant)
             $query = $query->whereNotIn('application_id', $application_ids);
         else
