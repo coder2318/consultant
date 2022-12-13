@@ -12,6 +12,7 @@ use App\Observers\CategoryObserver;
 use App\Observers\ProfileObserver;
 use App\Observers\ResumeObserver;
 use Illuminate\Routing\ResponseFactory;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(config('app.env' != 'local')) {
+            URL::forceScheme('https');
+            URL::forceRootUrl(env('APP_URL'));
+        }
         ResponseFactory::mixin(new ResponseFactoryMixin());
         Application::observe(ApplicationObserver::class);
         Resume::observe(ResumeObserver::class);
