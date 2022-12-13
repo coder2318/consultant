@@ -27,10 +27,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(config('app.env' != 'local')) {
-            URL::forceScheme('https');
-            URL::forceRootUrl(env('APP_URL'));
-        }
+//        if(config('app.env' != 'local')) {
+//            URL::forceScheme('https');
+//            URL::forceRootUrl(env('APP_URL'));
+//        }
         $this->configureRateLimiting();
 
         $this->routes(function () {
