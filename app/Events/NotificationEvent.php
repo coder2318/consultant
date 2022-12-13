@@ -14,15 +14,15 @@ class NotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $to_user_id;
+    public $profile_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($to_user_id)
+    public function __construct($profile_id)
     {
-        $this->to_user_id = $to_user_id;
+        $this->profile_id = $profile_id;
     }
 
     /**
@@ -32,6 +32,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('notifications.'.$this->to_user_id);
+        return new PrivateChannel('notifications.'.$this->profile_id);
     }
 }

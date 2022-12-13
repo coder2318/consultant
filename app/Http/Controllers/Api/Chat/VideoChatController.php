@@ -6,6 +6,7 @@ use App\Events\NotificationEvent;
 use App\Events\StartVideoChat;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Zoom;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class VideoChatController extends Controller
@@ -22,7 +23,9 @@ class VideoChatController extends Controller
 //            'application_id' => $request->application_id ?? 1
 //        ]);
         broadcast(new StartVideoChat($data));
-        broadcast(new NotificationEvent($data['userToCall']));
+        $profile = Profile::where('user_id', $data['userToCall'])->first();
+        if($profile)
+            broadcast(new NotificationEvent($profile->id));
     }
 
     public function acceptCall(Request $request)
