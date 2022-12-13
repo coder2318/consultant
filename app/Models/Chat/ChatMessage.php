@@ -22,6 +22,10 @@ class ChatMessage extends BaseModel
         'file'
     ];
 
+    protected $casts = [
+        'is_price' => 'bool'
+    ];
+
     protected $appends = ['owner'];
 
     public static function boot()
