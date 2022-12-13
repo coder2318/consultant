@@ -30,7 +30,7 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(ChatMessage $chatMessage, $to_profile_id)
+    public function __construct($chatMessage, $to_profile_id)
     {
         $this->chatMessage = $chatMessage;
         $this->to_profile_id  = $to_profile_id;
