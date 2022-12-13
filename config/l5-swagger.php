@@ -39,7 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app.url'),
+                    base_path('app'),
                 ],
                 /*
              * Edit to set the api's base path
@@ -54,7 +54,7 @@ return [
             /*
              * Route for accessing parsed swagger annotations.
             */
-            'docs' => 'docs',
+            'docs' => 'api-consultant/docs',
 
             /*
              * Route for Oauth2 authentication callback.
@@ -81,7 +81,7 @@ return [
             /*
              * Absolute path to location where parsed annotations will be stored
             */
-            'docs' => storage_path('api-docs'),
+            'docs' => public_path('docs'),
 
             /*
              * Absolute path to directory where to export views
