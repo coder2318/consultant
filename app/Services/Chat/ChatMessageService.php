@@ -8,6 +8,7 @@ use App\Events\MessageSent;
 use App\Events\MessageShowed;
 use App\Models\Application;
 use App\Models\Chat\Chat;
+use App\Models\Profile;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
 use App\Traits\FilesUpload;
@@ -62,8 +63,8 @@ class ChatMessageService extends BaseService
                 $input['chat_id'] = $params['chat_id'];
                 $input['from_profile_id'] = auth()->user()->profile->id;
                 $chatMessage = $this->repo->store($input);
-                $to_profile_id = $chatMessage->chat->to_profile_id;
-                broadcast(new MessageSent($chatMessage, $to_profile_id));
+                $userId = Profile::find($chatMessage->chat->to_profile_id)->user_id;
+                broadcast(new MessageSent($chatMessage, $userId));
             }
             if($chatMessage && $chatMessage->is_price === true){
                 info('$chatMessage->is_price', [$chatMessage->is_price]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Chat;
 
+use App\Events\NotificationEvent;
 use App\Events\StartVideoChat;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Zoom;
@@ -21,6 +22,7 @@ class VideoChatController extends Controller
 //            'application_id' => $request->application_id ?? 1
 //        ]);
         broadcast(new StartVideoChat($data));
+        broadcast(new NotificationEvent($data['userToCall']));
     }
 
     public function acceptCall(Request $request)

@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Broadcast;
 //});
 
 
-Broadcast::channel('notifications.{profileId}', function ($user, $profileId) {
-    return (int) $user->profile->id === (int) $profileId;
+Broadcast::channel('notifications.{profileId}', function ($user, $userId) {
+    return (int) $user->id === (int) $userId;
 });
 
 Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
