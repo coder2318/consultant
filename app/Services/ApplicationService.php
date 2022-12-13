@@ -118,8 +118,8 @@ class ApplicationService extends BaseService
     {
         $application = $this->repo->getById($id);
         $params = $this->fileUpload($params, 'applications', $application);
-        if(isset($params['profile_id']) && isset($params['status'])){
-            $resume_ids = Resume::where('profile_id', $params['profile_id'])->get()->pluck('id');
+        if(isset($params['to_profile_id']) && isset($params['status'])){
+            $resume_ids = Resume::where('profile_id', $params['to_profile_id'])->get()->pluck('id');
             $response_resume = Response::where('application_id', $id)->whereIn('resume_id', $resume_ids)->first();
             if($response_resume)
                 $params['resume_id'] = $response_resume->resume_id;
