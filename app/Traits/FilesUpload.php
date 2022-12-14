@@ -24,6 +24,7 @@ trait FilesUpload
             $fileName = time() . '.' . $params['file']->extension();
             $params['file']->storeAs('public/'.$pathFile, $fileName);
             $params['file'] ='storage/'.$pathFile.'/'.$fileName;
+            $params['file_original_name'] = $params['file']->getClientOriginalName();
 
         }
 

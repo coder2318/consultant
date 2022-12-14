@@ -19,7 +19,8 @@ class ChatMessage extends BaseModel
         'created_at',
         'updated_at',
         'is_price',
-        'file'
+        'file',
+        'file_original_name'
     ];
 
     protected $appends = ['owner'];
