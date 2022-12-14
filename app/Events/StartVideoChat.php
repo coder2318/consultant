@@ -33,7 +33,7 @@ class StartVideoChat implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        info('video_data', $this->data);
+//        info('video_data', $this->data);
         return new PresenceChannel('video-channel.'.$this->data['chat_id']);
     }
 

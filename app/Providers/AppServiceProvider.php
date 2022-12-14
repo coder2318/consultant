@@ -33,11 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//        if(config('app.env' != 'local')) {
-//            info('success env');
+        if(config('app.env' != 'local')) {
+            info('success env');
             URL::forceScheme('https');
             URL::forceRootUrl(env('APP_URL'));
-//        }
+        }
         ResponseFactory::mixin(new ResponseFactoryMixin());
         Application::observe(ApplicationObserver::class);
         Resume::observe(ResumeObserver::class);

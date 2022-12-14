@@ -49,7 +49,7 @@ class Resume extends BaseModel
             $files = [];
             $arr = explode(',', $value);
             foreach ($arr as $item) {
-                $files[] = url('/api-consultant').'/'.$item;
+                $files[] = url('/').'/'.$item;
             }
             return $files;
         }

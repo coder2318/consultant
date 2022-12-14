@@ -32,7 +32,6 @@ Broadcast::channel('discussion.{chatId}', function ($user, $chatId) {
 
 /** video chat uchun eventlar */
 Broadcast::channel('video-channel.{chatId}', function ($user, $chatId) {
-        \Illuminate\Support\Facades\Log::info('Incoming_broadcast_auth', ['id' => $user->id, 'name' => $user->f_name]);
         if($user->canAccept($chatId)){
             return ['id' => $user->id, 'name' => $user->f_name, 'chat_id', $chatId];
         }

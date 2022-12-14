@@ -107,7 +107,6 @@ class ChatMessageController extends Controller
 
     public function send(SendRequest $request)
     {
-//        dd($request->all());
         $chatMessage = $this->service->create($request->all());
 
         return response()->successJson($chatMessage);
