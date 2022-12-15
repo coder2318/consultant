@@ -146,7 +146,7 @@ class ApplicationService extends BaseService
             Application::CONFIRMED => ChatMessage::ACCEPT,
             Application::WAIT_CONFIRM => ChatMessage::WAIT
         };
-        $data['msg'] = [
+        $data['msg'][] = [
             'message' => '',
             'is_price' => false,
             'action_status' => $action_status
