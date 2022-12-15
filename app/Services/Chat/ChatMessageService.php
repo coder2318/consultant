@@ -63,6 +63,7 @@ class ChatMessageService extends BaseService
                 }
                 $input['chat_id'] = $params['chat_id'];
                 $input['from_profile_id'] = auth()->user()->profile->id;
+                $input['action_status'] = $params['action_status'] ?? null;
                 $chatMessage = $this->repo->store($input);
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
