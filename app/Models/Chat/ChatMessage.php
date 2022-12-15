@@ -20,7 +20,8 @@ class ChatMessage extends BaseModel
         'updated_at',
         'is_price',
         'file',
-        'file_original_name'
+        'file_original_name',
+        'action_status' // clientlar  uchun podskazka beradigan status
     ];
 
     protected $appends = ['owner'];
@@ -39,7 +40,7 @@ class ChatMessage extends BaseModel
     public function getFileAttribute($value)
     {
         if($value)
-            return url('/').'/'.$value;
+            return config('app.url').'/'.$value;
         return null;
     }
 
