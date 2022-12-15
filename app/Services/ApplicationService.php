@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Jobs\ApplicationJob;
 use App\Models\Application;
+use App\Models\Chat\ChatMessage;
 use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ApplicationRepository;
+use App\Services\Chat\ChatMessageService;
 use App\Traits\FilesUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class ApplicationService extends BaseService
 {
     use FilesUpload;
-    public function __construct(ApplicationRepository $repo)
+    public function __construct(ApplicationRepository $repo, protected ChatMessageService $chatMessageService)
     {
         $this->repo = $repo;
         $this->filter_fields = ['title' => ['type' => 'string'], 'resume_id' => ['type' => 'number'], 'application_id' => ['type' => 'number'],
@@ -139,6 +141,19 @@ class ApplicationService extends BaseService
             Application::CONFIRMED => 'accept',
             default => 'waiting'
         };
+
+        $action_status = match ($application->status) {
+            Application::CONFIRMED => ChatMessage::ACCEPT,
+            Application::WAIT_CONFIRM => ChatMessage::WAIT
+        };
+        $data['msg'] = [
+            'message' => '',
+            'is_price' => false,
+            'action_status' => $action_status
+        ];
+        $data['chat_id'] = $chat_id;
+        $this->chatMessageService->create($data);
+
         dealDataForm($type, $chat_id, $application->status, $application->payment_verified);
     }
 

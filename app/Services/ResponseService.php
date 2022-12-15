@@ -39,7 +39,8 @@ class ResponseService extends BaseService
                     'chat_id' => $chat->id,
                     'from_profile_id' => auth()->user()->profile->id,
                     'message' => $msg['message'],
-                    'is_price' => $msg['is_price']
+                    'is_price' => $msg['is_price'],
+                    'action_status' => $msg['is_price'] === true ? ChatMessage::OFFER : null
                 ]);
             }
         DB::commit();
@@ -90,7 +91,8 @@ class ResponseService extends BaseService
                 'chat_id' => $chat->id,
                 'from_profile_id' => auth()->user()->profile->id,
                 'message' => $msg['message'],
-                'is_price' => $msg['is_price']
+                'is_price' => $msg['is_price'],
+                'action_status' => $msg['is_price'] === true ? ChatMessage::OFFER : null
             ]);
         }
         DB::commit();

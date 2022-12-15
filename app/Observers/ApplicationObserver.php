@@ -59,6 +59,8 @@ class ApplicationObserver
                 $response->update([
                     'status' => Response::ACCEPT
                 ]);
+
+
         }
     }
 

@@ -10,6 +10,9 @@ class ChatMessage extends BaseModel
 {
     use HasFactory;
 
+    const OFFER = 1;
+    const ACCEPT = 2;
+    const WAIT = 3;
     protected $fillable = [
         'chat_id',
         'from_profile_id',
