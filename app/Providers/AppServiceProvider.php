@@ -5,12 +5,14 @@ namespace App\Providers;
 use App\Mixins\ResponseFactoryMixin;
 use App\Models\Application;
 use App\Models\Category;
+use App\Models\Chat\Zoom;
 use App\Models\Profile;
 use App\Models\Resume;
 use App\Observers\ApplicationObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\ProfileObserver;
 use App\Observers\ResumeObserver;
+use App\Observers\ZoomObserver;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -43,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
         Resume::observe(ResumeObserver::class);
         Profile::observe(ProfileObserver::class);
         Category::observe(CategoryObserver::class);
+        Zoom::observe(ZoomObserver::class);
     }
 }
