@@ -7,10 +7,15 @@ use App\Events\StartVideoChat;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Zoom;
 use App\Models\Profile;
+use App\Services\Chat\ZoomService;
 use Illuminate\Http\Request;
 
 class VideoChatController extends Controller
 {
+    public function __construct(protected ZoomService $service)
+    {
+    }
+
     public function callUser(Request $request)
     {
         $data['userToCall'] = $request->user_to_call;
@@ -18,14 +23,11 @@ class VideoChatController extends Controller
         $data['from'] = auth()->user()->id;
         $data['type'] = 'incomingCall';
         $data['chat_id'] = $request->chat_id;
-//        Zoom::create([
-//            'profile_ids' => [$data['from'], $data['userToCall']],
-//            'application_id' => $request->application_id ?? 1
-//        ]);
         broadcast(new StartVideoChat($data));
         $profile = Profile::where('user_id', $data['userToCall'])->first();
         if($profile)
             broadcast(new NotificationEvent($profile->id));
+        $this->service->create($data);
     }
 
     public function acceptCall(Request $request)
@@ -36,6 +38,7 @@ class VideoChatController extends Controller
         $data['chat_id'] = $request->chat_id;
 
         broadcast(new StartVideoChat($data));
+        $this->service->changeStatus($data, Zoom::INCOMING);
     }
 
     public function disconnectCall(Request $request)
@@ -46,6 +49,8 @@ class VideoChatController extends Controller
         $data['chat_id'] = $request->chat_id;
 
         broadcast(new StartVideoChat($data));
+
+        $this->service->update($data);
     }
 
     public function declineCall(Request $request)
@@ -56,5 +61,6 @@ class VideoChatController extends Controller
         $data['chat_id'] = $request->chat_id;
 
         broadcast(new StartVideoChat($data));
+        $this->service->changeStatus($data, Zoom::DECLINED);
     }
 }

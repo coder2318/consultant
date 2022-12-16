@@ -12,8 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 class Zoom extends BaseModel
 {
     use HasFactory;
+
+    const MISSED = 1;
+    const INCOMING = 2;
+    const DECLINED = 3;
+
     protected $fillable = [
-        'application_id',
+        'chat_id',
         'profile_ids',
         'end_time',
         'status'

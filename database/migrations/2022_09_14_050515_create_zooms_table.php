@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('zooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->onDelete('cascade');
+            $table->foreignId('chat_id')->constrained()->onDelete('cascade');
             $table->integer('profile_ids');
             $table->dateTime('end_time')->nullable();
             $table->integer('status')->default(1);
