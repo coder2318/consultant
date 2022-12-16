@@ -29,7 +29,7 @@ class ZoomService extends BaseService
         }
     }
 
-    public function changeStatus($params, $status = Zoom::MISSED)
+    public function changeStatus($params, $status)
     {
         $zoom = $this->repo->getQuery()->where('chat_id', $params['chat_id'])->first();
         if($zoom){
