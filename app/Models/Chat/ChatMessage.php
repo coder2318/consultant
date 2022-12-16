@@ -13,6 +13,15 @@ class ChatMessage extends BaseModel
     const OFFER = 1;
     const ACCEPT = 2;
     const WAIT = 3;
+
+    const TYPE_CHAT = 'chat';
+    const TYPE_FILE = 'file';
+    const TYPE_CALL = 'call';
+
+    const ZOOM_MISSED = 1;
+    const ZOOM_INCOMING = 2;
+    const ZOOM_DECLINED = 3;
+
     protected $fillable = [
         'chat_id',
         'from_profile_id',
@@ -24,7 +33,10 @@ class ChatMessage extends BaseModel
         'is_price',
         'file',
         'file_original_name',
-        'action_status' // clientlar  uchun podskazka beradigan status
+        'action_status', // clientlar  uchun podskazka beradigan status,
+        'type', // messagelarni type file, chat, call bulishi mumkin
+        'call_status', // incoming, missed, canceled bulishi mumkin
+        'zoom_id'
     ];
 
     protected $appends = ['owner'];

@@ -8,6 +8,7 @@ use App\Events\MessageSent;
 use App\Events\MessageShowed;
 use App\Models\Application;
 use App\Models\Chat\Chat;
+use App\Models\Chat\ChatMessage;
 use App\Models\Profile;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
@@ -59,6 +60,7 @@ class ChatMessageService extends BaseService
                 $input['is_price'] = $item['is_price'];
                 if(isset($item['file'])){
                     $input = $this->fileUpload($item, 'chat-messages');
+                    $input['type'] = ChatMessage::TYPE_FILE;
                 }
                 $input['chat_id'] = $params['chat_id'];
                 $input['from_profile_id'] = auth()->user()->profile->id;

@@ -21,7 +21,8 @@ class Zoom extends BaseModel
         'chat_id',
         'profile_ids',
         'end_time',
-        'status'
+        'status',
+        'from_profile_id'
     ];
     protected $appends = ['to_profile_id', 'profile'];
 
@@ -33,6 +34,15 @@ class Zoom extends BaseModel
         'created_at',
         'updated_at'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            if(auth()->user() && auth()->user()->profile)
+                $model->from_profile_id = auth()->user()->profile->id;
+        });
+    }
 
     public function getToProfileIdAttribute()
     {
