@@ -31,7 +31,7 @@ class ZoomService extends BaseService
 
     public function changeStatus($params, $status)
     {
-        $zoom = $this->repo->getQuery()->where('chat_id', $params['chat_id'])->first();
+        $zoom = $this->repo->getQuery()->where('chat_id', $params['chat_id'])->latest()->first();
         if($zoom){
             $data = [
                 'status' => $status,
