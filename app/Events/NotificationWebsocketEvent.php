@@ -10,19 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NotificationEvent
+class NotificationWebsocketEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $params;
+    public $profile_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($params)
+    public function __construct($profile_id)
     {
-        $this->params = $params;
+        $this->profile_id = $profile_id;
     }
 
     /**
@@ -32,6 +32,7 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('notifications.'.$this->profile_id);
     }
+
 }

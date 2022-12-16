@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Chat;
 
-use App\Events\NotificationEvent;
+use App\Events\NotificationWebsocketEvent;
 use App\Events\StartVideoChat;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Zoom;
@@ -26,7 +26,7 @@ class VideoChatController extends Controller
         broadcast(new StartVideoChat($data));
         $profile = Profile::where('user_id', $data['userToCall'])->first();
         if($profile)
-            broadcast(new NotificationEvent($profile->id));
+            broadcast(new NotificationWebsocketEvent($profile->id));
         $this->service->create($data);
     }
 
