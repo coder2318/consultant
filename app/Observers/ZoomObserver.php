@@ -20,7 +20,7 @@ class ZoomObserver
             'from_profile_id' => $zoom->from_profile_id,
             'message' => '',
             'type' => ChatMessage::TYPE_CALL,
-            'call_status' => $zoom->status,
+            'call_status' => Zoom::MISSED,
             'zoom_id' => $zoom->id
         ]);
     }
