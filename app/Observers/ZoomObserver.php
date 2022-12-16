@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\MessageSent;
 use App\Models\Chat\ChatMessage;
 use App\Models\Chat\Zoom;
 
@@ -38,6 +39,8 @@ class ZoomObserver
             $chat_message->update([
                 'call_status' => $zoom->status
             ]);
+
+            broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
         }
     }
 
