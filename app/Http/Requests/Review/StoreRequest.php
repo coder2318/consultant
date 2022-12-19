@@ -25,8 +25,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'resume_id' => 'required|exists:resumes,id',
-            'text' => 'required',
-            'rating' => 'nullable|numeric'
+            'text' => 'nullable',
+            'rating' => 'required|numeric'
         ];
     }
 }
