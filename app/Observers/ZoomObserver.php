@@ -40,7 +40,7 @@ class ZoomObserver
                 $chat_message->update([
                     'call_status' => $zoom->status
                 ]);
-                broadcast(new MessageSent($chat_message, $chat_message->from_profile_id));
+                broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
             }
         }
     }
