@@ -3,6 +3,7 @@
 namespace App\Models\Chat;
 
 use App\Models\BaseModel;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,7 +40,7 @@ class ChatMessage extends BaseModel
         'zoom_id'
     ];
 
-    protected $appends = ['owner'];
+    protected $appends = ['owner', 'call_duration'];
 
     public static function boot()
     {
@@ -85,5 +86,14 @@ class ChatMessage extends BaseModel
             return false;
         }
         return true;
+    }
+
+    public function getCallDurationAttribute(): float|int|null
+    {
+        if($this->call_status == self::TYPE_CALL && $this->call_status == Zoom::INCOMING && $this->zoom_id){
+            $zoom = Zoom::find($this->zoom_id);
+            return Carbon::create($zoom->created_at)->diffInSeconds(Carbon::create($zoom->end_time));
+        }
+        return null;
     }
 }
