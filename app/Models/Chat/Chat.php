@@ -56,6 +56,8 @@ class Chat extends BaseModel
             $userID = next($userArray);
         }
 
+        info('current_user',  [$currentUserId]);
+        info('user_id',  [$userID]);
         return $userID;
     }
 
