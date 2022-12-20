@@ -36,11 +36,12 @@ class ZoomObserver
     {
         $chat_message = ChatMessage::where('type', ChatMessage::TYPE_CALL)->where('zoom_id', $zoom->id)->first();
         if($chat_message){
-            $chat_message->update([
-                'call_status' => $zoom->status
-            ]);
-
-//            broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
+            if($chat_message->status !== $zoom->status){
+                $chat_message->update([
+                    'call_status' => $zoom->status
+                ]);
+                broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
+            }
         }
     }
 
