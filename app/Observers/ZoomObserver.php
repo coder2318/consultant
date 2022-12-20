@@ -21,7 +21,7 @@ class ZoomObserver
             'from_profile_id' => $zoom->from_profile_id,
             'message' => '',
             'type' => ChatMessage::TYPE_CALL,
-            'call_status' => Zoom::MISSED,
+            'call_status' => Zoom::INCOMING,
             'zoom_id' => $zoom->id
         ]);
         broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
@@ -35,19 +35,19 @@ class ZoomObserver
      */
     public function updated(Zoom $zoom)
     {
-        $chat_message = ChatMessage::where('type', ChatMessage::TYPE_CALL)->where('zoom_id', $zoom->id)->first();
-        if($chat_message){
-            if($chat_message->status !== $zoom->status){
-                $chat_message->update([
-                    'call_status' => $zoom->status
-                ]);
-//                if($chat_message->from_profile_id == auth()->user()->profile->id){
-                    broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
-//                } else{
-//                    broadcast(new MessageSent($chat_message, auth()->user()->profile->id));
-//                }
-            }
-        }
+//        $chat_message = ChatMessage::where('type', ChatMessage::TYPE_CALL)->where('zoom_id', $zoom->id)->first();
+//        if($chat_message){
+//            if($chat_message->status !== $zoom->status){
+//                $chat_message->update([
+//                    'call_status' => $zoom->status
+//                ]);
+////                if($chat_message->from_profile_id == auth()->user()->profile->id){
+//                    broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
+////                } else{
+////                    broadcast(new MessageSent($chat_message, auth()->user()->profile->id));
+////                }
+//            }
+//        }
     }
 
     /**
