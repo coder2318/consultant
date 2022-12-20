@@ -21,7 +21,7 @@ class ZoomObserver
             'from_profile_id' => $zoom->from_profile_id,
             'message' => '',
             'type' => ChatMessage::TYPE_CALL,
-            'call_status' => Zoom::MISSED,
+            'call_status' => Zoom::INCOMING,
             'zoom_id' => $zoom->id
         ]);
         broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
