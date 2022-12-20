@@ -24,7 +24,7 @@ class ZoomObserver
             'call_status' => Zoom::MISSED,
             'zoom_id' => $zoom->id
         ]);
-//        broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
+        broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
     }
 
     /**
@@ -41,11 +41,11 @@ class ZoomObserver
                 $chat_message->update([
                     'call_status' => $zoom->status
                 ]);
-                if($chat_message->from_profile_id == auth()->user()->profile->id){
-                    broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
-                } else{
-                    broadcast(new MessageSent($chat_message, auth()->user()->profile->id));
-                }
+//                if($chat_message->from_profile_id == auth()->user()->profile->id){
+//                    broadcast(new MessageSent($chat_message, $chat_message->chat->to_profile_id));
+//                } else{
+//                    broadcast(new MessageSent($chat_message, auth()->user()->profile->id));
+//                }
             }
         }
     }
