@@ -90,7 +90,7 @@ class ChatMessage extends BaseModel
 
     public function getCallDurationAttribute(): float|int|null
     {
-        if($this->call_status == self::TYPE_CALL && $this->call_status == Zoom::INCOMING && $this->zoom_id){
+        if($this->type == self::TYPE_CALL && $this->call_status == Zoom::INCOMING && $this->zoom_id){
             $zoom = Zoom::find($this->zoom_id);
             return Carbon::create($zoom->created_at)->diffInSeconds(Carbon::create($zoom->end_time));
         }
