@@ -92,7 +92,9 @@ class ChatMessage extends BaseModel
     {
         if($this->type == self::TYPE_CALL && $this->call_status == Zoom::INCOMING && $this->zoom_id){
             $zoom = Zoom::find($this->zoom_id);
-            return Carbon::create($zoom->created_at)->diffInSeconds(Carbon::create($zoom->end_time));
+            if($zoom->status === Zoom::INCOMING)
+                return Carbon::create($zoom->created_at)->diffInSeconds(Carbon::create($zoom->end_time));
+            return null;
         }
         return null;
     }
