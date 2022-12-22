@@ -2,9 +2,13 @@
 
 namespace App\Observers;
 
+use App\Events\NotificationEvent;
 use App\Models\Application;
 use App\Models\Chat\Chat;
+use App\Models\Chat\ChatMessage;
+use App\Models\Notification;
 use App\Models\Response;
+use App\Models\Resume;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -18,13 +22,22 @@ class ApplicationObserver
      */
     public function created(Application $application)
     {
-        $application->update([
-            'expired_date' => Carbon::now()->addDays(30)->format('Y-m-d')
-        ]);
-        if($application->resume_id)
-                $application->update([
-                    'type' => Application::PRIVATE
+        if($application->resume_id){
+            $application->update([
+                'type' => Application::PRIVATE
+            ]);
+            $resume = Resume::find($application->resume_id);
+            if($resume){
+                $notification = Notification::create([
+                    'profile_id' => $resume->profile_id,
+                    'text' => $application->title,
+                    'type' => Notification::TYPE_PRIVATE_APPLICATION,
+                    'link' => $application->id,
+                    'data' => ['status' => $application->status]
                 ]);
+                broadcast(new NotificationEvent($notification));
+            }
+        }
     }
 
     /**

@@ -22,7 +22,9 @@ class Resume extends BaseModel
         'files',
         'status',
         'visible',
-        'skill_ids'
+        'skill_ids',
+        'showed',
+        'reason_inactive'
     ];
 
     protected $casts = [

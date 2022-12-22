@@ -27,13 +27,13 @@ class NotificationListener
      */
     public function handle(NotificationEvent $event)
     {
-        $data = $event->params;
-        Notification::create([
-            'profile_id' => $data['profile_id'],
-            'text' => $data['text'] ?? 'Notification',
-            'description' => $data['description']?? null,
-            'type' => $data['type'],
-            'data' => $data['data']
-        ]);
+//        $data = $event->params;
+//        Notification::create([
+//            'profile_id' => $data['profile_id'],
+//            'text' => $data['text'] ?? 'Notification',
+//            'description' => $data['description']?? null,
+//            'type' => $data['type'],
+//            'data' => $data['data']
+//        ]);
     }
 }

@@ -10,6 +10,10 @@ class Notification extends Model
 {
     use HasFactory;
 
+    const TYPE_MESSAGE = 'message';
+    const TYPE_RESUME = 'resume';
+    const TYPE_APPLICATION = 'application';
+    const TYPE_PRIVATE_APPLICATION = 'private_application';
     protected $fillable = [
         'text',
         'description',
@@ -17,7 +21,8 @@ class Notification extends Model
         'cascade',
         'showed',
         'type',
-        'data'
+        'data',
+        'link'
     ];
 
     protected $casts = [

@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Events\NotificationEvent;
+use App\Models\Notification;
 use App\Models\Resume;
 
 class ResumeObserver
@@ -25,11 +26,13 @@ class ResumeObserver
         $resume = Resume::find($resume->id);
         $data = [
             'profile_id' => $resume->profile_id,
-            'text' => '',
-            'type' => 'resume',
-            'data' => ['id' => $resume->id, 'status' => $resume->status]
+            'text' => $resume->category,
+            'type' => Notification::TYPE_RESUME,
+            'link' => $resume->id,
+            'data' => ['id' => $resume->id, 'status' => $resume->status, 'reason_inactive' => '']
         ];
-        event(new NotificationEvent($data));
+        $notification = Notification::create($data);
+        broadcast(new NotificationEvent($notification));
     }
 
     /**
@@ -40,7 +43,21 @@ class ResumeObserver
      */
     public function updated(Resume $resume)
     {
-        //
+        if($resume->wasChanged('status'))
+        {
+            $data = [
+                'profile_id' => $resume->profile_id,
+                'text' => $resume->category,
+                'type' => Notification::TYPE_RESUME,
+                'link' => $resume->id
+            ];
+            if($resume->status === Resume::CONFIRMED)
+                $data['data'] = ['id' => $resume->id, 'status' => $resume->status, 'reason_inactive' => ''];
+            else if($resume->status === Resume::BLOCKED)
+                $data['data'] = ['id' => $resume->id, 'status' => $resume->status, 'reason_inactive' => $resume->reason_inactive];
+            $notification = Notification::create($data);
+            broadcast(new NotificationEvent($notification));
+        }
     }
 
     /**

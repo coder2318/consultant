@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Notification;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,19 +11,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NotificationEvent
+class NotificationEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $params;
+    public $notification;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($params)
+    public function __construct($notification)
     {
-        $this->params = $params;
+        $this->notification = $notification;
     }
 
     /**
@@ -32,6 +33,11 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('notifications.'.$this->notification->profile_id);
+    }
+
+    public function broadcastAs()
+    {
+        return 'notification.sent';
     }
 }

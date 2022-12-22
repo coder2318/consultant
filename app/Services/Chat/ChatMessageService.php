@@ -6,9 +6,11 @@ namespace App\Services\Chat;
 
 use App\Events\MessageSent;
 use App\Events\MessageShowed;
+use App\Events\NotificationEvent;
 use App\Models\Application;
 use App\Models\Chat\Chat;
 use App\Models\Chat\ChatMessage;
+use App\Models\Notification;
 use App\Models\Profile;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
@@ -69,6 +71,7 @@ class ChatMessageService extends BaseService
                 $to_profile_id = $chatMessage->chat->to_profile_id;
                 broadcast(new MessageSent($chatMessage, $to_profile_id));
             }
+            $this->sendNotificationEvent($chatMessage);
             if($chatMessage && $chatMessage->is_price === "true"){
                 info('$chatMessage->is_price', [$chatMessage->is_price]);
                 dealDataForm('offer', $chatMessage->chat_id, Application::PUBLISHED, false, $chatMessage->from_profile_id);
@@ -76,6 +79,19 @@ class ChatMessageService extends BaseService
             return  $chatMessage;
         }
         abort(422,'Chat is invalid for sending|201');
+    }
+
+    function sendNotificationEvent($chatMessage)
+    {
+        $application = Application::find($chatMessage->chat->application_id);
+        $notification = Notification::create([
+            'profile_id' => $chatMessage->chat->to_profile_id,
+            'text' => $application ? $application->title : '',
+            'type' => Notification::TYPE_MESSAGE,
+            'link' => $chatMessage->chat_id,
+            'data' => ['status' => ChatMessage::TYPE_CHAT]
+        ]);
+        broadcast(new NotificationEvent($notification));
     }
 
     public function updateShowed($params)

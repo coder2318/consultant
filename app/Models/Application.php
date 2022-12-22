@@ -52,8 +52,10 @@ class Application extends BaseModel
     {
         parent::boot();
         self::creating(function ($model) {
-            if(auth()->user() && auth()->user()->profile)
+            if(auth()->user() && auth()->user()->profile){
                 $model->profile_id = auth()->user()->profile->id;
+                $model->expired_date = Carbon::now()->addDays(30)->format('Y-m-d');
+            }
         });
     }
 
