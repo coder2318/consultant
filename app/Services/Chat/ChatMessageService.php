@@ -53,7 +53,7 @@ class ChatMessageService extends BaseService
                 $response = Response::where('application_id', $application->id)->whereIn('resume_id', $resume_ids)->first();
                 if($response){
                     if($response->status == Response::DENY)
-                        dealDataForm('deny', $last_chat->chat_id, $application->response_status, false, $last_chat->from_profile_id);
+                        dealDataForm('deny', $last_chat->chat_id, $response->status, false, $last_chat->from_profile_id);
                     else
                         dealDataForm('offer', $last_chat->chat_id, $application->status, $application->payment_verified, $last_chat->from_profile_id);
                 } else{
