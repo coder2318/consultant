@@ -3143,6 +3143,78 @@
                 ]
             }
         },
+        "/cancel-response": {
+            "post": {
+                "tags": [
+                    "Response"
+                ],
+                "summary": "Cancel response and change status to deny",
+                "description": "Cancel response",
+                "operationId": "d46541bce89566be42bc690409c7e95c",
+                "requestBody": {
+                    "description": "Cancel response",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "application_id",
+                                    "profile_id",
+                                    "chat_id"
+                                ],
+                                "properties": {
+                                    "application_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "profile_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "chat_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/resume": {
             "get": {
                 "tags": [

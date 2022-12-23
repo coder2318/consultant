@@ -343,9 +343,10 @@ class ResponseController extends Controller
      *    @OA\JsonContent(
      *       required={"application_id", "profile_id", "chat_id"},
      *       @OA\Property(property="application_id", type="number", example="1"),
-     *       @OA\Property(property="profile_id", type="number", example="1")
+     *       @OA\Property(property="profile_id", type="number", example="1"),
      *       @OA\Property(property="chat_id", type="number", example="1")
-     * ),
+     *      ),
+ *     ),
      * @OA\Response(
      *    response=422,
      *    description="Unprocessable Content",
