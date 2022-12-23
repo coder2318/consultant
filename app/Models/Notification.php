@@ -32,7 +32,7 @@ class Notification extends Model
     protected static function booted()
     {
         static::addGlobalScope('unshowed', function (Builder $builder) {
-            $builder->where('showed', true);
+            $builder->where('showed', false);
         });
     }
 }
