@@ -94,7 +94,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         Route::post('/video/disconnect-call', [VideoChatController::class, 'disconnectCall']);
         Route::post('/video/decline-call', [VideoChatController::class, 'declineCall']);
         /**  */
-
+        Route::get('make-all-showed-notification', [NotificationController::class, 'allShowed']); /** hamma notificationlarni showed qilib belgilash uchun */
         Route::post('cancel-response', [ResponseController::class, 'cancelResponse']);
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);

@@ -280,4 +280,30 @@ class NotificationController extends Controller
         return response()->successJson('Successfully deleted');
     }
 
+    /**
+     * @OA\Get (
+     * path="/make-all-showed-notification",
+     * summary="Show notification",
+     * security={{ "bearerAuth": {} }},
+     * description="Show by notification",
+     * tags={"Notification"},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+    public function allShowed()
+    {
+        return response()->successJson($this->service->makeShowedAll());
+    }
+
 }

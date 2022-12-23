@@ -2218,6 +2218,32 @@
                 ]
             }
         },
+        "/make-all-showed-notification": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Show notification",
+                "description": "Show by notification",
+                "operationId": "b989862268c8541830e285e38fa909e0",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/payment": {
             "get": {
                 "tags": [

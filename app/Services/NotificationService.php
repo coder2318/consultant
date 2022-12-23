@@ -22,4 +22,13 @@ class NotificationService extends BaseService
         ]);
         return $model;
     }
+
+    public function makeShowedAll()
+    {
+        $this->repo->getQuery()->where('profile_id', auth()->user()->profile->id)->update([
+            'showed' => true
+        ]);
+        return true;
+
+    }
 }
