@@ -47,6 +47,7 @@ class ChatMessageService extends BaseService
         if($last_chat){
             $chat = Chat::find($last_chat->chat_id);
             $application = Application::find($chat->application_id);
+            info('$application->response_status', [$application->response_status]);
                 if($application->response_status == Response::DENY)
                     dealDataForm('deny', $last_chat->chat_id, $application->response_status, false, $last_chat->from_profile_id);
                 else
