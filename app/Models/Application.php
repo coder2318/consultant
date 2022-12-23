@@ -143,6 +143,7 @@ class Application extends BaseModel
     public function getResponseStatusAttribute()
     {
         if(auth()->check()){
+
             $resume_ids = Resume::where('profile_id', auth()->user()->profile->id)->get()->pluck('id');
             $response = Response::where('application_id', $this->id)->whereIn('resume_id', $resume_ids)->first();
             return $response ? $response->status : null;
