@@ -113,7 +113,7 @@ class ResponseService extends BaseService
                 'chat_id' => $params['chat_id'],
                 'action_status' => ChatMessage::DENY
             ]);
-            dealDataForm('offer', $params['chat_id'], Response::DENY, false, auth()->user()->profile->id);
+            dealDataForm('deny', $params['chat_id'], Response::DENY, false, auth()->user()->profile->id);
             return $response;
         }
     }
