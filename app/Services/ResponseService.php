@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Application;
 use App\Models\Chat\Chat;
 use App\Models\Chat\ChatMessage;
+use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ResponseRepository;
 use App\Services\Chat\ChatService;
@@ -97,5 +98,23 @@ class ResponseService extends BaseService
         }
         DB::commit();
         return $chat;
+    }
+
+    public function cancelResponse($params)
+    {
+        $resume_ids = Resume::where('profile_id', $params['profile_id'])->get()->pluck('id');
+        $response = $this->repo->getQuery()->where('application_id', $params['application_id'])->whereIn('resume_id', $resume_ids)->first();
+        if($response) {
+            $response->update([
+                'status' => Response::DENY
+            ]);
+            ChatMessage::create([
+                'from_profile_id' => auth()->user()->profile->id,
+                'chat_id' => $params['chat_id'],
+                'action_status' => ChatMessage::DENY
+            ]);
+            dealDataForm('offer', $params['chat_id'], Response::DENY, false, auth()->user()->profile->id);
+            return $response;
+        }
     }
 }

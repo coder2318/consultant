@@ -11,14 +11,18 @@ class ChatMessage extends BaseModel
 {
     use HasFactory;
 
+    /** @var int action_status */
     const OFFER = 1;
     const ACCEPT = 2;
     const WAIT = 3;
+    const DENY = 4;
 
+    /** @var string type */
     const TYPE_CHAT = 'chat';
     const TYPE_FILE = 'file';
     const TYPE_CALL = 'call';
 
+    /** @var int call_status */
     const ZOOM_MISSED = 1;
     const ZOOM_INCOMING = 2;
     const ZOOM_DECLINED = 3;

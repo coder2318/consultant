@@ -95,6 +95,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         Route::post('/video/decline-call', [VideoChatController::class, 'declineCall']);
         /**  */
 
+        Route::post('cancel-response', [ResponseController::class, 'cancelResponse']);
         Route::apiResource('profile', ProfileController::class);
         Route::apiResource('skill', SkillController::class);
         Route::apiResource('notification', NotificationController::class);

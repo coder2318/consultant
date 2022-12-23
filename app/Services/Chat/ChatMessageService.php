@@ -12,6 +12,7 @@ use App\Models\Chat\Chat;
 use App\Models\Chat\ChatMessage;
 use App\Models\Notification;
 use App\Models\Profile;
+use App\Models\Response;
 use App\Repositories\Chat\ChatMessageRepository;
 use App\Services\BaseService;
 use App\Traits\FilesUpload;
@@ -46,8 +47,10 @@ class ChatMessageService extends BaseService
         if($last_chat){
             $chat = Chat::find($last_chat->chat_id);
             $application = Application::find($chat->application_id);
-            if($application)
-                dealDataForm('offer', $last_chat->chat_id, $application->status, $application->payment_verified, $last_chat->from_profile_id);
+                if($application->response_status == Response::DENY)
+                    dealDataForm('deny', $last_chat->chat_id, $application->response_status, false, $last_chat->from_profile_id);
+                else
+                    dealDataForm('offer', $last_chat->chat_id, $application->status, $application->payment_verified, $last_chat->from_profile_id);
         }
 
         return $query;
