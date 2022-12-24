@@ -23,7 +23,8 @@ class Notification extends Model
         'showed',
         'type',
         'data',
-        'link'
+        'link',
+        'is_consultant'
     ];
 
     protected $casts = [
