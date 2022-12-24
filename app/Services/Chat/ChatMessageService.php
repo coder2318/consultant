@@ -106,7 +106,8 @@ class ChatMessageService extends BaseService
             'text' => $application ? $application->title : '',
             'type' => Notification::TYPE_MESSAGE,
             'link' => $chatMessage->chat_id,
-            'data' => ['status' => ChatMessage::TYPE_CHAT]
+            'data' => ['status' => ChatMessage::TYPE_CHAT],
+            'is_consultant' => !(auth()->user()->profile->id == $application->profile_id)
         ]);
         broadcast(new NotificationEvent($notification));
     }
