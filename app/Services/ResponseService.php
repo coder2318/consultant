@@ -23,8 +23,11 @@ class ResponseService extends BaseService
     public function create($params): object
     {
         DB::beginTransaction();
+            $application = $this->applicationModel->find($params['application_id']);
+            if($application->profile_id == auth()->user()->profile->id){
+                abort(403, 'You don\'t send response to your application');
+            }
             $response = $this->repo->store($params);
-            $application = $this->applicationModel->find($response->application_id);
             $inputs['profile_ids'] = [auth()->user()->profile->id, $application->profile_id];
             $inputs['application_id'] = $application->id;
             $chat = $this->chatService->getByUserIds($inputs['profile_ids'], $application->id);
