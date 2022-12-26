@@ -291,6 +291,13 @@ class ResumeController extends Controller
      *      summary="top-consultant",
      *     security={{ "bearerAuth": {} }},
      *      description="index",
+     *     @OA\Parameter(
+     *         description="Limit",
+     *         in="query",
+     *         name="limit",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"

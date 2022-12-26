@@ -3600,6 +3600,17 @@
                 "summary": "top-consultant",
                 "description": "index",
                 "operationId": "top-consultant",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
