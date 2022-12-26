@@ -73,7 +73,7 @@ class Resume extends BaseModel
             $is_online = true;
         return [
             'fullname' => $user->l_name . ' '.$user->f_name,
-            'avatar' => config('services.core_address').$user->photo,
+            'avatar' => $user->photo ? config('services.core_address').$user->photo : null,
             'last_online_at' => $profile->last_online_at,
             'id' => $user->id,
             'is_online' => $is_online
