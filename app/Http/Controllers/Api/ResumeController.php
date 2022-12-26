@@ -315,6 +315,6 @@ class ResumeController extends Controller
 
     public function topConsultant(IndexRequest $request)
     {
-        return response()->successJson($this->service->topConsultant($request->all()));
+        return response()->successJson(array_values($this->service->topConsultant($request->all())));
     }
 }
