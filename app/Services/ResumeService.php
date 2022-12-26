@@ -72,7 +72,7 @@ class ResumeService extends BaseService
         $resumes = $this->repo->getQuery()->limit($limit)->get();
         return $resumes->sortBy(function ($model){
             return $model->review['rating'];
-        });
+        })->toArray();
 
     }
 }
