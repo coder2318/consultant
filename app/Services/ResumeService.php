@@ -65,4 +65,14 @@ class ResumeService extends BaseService
             $resume->save();
         }
     }
+
+    public function topConsultant($params)
+    {
+        $limit = $params['limit'] ?? 4;
+        $resumes = $this->repo->getQuery()->limit($limit)->get();
+        return $resumes->sortBy(function ($model){
+            return $model->review['rating'];
+        });
+
+    }
 }

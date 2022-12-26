@@ -282,4 +282,32 @@ class ResumeController extends Controller
     {
         return response()->successJson($this->service->checkHasResume());
     }
+
+    /**
+     * @OA\Get(
+     *      path="/top-consultant",
+     *      operationId="top-consultant",
+     *      tags={"Resume"},
+     *      summary="top-consultant",
+     *     security={{ "bearerAuth": {} }},
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function topConsultant(IndexRequest $request)
+    {
+        return response()->successJson($this->service->topConsultant($request->all()));
+    }
 }

@@ -103,6 +103,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
 
     });
     /** umumiy apilar */
+    Route::get('top-consultant', [ResumeController::class, 'topConsultant']);
     Route::get('resume/{resume}', [ResumeController::class, 'show']);
     Route::get('resume', [ResumeController::class, 'index']);
     Route::get('category', [CategoryController::class, 'index']);

@@ -26,7 +26,8 @@ class IndexRequest extends FormRequest
         return [
             'category_id' => 'nullable',
             'language' => 'nullable',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'limit' => 'nullable|numeric'
         ];
     }
 }
