@@ -233,4 +233,16 @@ class ApplicationService extends BaseService
         return $query;
     }
 
+    public function countStat()
+    {
+        $applications = $this->repo->getQuery()->active()->get()->count();
+        $finished = $this->repo->getQuery()->finished()->get()->count();
+        $resumes = Resume::active()->get()->count();
+        return [
+            'count_applications' => $applications,
+            'count_finished_applications' => $finished,
+            'count_resumes' => $resumes
+        ];
+    }
+
 }

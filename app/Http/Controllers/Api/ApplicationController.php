@@ -564,4 +564,31 @@ class ApplicationController extends Controller
         return response()->successJson($this->service->getCountBadges($request->all()));
     }
 
+    /**
+     * @OA\Get(
+     *      path="/statistic-count",
+     *      operationId="statisticcount",
+     *      tags={"Application"},
+     *     security={{ "bearerAuth": {} }},
+     *      summary="statistic-count list",
+     *      description="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+    public function countStatistic() // main page uchun countlar
+    {
+        return response()->successJson($this->service->countStat());
+    }
+
 }

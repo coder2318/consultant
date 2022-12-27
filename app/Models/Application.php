@@ -135,9 +135,19 @@ class Application extends BaseModel
         $query->where('status', self::PUBLISHED);
     }
 
+    public function scopeActive($query)
+    {
+        $query->whereIn('status', [self::PUBLISHED, self::CONFIRMED, self::WAIT_CONFIRM, self::FINISHED]);
+    }
+
     public function scopeConfirm($query)
     {
-        $query->whereIn('status', [self::CONFIRMED, self::FINISHED, self::CANCELED]);
+        $query->whereIn('status', [self::CONFIRMED, self::FINISHED]);
+    }
+
+    public function scopeFinished($query)
+    {
+        $query->where('status', self::FINISHED);
     }
 
     public function getResponseStatusAttribute()

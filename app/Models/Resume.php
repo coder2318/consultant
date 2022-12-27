@@ -113,4 +113,9 @@ class Resume extends BaseModel
     {
         return $this->hasMany(Review::class, 'resume_id', 'id');
     }
+
+    public function scopeActive($query)
+    {
+        $query->whereIn('status', [self::CONFIRMED, self::CREATED]);
+    }
 }
