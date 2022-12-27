@@ -11,7 +11,6 @@ use App\Repositories\ApplicationRepository;
 use App\Services\Chat\ChatMessageService;
 use App\Traits\FilesUpload;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 class ApplicationService extends BaseService
 {
