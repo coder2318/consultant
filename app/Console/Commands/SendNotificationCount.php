@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Events\NotificationEvent;
 use App\Models\Application;
+use App\Models\Category;
 use App\Models\Notification;
 use App\Models\Resume;
 use Carbon\Carbon;
@@ -40,16 +41,18 @@ class SendNotificationCount extends Command
         if(count($applications)){
             foreach ($applications as $item)
             {
+                $category = Category::find($item->category_id);
                 $profile_ids = Resume::where('category_id', $item->category_id)->get()->pluck('profile_id')->toArray();
                 if(count($profile_ids))
                     foreach ($profile_ids as $profile_id) {
                         $notification = Notification::create([
                             'profile_id' => $profile_id,
-                            'text' => '',
+                            'text' => $category->name,
                             'type' => Notification::TYPE_NEW_APPLICATIONS_COUNT,
                             'link' => $item->count,
                             'data' => [
-                                'category_id' => $item->category_id
+                                'category_id' => $item->category_id,
+                                'category' => $category->name
                             ]
                         ]);
                         broadcast(new NotificationEvent($notification));
