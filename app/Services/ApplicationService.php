@@ -112,7 +112,7 @@ class ApplicationService extends BaseService
 
     public function create($params): object
     {
-        if($params['resume_id']){
+        if(isset($params['resume_id'])){
             $to_profile_id = Resume::find($params['resume_id'])->profile_id;
             if($to_profile_id === auth()->user()->profile->id)
                 abort(403, 'You don\'t send application to your resume');
