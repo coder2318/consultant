@@ -104,6 +104,7 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
     });
     /** umumiy apilar */
     Route::get('statistic-count', [ApplicationController::class, 'countStatistic']);
+    Route::get('resume-shortlist', [ResumeController::class, 'indexShortList']);
     Route::get('top-consultant', [ResumeController::class, 'topConsultant']);
     Route::get('resume/{resume}', [ResumeController::class, 'show']);
     Route::get('resume', [ResumeController::class, 'index']);

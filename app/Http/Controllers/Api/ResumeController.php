@@ -317,4 +317,46 @@ class ResumeController extends Controller
     {
         return response()->successJson(array_values($this->service->topConsultant($request->all())));
     }
+
+    /**
+     * @OA\Get(
+     *      path="/resume-shortlist",
+     *      operationId="ResumeShortIndex",
+     *      tags={"Resume"},
+     *      summary="Resume short list",
+     *     security={{ "bearerAuth": {} }},
+     *      description="index",
+     * @OA\Parameter(
+     *         description="Category ID",
+     *         in="query",
+     *         name="category_id",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     * @OA\Parameter(
+     *         description="limit",
+     *         in="query",
+     *         name="limit",
+     *         required=false,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *     )
+     */
+
+    public function indexShortList(IndexRequest $request)
+    {
+        return response()->successJson($this->service->list($request->all()));
+    }
 }
