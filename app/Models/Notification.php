@@ -15,6 +15,7 @@ class Notification extends Model
     const TYPE_APPLICATION = 'application';
     const TYPE_PRIVATE_APPLICATION = 'private_application';
     const TYPE_NEW_APPLICATIONS_COUNT = 'new_applications_count';
+    const RESPONSE = 'response';
     protected $fillable = [
         'text',
         'description',
