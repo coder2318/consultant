@@ -7,10 +7,12 @@ use App\Models\Application;
 use App\Models\Category;
 use App\Models\Chat\Zoom;
 use App\Models\Profile;
+use App\Models\Response;
 use App\Models\Resume;
 use App\Observers\ApplicationObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\ProfileObserver;
+use App\Observers\ResponseObserver;
 use App\Observers\ResumeObserver;
 use App\Observers\ZoomObserver;
 use Illuminate\Routing\ResponseFactory;
@@ -46,5 +48,6 @@ class AppServiceProvider extends ServiceProvider
         Profile::observe(ProfileObserver::class);
         Category::observe(CategoryObserver::class);
         Zoom::observe(ZoomObserver::class);
+        Response::observe(ResponseObserver::class);
     }
 }
