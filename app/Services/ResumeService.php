@@ -19,6 +19,7 @@ class ResumeService extends BaseService
         $query = $this->repo->getQuery();
         $query = $this->select($query, $this->attributes);
         $query = $query->where('profile_id', auth()->user()->profile->id);
+        $query = $query->withoutGlobalScope('visible');
         if(isset($params['limit']))
             $query = $query->limit($params['limit']);
 
