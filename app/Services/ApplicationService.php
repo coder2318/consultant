@@ -239,9 +239,9 @@ class ApplicationService extends BaseService
         $finished = $this->repo->getQuery()->finished()->get()->count();
         $resumes = Resume::active()->get()->count();
         return [
-            'count_applications' => $applications,
-            'count_finished_applications' => $finished,
-            'count_resumes' => $resumes
+            'count_applications' => $applications + 25,
+            'count_finished_applications' => $finished + 25,
+            'count_resumes' => $resumes + 25
         ];
     }
 

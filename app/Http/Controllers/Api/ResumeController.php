@@ -133,9 +133,9 @@ class ResumeController extends Controller
      * )
      */
 
-    public function show(Resume $resume)
+    public function show($id)
     {
-        $model = $this->service->show((int) $resume->id);
+        $model = $this->service->show((int) $id);
         $model->reviews;
         return response()->successJson($model);
     }
@@ -181,9 +181,9 @@ class ResumeController extends Controller
      *      ),
      * )
      */
-    public function update(UpdateRequest $request, Resume $resume)
+    public function update(UpdateRequest $request, $id)
     {
-        $model = $this->service->edit($request->all(), (int) $resume->id);
+        $model = $this->service->edit($request->all(), (int) $id);
         return response()->successJson($model);
     }
 
@@ -221,9 +221,9 @@ class ResumeController extends Controller
      * )
      */
 
-    public function destroy(Resume $resume)
+    public function destroy($id)
     {
-        $this->service->delete((int) $resume->id);
+        $this->service->delete((int) $id);
         return response()->successJson('Successfully deleted');
     }
 
