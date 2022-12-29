@@ -28,7 +28,7 @@ class ResumeService extends BaseService
 
     public function checkHasResume()
     {
-        $resumes = $this->repo->getQuery()->where('profile_id', auth()->user()->profile->id)->get()->count();
+        $resumes = $this->repo->getQuery()->where('profile_id', auth()->user()->profile->id)->withoutGlobalScope('visible')->get()->count();
         if($resumes)
             return true;
         return false;
