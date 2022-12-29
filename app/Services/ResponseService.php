@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Events\NotificationEvent;
 use App\Models\Application;
 use App\Models\Chat\Chat;
 use App\Models\Chat\ChatMessage;
+use App\Models\Notification;
 use App\Models\Response;
 use App\Models\Resume;
 use App\Repositories\ResponseRepository;
@@ -100,6 +102,15 @@ class ResponseService extends BaseService
             ]);
         }
         DB::commit();
+        $application = Application::find($params['application_id']);
+        $notification = Notification::create([
+            'profile_id' => $application->profile_id,
+            'text' => $application->title,
+            'type' => Notification::RESPONSE,
+            'link' => $application->id,
+            'data' => ['status' => $application->status]
+        ]);
+        broadcast(new NotificationEvent($notification));
         return $chat;
     }
 
