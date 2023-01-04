@@ -61,7 +61,7 @@ class VideoChatController extends Controller
         $data['chat_id'] = $request->chat_id;
 
         broadcast(new StartVideoChat($data));
-        $this->service->update($data);
+//        $this->service->update($data);
 
 //        $this->service->changeStatus($data, Zoom::DECLINED);
     }
