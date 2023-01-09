@@ -22,6 +22,10 @@ Broadcast::channel('notifications.{profileId}', function ($user, $profileId) {
     return (int) $user->profile->id === (int) $profileId;
 });
 
+Broadcast::channel('invite.{profileId}', function ($user, $profileId) {
+    return (int) $user->profile->id === (int) $profileId;
+});
+
 Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
     return in_array($user->profile->id, \App\Models\Chat\Chat::find($chatId)->profile_ids);
 });

@@ -4,6 +4,7 @@
 namespace App\Services\Chat;
 
 
+use App\Events\InviteChat;
 use App\Models\Chat\Chat;
 use App\Models\Chat\Zoom;
 use App\Repositories\Chat\ZoomRepository;
@@ -49,5 +50,17 @@ class ZoomService extends BaseService
             ];
             return $this->repo->update($data, $zoom->id);
         }
+    }
+
+    public function inviteToChat($chat_id)
+    {
+        $chat = $this->chatModel->findOrFail($chat_id);
+        $data = [
+            'profile_id' => $chat->to_profile_id,
+            'is_consultant' => !(auth()->user()->profile->id == $chat->application->profile_id),
+            'text' => $chat->application->title
+        ];
+        broadcast(new InviteChat($data));
+        return $data;
     }
 }
