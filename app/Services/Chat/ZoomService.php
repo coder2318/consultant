@@ -58,7 +58,8 @@ class ZoomService extends BaseService
         $data = [
             'profile_id' => $chat->to_profile_id,
             'is_consultant' => !(auth()->user()->profile->id == $chat->application->profile_id),
-            'text' => $chat->application->title
+            'text' => $chat->application->title,
+            'chat_id' => $chat_id
         ];
         broadcast(new InviteChat($data));
         return $data;
