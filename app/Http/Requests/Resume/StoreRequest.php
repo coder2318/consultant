@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             'language' => 'nullable|array',
             'about' => 'nullable',
             'files.*' => 'nullable|file|max:10240',
-            'skill_ids' => 'nullable|array'
+            'skill_ids' => 'nullable|array',
+            'position' => 'required'
         ];
     }
 }

@@ -25,7 +25,8 @@ class Resume extends BaseModel
         'visible',
         'skill_ids',
         'showed',
-        'reason_inactive'
+        'reason_inactive',
+        'position'
     ];
 
     protected $casts = [
