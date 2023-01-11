@@ -13,7 +13,7 @@ class ActionInChatRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
