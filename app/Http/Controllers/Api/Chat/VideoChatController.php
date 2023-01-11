@@ -149,6 +149,6 @@ class VideoChatController extends Controller
 
     public function actionInChat(ActionInChatRequest $request)
     {
-        return response()->successJson($this->service->inviteToChat($request->all()));
+        return response()->successJson($this->service->actionInChat($request->all()));
     }
 }
