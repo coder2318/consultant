@@ -22,7 +22,11 @@ Broadcast::channel('notifications.{profileId}', function ($user, $profileId) {
     return (int) $user->profile->id === (int) $profileId;
 });
 
-Broadcast::channel('invite.{profileId}', function ($user, $profileId) {
+Broadcast::channel('invite.{profileId}', function ($user, $profileId) { /** chatga chaqriruvchi kanal */
+    return (int) $user->profile->id === (int) $profileId;
+});
+
+Broadcast::channel('action-in-chats.{profileId}', function ($user, $profileId) { /** chatga chaqirilganda accept yoki not now qigandagi actionlarni chiqarib beruvchi kanal */
     return (int) $user->profile->id === (int) $profileId;
 });
 

@@ -93,7 +93,8 @@ Route::group(['prefix' => 'v1',  'middleware' => ['api']], function() {
         Route::post('/video/accept-call', [VideoChatController::class, 'acceptCall']);
         Route::post('/video/disconnect-call', [VideoChatController::class, 'disconnectCall']);
         Route::post('/video/decline-call', [VideoChatController::class, 'declineCall']);
-        Route::post('/video/invite-to-chat/{chat_id}', [VideoChatController::class, 'inviteChat']);
+        Route::post('/video/invite-to-chat/{chat_id}', [VideoChatController::class, 'inviteChat']); /** chatga chaqirvolish uchun api */
+        Route::post('/video/action-in-chat', [VideoChatController::class, 'actionInChat']); /** chatga chaqirganda accept yoki now_now bosgandagi api */
         /**  */
         Route::get('make-all-showed-notification', [NotificationController::class, 'allShowed']); /** hamma notificationlarni showed qilib belgilash uchun */
         Route::post('cancel-response', [ResponseController::class, 'cancelResponse']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Chat;
 use App\Events\NotificationWebsocketEvent;
 use App\Events\StartVideoChat;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Zoom\ActionInChatRequest;
 use App\Models\Chat\Chat;
 use App\Models\Chat\Zoom;
 use App\Models\Profile;
@@ -70,5 +71,10 @@ class VideoChatController extends Controller
     public function inviteChat($chat_id)
     {
         return response()->successJson($this->service->inviteToChat($chat_id));
+    }
+
+    public function actionInChat(ActionInChatRequest $request)
+    {
+        return response()->successJson($this->service->inviteToChat($request->all()));
     }
 }

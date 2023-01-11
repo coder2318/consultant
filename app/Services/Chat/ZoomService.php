@@ -4,6 +4,7 @@
 namespace App\Services\Chat;
 
 
+use App\Events\ActionsInChatsEvent;
 use App\Events\InviteChat;
 use App\Models\Chat\Chat;
 use App\Models\Chat\Zoom;
@@ -62,6 +63,18 @@ class ZoomService extends BaseService
             'chat_id' => $chat_id
         ];
         broadcast(new InviteChat($data));
+        return $data;
+    }
+
+    public function actionInChat($params)
+    {
+        $chat = $this->chatModel->findOrFail($params['chat_id']);
+        $data = [
+            'profile_id' => $chat->to_profile_id,
+            'fullname' => auth()->user()->l_name . ' '.auth()->user()->f_name,
+            'type' => $params['type']
+        ];
+        broadcast(new ActionsInChatsEvent($data));
         return $data;
     }
 }
