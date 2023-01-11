@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\ResumeRepository;
 use App\Traits\FilesUpload;
+use Illuminate\Database\Eloquent\Builder;
 
 class ResumeService extends BaseService
 {
@@ -12,6 +13,35 @@ class ResumeService extends BaseService
     {
         $this->repo = $repository;
         $this->filter_fields = ['category_id' => ['type' => 'number'], 'status' => ['type' => 'number']];
+    }
+
+    public function get(array $params, $pagination = true)
+    {
+        $perPage = null;
+        if ($pagination) {
+            $perPage = isset($params['per_page']) ? $params['per_page'] : 20;
+        }
+
+        $query = $this->repo->getQuery();
+        $query = $this->relation($query, $this->relation);
+        $query = $this->filter($query, $this->filter_fields, $params);
+        if(isset($params['search']))
+        {
+            $query =
+                $query->where(function ($q) use ($params){
+                   $q->where('position', 'ilike', '%'.$params['search'].'%')
+                       ->orWhereHas('profile', function (Builder $builder) use ($params) {
+                           $builder->whereHas('user', function (Builder $b) use ($params){
+                                $b->where('f_name', 'ilike', '%'.$params['search'].'%')
+                                    ->orWhere('l_name', 'ilike', '%'.$params['search'].'%');
+                           });
+                       });
+                });
+        }
+        $query = $this->sort($query, $this->sort_fields, $params);
+        $query = $this->select($query, $this->attributes);
+        $query = $this->repo->getPaginate($query, $perPage);
+        return $query;
     }
 
     public function myIndex()

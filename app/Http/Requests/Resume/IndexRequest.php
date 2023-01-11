@@ -27,7 +27,8 @@ class IndexRequest extends FormRequest
             'category_id' => 'nullable',
             'language' => 'nullable',
             'status' => 'nullable',
-            'limit' => 'nullable|numeric'
+            'limit' => 'nullable|numeric',
+            'search' => 'nullable',
         ];
     }
 }

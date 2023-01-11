@@ -30,6 +30,13 @@ class ResumeController extends Controller
      *         required=false,
      *         @OA\Schema(type="integer")
      *     ),
+     *      @OA\Parameter(
+     *         description="Search",
+     *         in="query",
+     *         name="search",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
      * @OA\Parameter(
      *         description="Status CREATED = 1, CONFIRMED = 2, BLOCKED = 3",
      *         in="query",
