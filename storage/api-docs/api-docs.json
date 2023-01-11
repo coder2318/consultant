@@ -1546,6 +1546,126 @@
                 ]
             }
         },
+        "/video/invite-to-chat/{chat_id}": {
+            "post": {
+                "tags": [
+                    "Zoom"
+                ],
+                "summary": "api for invite to chat",
+                "description": "api for invite to chat",
+                "operationId": "bbc1ee2fe9d8f84acee1ba2a4362656d",
+                "parameters": [
+                    {
+                        "name": "chat_id",
+                        "in": "path",
+                        "description": "Chat_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/video/action-in-chat": {
+            "post": {
+                "tags": [
+                    "Zoom"
+                ],
+                "summary": "Action when intived in chat",
+                "description": "Action when intived in chat",
+                "operationId": "f28860ac7d5bff2bf5c248b379beb5b0",
+                "requestBody": {
+                    "description": "d",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "chat_id",
+                                    "type"
+                                ],
+                                "properties": {
+                                    "chat_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "accept or now_now"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, filled input. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/comment": {
             "get": {
                 "tags": [

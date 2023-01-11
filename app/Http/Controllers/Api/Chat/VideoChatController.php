@@ -68,10 +68,84 @@ class VideoChatController extends Controller
 //        $this->service->changeStatus($data, Zoom::DECLINED);
     }
 
+    /**
+     * @OA\Post(
+     * path="/video/invite-to-chat/{chat_id}",
+     * summary="api for invite to chat",
+     * security={{ "bearerAuth": {} }},
+     * description="api for invite to chat",
+     * tags={"Zoom"},
+     *     @OA\Parameter(
+     *         name="chat_id",
+     *         in="path",
+     *         description="Chat_id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     * @OA\Response(
+     *    response=422,
+     *    description="Unprocessable Content",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, filled input. Please try again")
+     *        )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
+
     public function inviteChat($chat_id)
     {
         return response()->successJson($this->service->inviteToChat($chat_id));
     }
+
+    /**
+     * @OA\Post(
+     * path="/video/action-in-chat",
+     * summary="Action when intived in chat",
+     * security={{ "bearerAuth": {} }},
+     * description="Action when intived in chat",
+     * tags={"Zoom"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="d",
+     *    @OA\JsonContent(
+     *       required={ "chat_id", "type"},
+     *       @OA\Property(property="chat_id", type="number", example="1"),
+     *       @OA\Property(property="type", type="string", example="accept or now_now")
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=422,
+     *    description="Unprocessable Content",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, filled input. Please try again")
+     *        )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation"
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * )
+     */
 
     public function actionInChat(ActionInChatRequest $request)
     {
