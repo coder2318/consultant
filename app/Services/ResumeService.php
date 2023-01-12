@@ -41,6 +41,23 @@ class ResumeService extends BaseService
         $query = $this->sort($query, $this->sort_fields, $params);
         $query = $this->select($query, $this->attributes);
         $query = $this->repo->getPaginate($query, $perPage);
+        if(isset($params['sort_name']))
+        {
+            switch ($params['sort_name']) {
+                case 'rating':
+                    usort($query['data'], function ($a, $b) {
+                        return $a['review']['rating'] < $b['review']['rating'];
+                    });
+                    break;
+                case 'applications_count':
+                    usort($query['data'], function ($a, $b) {
+                        return $a['applications_count'] < $b['applications_count'];
+                    });
+                    break;
+                default :
+                    break;
+            }
+        }
         return $query;
     }
 

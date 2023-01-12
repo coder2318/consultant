@@ -29,6 +29,7 @@ class IndexRequest extends FormRequest
             'status' => 'nullable',
             'limit' => 'nullable|numeric',
             'search' => 'nullable',
+            'sort_name' => 'nullable|in:applications_count,rating',
         ];
     }
 }

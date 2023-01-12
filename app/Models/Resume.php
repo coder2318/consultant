@@ -34,7 +34,7 @@ class Resume extends BaseModel
         'skill_ids' => ArrayStringCast::class
     ];
 
-    protected $appends = ['user', 'review', 'category', 'skills', 'file_names'];
+    protected $appends = ['user', 'review', 'category', 'skills', 'file_names', 'applications_count'];
 
     public static function boot()
     {
@@ -112,6 +112,11 @@ class Resume extends BaseModel
     {
         $category = Category::find($this->category_id);
         return $category->name;
+    }
+
+    public function getApplicationsCountAttribute()
+    {
+        return Application::where('resume_id', $this->id)->get()->count();
     }
 
     public function getSkillsAttribute()

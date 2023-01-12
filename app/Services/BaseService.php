@@ -176,7 +176,7 @@ class BaseService
         }
         if (isset($params) and isset($params['sort_by'])) {
             $key = $params['sort_by'];
-            $order = $params['order_by'];
+            $order = $params['order_by']??'desc';
         }
         $query->orderBy($key, $order);
 
