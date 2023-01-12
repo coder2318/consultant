@@ -3422,6 +3422,15 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "sort_name",
+                        "in": "query",
+                        "description": "Sort Name for sort by rating, applications_count",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {

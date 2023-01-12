@@ -44,6 +44,13 @@ class ResumeController extends Controller
      *         required=false,
      *         @OA\Schema(type="integer")
      *     ),
+     *     @OA\Parameter(
+     *         description="Sort Name for sort by rating, applications_count",
+     *         in="query",
+     *         name="sort_name",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation"
